@@ -1,0 +1,2 @@
+Invoke-WebRequest "https://drive.google.com/uc?export=download&id=1TUZ54-AzgN1tGNMqVsVevdaKGyJieInZ" -OutFile "DeployFiles/Banks/Init.bnk"
+Invoke-WebRequest "https://drive.google.com/uc?export=download&id=1cene-6BHUGfZqgofZtQoEdNFvR4n_s0b" -OutFile "DeployFiles/Banks/Main.bnk"

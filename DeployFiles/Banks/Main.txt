@@ -1,70 +1,15 @@
 Event	ID	Name			Wwise Object Path	Notes
-	215701159	SetIntensity_Start			\Default Work Unit\SetIntensity_Start	
-	321389291	TruckSpawn			\Default Work Unit\TruckSpawn	
-	395696500	SetIntensity_Ending			\Default Work Unit\SetIntensity_Ending	
-	417627684	PlayMusic			\Default Work Unit\PlayMusic	
-	558767747	StartShop			\Default Work Unit\StartShop	
-	673539239	ChairLand			\Default Work Unit\ChairLand	
-	1116398592	Hit			\Default Work Unit\Hit	
-	1119853562	PickupWood			\Default Work Unit\PickupWood	
-	1362996693	DropWood			\Default Work Unit\DropWood	
-	1644303879	FeedFurnace			\Default Work Unit\FeedFurnace	
-	1874299701	ChairSpawn			\Default Work Unit\ChairSpawn	
-	2183660256	EndShop			\Default Work Unit\EndShop	
-	2837384057	Stop_Music			\Default Work Unit\Stop_Music	
-	3090939896	FeedFurnace_Intro			\Default Work Unit\FeedFurnace_Intro	
 	3099361103	Woosh			\Default Work Unit\Woosh	
-	3387354601	SetIntensity_Building2			\Default Work Unit\SetIntensity_Building2	
-	3408035276	SetIntensity_Frantic			\Default Work Unit\SetIntensity_Frantic	
-	3451300638	Statistics_Text			\Default Work Unit\Statistics_Text	
-	3500952309	ShopkeeperTalk			\Default Work Unit\ShopkeeperTalk	
-	3532703493	BuyUpgrade			\Default Work Unit\BuyUpgrade	
-	3732156313	SetIntensity_Building			\Default Work Unit\SetIntensity_Building	
-
-State Group	ID	Name			Wwise Object Path	Notes
-	901835532	ShopState			\Default Work Unit\ShopState	
-	1021618141	MusicState			\Default Work Unit\MusicState	
-
-State	ID	Name	State Group			Notes
-	0	None	ShopState			
-	3201166856	InShop	ShopState			
-	0	None	MusicState			
-	1213198585	Building2	MusicState			
-	1281810935	Start	MusicState			
-	2236770716	Frantic	MusicState			
-	3339761385	Building	MusicState			
-	3966194980	Ending	MusicState			
 
 Effect plug-ins	ID	Name	Type				Notes
 	660968117	Wwise_Time_Stretch_(Custom)	Wwise Time Stretch			
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
-	16056240	machinations-by-kevin-macleod-from-filmmusic-io	D:\Mettra_User\Documents\WwiseProjects\LD40\.cache\Windows\SFX\machinations-by-kevin-macleod-from-filmmusic-io_D79FB2B7.wem		\Interactive Music Hierarchy\Default Work Unit\Switch\Building2\Building\machinations-by-kevin-macleod-from-filmmusic-io		18459712
-	40654566	lobby-time-by-kevin-macleod-from-filmmusic-io	D:\Mettra_User\Documents\WwiseProjects\LD40\.cache\Windows\SFX\lobby-time-by-kevin-macleod-from-filmmusic-io_D79FB2B7.wem		\Interactive Music Hierarchy\Default Work Unit\Switch\Shop\Shop\lobby-time-by-kevin-macleod-from-filmmusic-io		34080832
-	56389956	woosh7	D:\Mettra_User\Documents\WwiseProjects\LD40\.cache\Windows\SFX\woosh7_4FC06227.wem		\Actor-Mixer Hierarchy\Default Work Unit\Woosh\woosh7		126080
-	82811282	furnace_feed_4	D:\Mettra_User\Documents\WwiseProjects\LD40\.cache\Windows\SFX\furnace_feed_4_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\FurnaceFeed\furnace_feed_4		29514
-	143496682	wood_ground_1	D:\Mettra_User\Documents\WwiseProjects\LD40\.cache\Windows\SFX\wood_ground_1_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\WoodGround\wood_ground_1		19348
-	172714102	woosh2	D:\Mettra_User\Documents\WwiseProjects\LD40\.cache\Windows\SFX\woosh2_24E0882C.wem		\Actor-Mixer Hierarchy\Default Work Unit\Woosh\woosh2		62600
-	228391736	woosh5	D:\Mettra_User\Documents\WwiseProjects\LD40\.cache\Windows\SFX\woosh5_DBA29247.wem		\Actor-Mixer Hierarchy\Default Work Unit\Woosh\woosh5		56636
-	263884439	wood_ground_2	D:\Mettra_User\Documents\WwiseProjects\LD40\.cache\Windows\SFX\wood_ground_2_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\WoodGround\wood_ground_2		19580
-	428496684	furnace_feed_1	D:\Mettra_User\Documents\WwiseProjects\LD40\.cache\Windows\SFX\furnace_feed_1_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\FurnaceFeed\furnace_feed_1		33384
-	444358527	hit3	D:\Mettra_User\Documents\WwiseProjects\LD40\.cache\Windows\SFX\hit3_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\HitContainer\hit3		11456
-	445288836	hit5	D:\Mettra_User\Documents\WwiseProjects\LD40\.cache\Windows\SFX\hit5_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\HitContainer\hit5		11456
-	453364488	Blip_Select2	D:\Mettra_User\Documents\WwiseProjects\LD40\.cache\Windows\SFX\Blip_Select2_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\ShopkeepTalk\Blip_Select2		10208
-	476627122	hit1	D:\Mettra_User\Documents\WwiseProjects\LD40\.cache\Windows\SFX\hit1_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\HitContainer\hit1		17856
-	477706361	hit2	D:\Mettra_User\Documents\WwiseProjects\LD40\.cache\Windows\SFX\hit2_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\HitContainer\hit2		17856
-	504583108	woosh3	D:\Mettra_User\Documents\WwiseProjects\LD40\.cache\Windows\SFX\woosh3_26962969.wem		\Actor-Mixer Hierarchy\Default Work Unit\Woosh\woosh3		77692
-	562076562	hit4	D:\Mettra_User\Documents\WwiseProjects\LD40\.cache\Windows\SFX\hit4_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\HitContainer\hit4		12736
-	670844402	wood_ground_3	D:\Mettra_User\Documents\WwiseProjects\LD40\.cache\Windows\SFX\wood_ground_3_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\WoodGround\wood_ground_3		23656
-	700881995	hurt1	D:\Mettra_User\Documents\WwiseProjects\LD40\.cache\Windows\SFX\hurt1_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\ChairLand\hurt1		18624
-	719180682	furnace_feed_3	D:\Mettra_User\Documents\WwiseProjects\LD40\.cache\Windows\SFX\furnace_feed_3_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\FurnaceFeed\furnace_feed_3		27022
-	719287357	upgrade4	D:\Mettra_User\Documents\WwiseProjects\LD40\.cache\Windows\SFX\upgrade4_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\BuyUpgrade\upgrade4		62912
-	775837885	wood_grab_2	D:\Mettra_User\Documents\WwiseProjects\LD40\.cache\Windows\SFX\wood_grab_2_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\WoodGrab\wood_grab_2		5610
-	929734131	wood_ground_4	D:\Mettra_User\Documents\WwiseProjects\LD40\.cache\Windows\SFX\wood_ground_4_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\WoodGround\wood_ground_4		4308
-	954002390	woosh1	D:\Mettra_User\Documents\WwiseProjects\LD40\.cache\Windows\SFX\woosh1_B425F635.wem		\Actor-Mixer Hierarchy\Default Work Unit\Woosh\woosh1		58384
-	956737668	error3	D:\Mettra_User\Documents\WwiseProjects\LD40\.cache\Windows\SFX\error3_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\ChairSpawn\error3		11200
-	1010366749	woosh4	D:\Mettra_User\Documents\WwiseProjects\LD40\.cache\Windows\SFX\woosh4_8DC99C79.wem		\Actor-Mixer Hierarchy\Default Work Unit\Woosh\woosh4		41292
-	1018262655	woosh8	D:\Mettra_User\Documents\WwiseProjects\LD40\.cache\Windows\SFX\woosh8_3C66F1AF.wem		\Actor-Mixer Hierarchy\Default Work Unit\Woosh\woosh8		93312
-	1059203334	furnace_feed_2	D:\Mettra_User\Documents\WwiseProjects\LD40\.cache\Windows\SFX\furnace_feed_2_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\FurnaceFeed\furnace_feed_2		26714
-	1070154011	wood_grab_1	D:\Mettra_User\Documents\WwiseProjects\LD40\.cache\Windows\SFX\wood_grab_1_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\WoodGrab\wood_grab_1		7612
+	56389956	woosh7	D:\Mettra_User\Documents\WwiseProjects\LD47\.cache\Windows\SFX\woosh7_4FC06227.wem		\Actor-Mixer Hierarchy\Default Work Unit\Woosh\woosh7		126080
+	172714102	woosh2	D:\Mettra_User\Documents\WwiseProjects\LD47\.cache\Windows\SFX\woosh2_24E0882C.wem		\Actor-Mixer Hierarchy\Default Work Unit\Woosh\woosh2		62600
+	228391736	woosh5	D:\Mettra_User\Documents\WwiseProjects\LD47\.cache\Windows\SFX\woosh5_DBA29247.wem		\Actor-Mixer Hierarchy\Default Work Unit\Woosh\woosh5		56636
+	504583108	woosh3	D:\Mettra_User\Documents\WwiseProjects\LD47\.cache\Windows\SFX\woosh3_26962969.wem		\Actor-Mixer Hierarchy\Default Work Unit\Woosh\woosh3		77692
+	954002390	woosh1	D:\Mettra_User\Documents\WwiseProjects\LD47\.cache\Windows\SFX\woosh1_B425F635.wem		\Actor-Mixer Hierarchy\Default Work Unit\Woosh\woosh1		58384
+	1010366749	woosh4	D:\Mettra_User\Documents\WwiseProjects\LD47\.cache\Windows\SFX\woosh4_8DC99C79.wem		\Actor-Mixer Hierarchy\Default Work Unit\Woosh\woosh4		41292
+	1018262655	woosh8	D:\Mettra_User\Documents\WwiseProjects\LD47\.cache\Windows\SFX\woosh8_3C66F1AF.wem		\Actor-Mixer Hierarchy\Default Work Unit\Woosh\woosh8		93312
 

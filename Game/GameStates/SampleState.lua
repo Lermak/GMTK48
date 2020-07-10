@@ -12,6 +12,7 @@ function SampleState:init()
   -- Called once, and only once, before entering the state the first time. See Gamestate.switch().
 
   local x = GameObject("TestObject")
+  wwise.postEvent("Woosh")
 end
 
 function SampleState:enter(previous, ...)
