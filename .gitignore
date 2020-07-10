@@ -1,0 +1,7 @@
+Release/
+DeployFiles/Banks/Plugininfo.xml
+DeployFiles/Banks/SoundbanksInfo.xml
+
+*.tmx
+*.pdn
+*.bnk
