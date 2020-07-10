@@ -20,6 +20,7 @@ function SampleState:enter(previous, ...)
 end
 
 function SampleState:update()
+  UpdateBoards()
 end
 
 function SampleState:draw()
