@@ -8,7 +8,7 @@
 
 local Module = ...
 
-function Module:onInitialize()
+function Module:onInitialize(position)
   -- Called when the game object is constructed
   --this is for the module
   self.shape = "rectangle"
@@ -16,6 +16,7 @@ function Module:onInitialize()
   self.scale.y = 4.0
   self.pivot.x = 0.5
   self.pivot.y = 0.5
+  self.position = position
   self.input = GameObject("ModuleInput", Color(255, 0, 0))
   self.input.zOrder = 1
   self.output = GameObject("ModuleOutput", Color(0,255,0))
