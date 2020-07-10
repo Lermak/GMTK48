@@ -14,6 +14,8 @@ end
 
 function TestObject:onUpdate(dt)
   -- Called every frame
+  
+
 end
 
 function TestObject:onDestroy()
