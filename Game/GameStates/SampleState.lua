@@ -14,11 +14,11 @@ end
 
 function SampleState:enter(previous, ...)
   -- Called every time when entering the state. See Gamestate.switch().
-  ConnectBoards(Boards[1], Boards[2], 1, 1)
+  ConnectBoards(Boards[1], 1, Boards[2], 1)
   UpdateBoards()
-  ConnectBoards(Boards[2], Boards[3], 1, 1)
+  ConnectBoards(Boards[2], 1, Boards[3], 1)
   UpdateBoards()
-  ConnectBoards(Boards[3], Boards[4], 1, 1)
+  ConnectBoards(Boards[3], 1, Boards[4], 1)
   UpdateBoards()
 end
 

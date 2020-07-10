@@ -41,7 +41,7 @@ function UpdateBoards()
   end
 end
 
-function ConnectBoards(b1, b2, o, i)
+function ConnectBoards(b1, o, b2, i)
   b2.inNodes[i] = b1.outNodes[o]
 end
 
