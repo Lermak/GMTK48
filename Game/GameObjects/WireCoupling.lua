@@ -29,11 +29,15 @@ function WireCoupling:show(b)
 end
 
 function WireCoupling:attachCable()
-  if self.cable.dropPoint == "none" then
+  if self.cable.dropPointOne == "none" then
     self.cable.p0 = self.wireEnds[1].position:clone()
-    self.cable.p1 = self.wireEnds[2].position:clone()
   else
     self.wireEnds[1].position = self.cable.p0:clone()
+  end
+  
+  if self.cable.dropPointTwo == "none" then
+    self.cable.p1 = self.wireEnds[2].position:clone()
+  else
     self.wireEnds[2].position = self.cable.p1:clone()
   end
 end
@@ -71,11 +75,7 @@ function WireCoupling:onUpdate(dt)
               w.position = y.position
               Cursor.wireEnd = nil
               flag = true
-
-              ConnectNode(self.wireEnds[1].myNode.nodeIdx, self.wireEnds[2].myNode.nodeIdx)
             elseif Cursor.wireEnd == nil and y.isConnected == true and y.wireEnd == w then
-              DisconnectNode(w.myNode.nodeIdx)
-
               y.isConnected = false
               Cursor.wireEnd = y.wireEnd
               w.dragged = true
@@ -87,15 +87,12 @@ function WireCoupling:onUpdate(dt)
         end
       end
     end
-
-
-    --Didn't click on valid node
     if flag == false then
       if w1 < self.wireEnds[1].scale.x then
         if self.wireEnds[1].dragged then
           self.wireEnds[1].dragged = false
           Cursor.wireEnd = nil
-          self.cable:drop("p0")
+          self.cable:drop("p0", true)
         elseif Cursor.wireEnd == nil then
           self.wireEnds[1].dragged = true
           Cursor.wireEnd = self.wireEnds[1]
@@ -105,7 +102,7 @@ function WireCoupling:onUpdate(dt)
     
       if w2 < self.wireEnds[2].scale.x then
         if self.wireEnds[2].dragged then
-          self.cable:drop("p1")
+          self.cable:drop("p1", true)
           self.wireEnds[2].dragged = false
           Cursor.wireEnd = nil
         elseif Cursor.wireEnd == nil then
