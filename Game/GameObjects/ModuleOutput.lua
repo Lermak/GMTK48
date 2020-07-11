@@ -29,7 +29,7 @@ function ModuleOutput:onUpdate(dt)
     if love.mouse.isLeftClick() and Cursor.outBoard ~= self.board and IsOutputUsed(self.board, self.port) == false then
       Cursor.outBoard = self.board
       Cursor.outPort = self.port
-      CheckCursorPlacement()
+      CheckCursorPlacement(self)
     end
     if love.mouse.isRightClick() and IsOutputUsed(self.board, self.port) then
       DisconnectBoards(self.board, self.port)

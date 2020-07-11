@@ -34,28 +34,7 @@ function SampleState:enter(previous, ...)
   GetAllConnections()
 end
 
-function SampleState:update()
-  if love.mouse.isLeftClick() then
-    if self.cableState == 0 then
-      --if self.cable then self.cable:destroy() end
-      self.cable = GameObject("Cable", Vector2D(MainCamera:mousePosition()), Vector2D(MainCamera:mousePosition()))
-      self.cableState = 1
-    elseif self.cableState == 1 then
-      self.cable.temporary = false
-      self.cableState = 0
-      self.cable:rebuild()
-    end
-  end
-
-  if love.mouse.isRightClick() then
-    self.cable:drop("p1")
-  end 
-
-  if self.cableState == 1 then
-    self.cable.p1 = Vector2D(MainCamera:mousePosition())
-    self.cable:rebuild()
-  end
-  
+function SampleState:update()  
   if love.keyboard.isTriggered("space") then
     if Boards[2].inputs[1] == nil then
       print("Connecting!")

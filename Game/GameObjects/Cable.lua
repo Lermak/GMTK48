@@ -12,7 +12,7 @@ function Cable:onInitialize(p0, p1)
   self.p0 = p0
   self.p1 = p1
   self.tension = 0.5
-  self.temporary = true
+  self.placing = true
   self.dropPoint = "none"
 
   self:rebuild()
@@ -45,7 +45,7 @@ function Cable:rebuild()
   self.bezierLen = ((2 * lineLen + polyLen) / 3)
 
   local alpha = 1
-  if self.temporary then
+  if self.placing then
     alpha = 0.75
   end
 
@@ -69,7 +69,14 @@ function Cable:drop(point)
 end
 
 function Cable:onUpdate(dt)
-  -- Called every frame
+  if self.placing then
+    self.dropPoint = "none"
+
+    self.p1 = Vector2D(MainCamera:mousePosition())
+    self:rebuild()
+  end
+
+  
   if self.dropPoint ~= "none" then
     local point = self.dropPoint
     local otherPoint = "p0"
