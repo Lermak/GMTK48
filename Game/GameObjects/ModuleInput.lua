@@ -42,7 +42,7 @@ function ModuleInput:onUpdate(dt)
 end
 
 function ModuleInput:onHover()
-  self.color = Color(0,0,255)
+  self.color = Color(0,255,0)
 end
 
 function ModuleInput:onNotHover()
