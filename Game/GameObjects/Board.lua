@@ -9,15 +9,14 @@
 local Board = ...
 
 
-function Board:onInitialize(i, o, op)
+function Board:onInitialize(n, op)
   -- Called when the game object is constructed
-  
-  
-  self.inNodes = i
-  self.outNodes = o 
+  self.outputs = {}
+  self.inputs = {}
+  self.name = n
   self.performOperation = op
   self.inputs = {}
-  for k,v in pairs(self.inNodes) do
+  for k,v in pairs(self.inputs) do
     local mi = GameObject("ModuleInput", Color(255,255,255))
     mi.position.x = -1
     mi.position.y = i
