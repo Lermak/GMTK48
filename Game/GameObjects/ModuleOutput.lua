@@ -8,10 +8,10 @@
 
 local ModuleOutput = ...
 
-function ModuleOutput:onInitialize(b, p)
+function ModuleOutput:onInitialize(b, p, iconPos)
   -- Called when the game object is constructed
   self.color = Color(128, 0, 0)
-  self:setImage("ModuleOutput.png")
+  self:setImage("ModuleAssets/WireSlot.png")
   
   self.pivot.x = 0.5
   self.pivot.y = 0.5
@@ -21,6 +21,11 @@ function ModuleOutput:onInitialize(b, p)
 
   self.board = b
   self.port = p
+
+  self.iconScreen = GameObject("IconScreen")
+  self.iconScreen.position.x = self.position.x + iconPos.x
+  self.iconScreen.position.y = self.position.y + iconPos.y
+  self.iconScreen.zOrder = self.zOrder + 1
 
   self:setupIcon()
 end
@@ -34,7 +39,7 @@ function ModuleOutput:setupIcon()
     end
     self.icon.zOrder = 10
     self.icon.visible = true
-    self.icon.position = {x = self.position.x + 1, y = self.position.y}
+    self.icon.position = self.iconScreen.position
   elseif self.icon ~= nil then
     self.icon.visible = false
   end
