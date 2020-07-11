@@ -26,6 +26,17 @@ function ModuleOutput:onInitialize(b, p, iconPos)
   
   self:setupIconScreen()
   self:setupIcon()
+  self:setupWireEnd()
+end
+
+function ModuleOutput:setupWireEnd()
+  if self.wireEnd == nil then
+    self.wireEnd = GameObject("WireEnd")
+    self.wireEnd.visible = false
+  end
+  self.wireEnd.position.x = self.position.x
+  self.wireEnd.position.y = self.position.y
+  self.wireEnd.zOrder = self.zOrder + 1
 end
 
 function ModuleOutput:setupIconScreen()
@@ -44,7 +55,7 @@ function ModuleOutput:setupIcon()
     else
       self.icon:onInitialize(self.board.outputs[self.port], Color(255,0,0))
     end
-    self.icon.zOrder = 10
+    self.icon.zOrder = self.zOrder + 2
     self.icon.visible = true
     self.icon.position = self.iconScreen.position
   elseif self.icon ~= nil then
@@ -55,11 +66,17 @@ end
 function ModuleOutput:onUpdate(dt)
   -- Called every frame
   self:setupIcon()
+  if IsOutputUsed(self.board, self.port) == false and (Cursor.outBoard == self.board and Cursor.outPort == self.port) == false then
+    self.wireEnd.visible = false
+  else
+    self.wireEnd.visible = true
+  end
   local mx, my = MainCamera:mousePosition()
   local l = (self.position - Vector2D(mx, my)):len()
   if l < 0.5 then
     self:onHover()
     if love.mouse.isLeftClick() and Cursor.outBoard ~= self.board and IsOutputUsed(self.board, self.port) == false and Cursor.outBoard == nil then
+      self.wireEnd.visible = true
       Cursor.outBoard = self.board
       Cursor.outPort = self.port
       CheckCursorPlacement(self)

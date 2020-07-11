@@ -10,6 +10,7 @@ function CheckCursorPlacement(obj)
   if Cursor.cable == nil then
     local v = obj.position:clone()
     Cursor.cable = GameObject("Cable", v, v)
+    Cursor.cable.zOrder = 10
     obj.cable = GameObjectHandle(Cursor.cable)
   end
 
