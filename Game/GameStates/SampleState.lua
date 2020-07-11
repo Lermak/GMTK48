@@ -19,33 +19,38 @@ function SampleState:enter(previous, ...)
   -- Called every time when entering the state. See Gamestate.switch().
 
   local y = 360
-  GameObject("Module", "Producer", {x = -640, y = y})
-  GameObject("Module", "Producer", {x = -384, y = y})
-  GameObject("Module", "Producer", {x = -128, y = y})
-  GameObject("Module", "Producer", {x = 128, y = y})
-  GameObject("Module", "Combiner", {x = 384, y = y})
+  
+  local y2 = 180
+  local y3 = 0
+  local  y4 = -180
 
-  y = 180
-  GameObject("Module", "Combiner", {x = -640, y = y})
-  GameObject("Module", "Combiner", {x = -384, y = y})
-  GameObject("Module", "Combiner", {x = -128, y = y})
-  GameObject("Module", "Combiner", {x = 128, y = y})
-  GameObject("Module", "Combiner", {x = 384, y = y})
+  Modules = {
+  GameObject("Module", "Producer", {x = -640, y = y}),
+  GameObject("Module", "Producer", {x = -384, y = y}),
+  GameObject("Module", "Producer", {x = -128, y = y}),
+  GameObject("Module", "Producer", {x = 128, y = y}),
+  GameObject("Module", "Combiner", {x = 384, y = y}),
+  
+  GameObject("Module", "Combiner", {x = -640, y = y2}),
+  GameObject("Module", "Combiner", {x = -384, y = y2}),
+  GameObject("Module", "Combiner", {x = -128, y = y2}),
+  GameObject("Module", "Combiner", {x = 128, y = y2}),
+  GameObject("Module", "Combiner", {x = 384, y = y2}),
+  
+  GameObject("Module", "Combiner", {x = -640, y = y3}),
+  GameObject("Module", "Combiner", {x = -384, y = y3}),
+  GameObject("Module", "Combiner", {x = -128, y = y3}),
+  GameObject("Module", "Combiner", {x = 128, y = y3}),
+  GameObject("Module", "Combiner", {x = 384, y = y3}),
 
-  y = 0
-  GameObject("Module", "Combiner", {x = -640, y = y})
-  GameObject("Module", "Combiner", {x = -384, y = y})
-  GameObject("Module", "Combiner", {x = -128, y = y})
-  GameObject("Module", "Combiner", {x = 128, y = y})
-  GameObject("Module", "Combiner", {x = 384, y = y})
+  GameObject("Module", "Combiner", {x = -640, y = y4}),
+  GameObject("Module", "Combiner", {x = -384, y = y4}),
+  GameObject("Module", "Combiner", {x = -128, y = y4}),
+  GameObject("Module", "Combiner", {x = 128, y = y4}),
+  GameObject("Module", "Combiner", {x = 384, y = y4})
+  }
 
-  y = -180
-  GameObject("Module", "Combiner", {x = -640, y = y})
-  GameObject("Module", "Combiner", {x = -384, y = y})
-  GameObject("Module", "Combiner", {x = -128, y = y})
-  GameObject("Module", "Combiner", {x = 128, y = y})
-  GameObject("Module", "Combiner", {x = 384, y = y})
-
+  GetAllConnections()
 end
 
 function SampleState:update()  
