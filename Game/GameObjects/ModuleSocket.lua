@@ -57,7 +57,7 @@ function ModuleSocket:setupIcon()
       self.icon:onInitialize(node.value, Color(0,0,255))
     end
     
-    self.icon.zOrder = 10
+    self.icon.zOrder = 15
     self.icon.visible = true
     self.icon.position = self.position
   elseif self.icon ~= nil then
