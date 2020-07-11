@@ -9,10 +9,11 @@
 local Board = ...
 
 
-function Board:onInitialize(i, o, op)
+function Board:onInitialize(n, op)
   -- Called when the game object is constructed
-  self.inNodes = i
-  self.outNodes = o 
+  self.outputs = {}
+  self.inputs = {}
+  self.name = n
   self.performOperation = op
 end
 
