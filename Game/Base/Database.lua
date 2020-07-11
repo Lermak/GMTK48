@@ -17,6 +17,10 @@ NumberRecipies = {
   { needed = {Resources[1]}, number = 3, produce = {Resources[2]}}
 }
 
+SystemRecipies = {
+  { needed = {Resources[3]} }
+}
+
 function Contains(t1, t2)
   if #t1 ~= #t2 then
     return false
@@ -39,26 +43,18 @@ end
 Boards = {
   GameObject("Board", "Resources", function(self)end),
   GameObject("Board", "c1", function(self)
-    if self.inputs[1] ~= nil then
-      print(#CombinerRecipies[1].needed, #GetAllInputsFor(self))
-      if Contains(CombinerRecipies[1].needed, GetAllInputsFor(self)) then
-        print("changed")
-        self.outputs = CombinerRecipies[1].produce
-      else
-        self.outputs = {}
-      end
-      self:cascade()
+    if Contains(CombinerRecipies[1].needed, GetAllInputsFor(self)) then
+      self.outputs = CombinerRecipies[1].produce[1]
+    else
+      self.outputs = {}
     end
   end),
   GameObject("Board", "c2", function(self)
-    if self.inputs[1] ~= nil then
-      if Contains(CombinerRecipies[2].needed, GetAllInputsFor(self)) then
-        self.outputs[1] = CombinerRecipies[2].produce
-      else
-        self.outputs[1] = nil     
-      end
-      self:cascade()
-    end   
+    if Contains(CombinerRecipies[2].needed, GetAllInputsFor(self)) then
+      self.outputs[1] = CombinerRecipies[2].produce[2]
+    else
+      self.outputs[1] = nil     
+    end
   end),
   GameObject("Board", "Splitter", function(self)
     if self.inputs[1] ~= nil then
@@ -69,6 +65,25 @@ Boards = {
       else
         self.outputs[1] = nil
         self.outputs[2] = nil
+      end
+    end
+  end),
+  GameObject("Board", "System1", function(self)
+    if self.inputs[1] ~= nil then
+      if(Contains(SystemRecipies[1].needed, GetAllInputsFor(self))) then
+        print("System 1 online")
+      else
+        print("System 1 offline")
+      end
+    end
+  end),
+  GameObject("Board", "System2", function(self)
+    if self.inputs[1] ~= nil then
+      print(self.inputs[1])
+      if(Contains(SystemRecipies[1].needed, GetAllInputsFor(self))) then
+        print("System 2 online")
+      else
+        print("System 2 offline")
       end
     end
   end),
@@ -98,6 +113,7 @@ function ConnectBoards(b1, i, b2, o)
   if b1.inputs[i] == nil and IsOutputUsed(b2,o) == false then
     b1.inputs[i] = {board = b2, port = o}
     b1:performOperation()    
+    b1:cascade()
   end
 end
 
