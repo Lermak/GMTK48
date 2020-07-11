@@ -32,8 +32,11 @@ function ModuleOutput:onUpdate(dt)
       CheckCursorPlacement(self)
     end
     if love.mouse.isRightClick() and IsOutputUsed(self.board, self.port) then
-      DisconnectBoards(self.board, self.port)
-      GetAllConnections()
+      for k,v in pairs(GetAllConnections()) do
+        if v[3] == self.board and v[4] == self.port then
+          DisconnectBoards(v[1], v[2])
+        end
+      end
     end
   else
     self:onNotHover()

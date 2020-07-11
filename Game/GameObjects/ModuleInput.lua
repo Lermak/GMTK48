@@ -33,7 +33,6 @@ function ModuleInput:onUpdate(dt)
     end
     if love.mouse.isRightClick() and IsInputUsed(self.board, self.port) then
       DisconnectBoards(self.board, self.port)
-      GetAllConnections()
     end
   else
     self:onNotHover()

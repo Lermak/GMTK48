@@ -90,7 +90,6 @@ function IsOutputUsed(b, i)
   for k,v in pairs(Boards) do
     for x,y in pairs(v.inputs) do
       if y.board == b and y.port == i then
-        print("used")
         return true
       end
     end
@@ -118,7 +117,6 @@ function DisconnectBoards(b, i)
     b.inputs[i] = nil
     b:performOperation()   
     b:cascade()
-    print("break")
   end
 end
 
