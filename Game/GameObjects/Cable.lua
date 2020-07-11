@@ -13,8 +13,8 @@ function Cable:onInitialize(p0, p1)
   self.p1 = p1
   self.tension = 0.5
   self.placing = true
-  self.dropPointOne = "none"
-  self.dropPointTwo = "none"
+  self.dropPointOne = false
+  self.dropPointTwo = false
   self:rebuild()
   self.visible = true
 end
