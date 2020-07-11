@@ -79,6 +79,7 @@ function ModuleOutput:onUpdate(dt)
         else
           self.wireEnd = Cursor.wireEnd
           self.wireEnd.dragged = false
+          self.wireEnd.position = self.position
           Cursor.wireEnd = nil
         end
       elseif Cursor.wireEnd == nil then
