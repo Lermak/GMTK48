@@ -68,7 +68,7 @@ function GetAllConnections()
   local t = {}
   for k,v in pairs(Boards) do
     for x,y in pairs(v.inputs) do
-      t[#t + 1] = {v.name, x, y.board.name, y.port}
+      t[#t + 1] = {v, x, y.board, y.port}
       print(v.name .. " input " .. x .. " to " .. y.board.name .. " output " .. y.port)
     end
   end
