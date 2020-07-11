@@ -38,7 +38,6 @@ function ModuleInput:onUpdate(dt)
   else
     self:onNotHover()
   end
-
 end
 
 function ModuleInput:onHover()

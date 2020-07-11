@@ -46,7 +46,7 @@ end
 
 
 function ModuleOutput:onHover()
-  self.color = Color(0,0,0)
+  self.color = Color(0,0,255)
 end
 
 function ModuleOutput:onNotHover()

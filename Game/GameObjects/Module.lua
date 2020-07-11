@@ -17,6 +17,7 @@ function Module:onInitialize(position, inputs, outputs)
   self.pivot.x = 0.5
   self.pivot.y = 0.5
   self.position = position
+  self.zOrder = -1
   self.input = {}
   self.output = {}
   for k,v in pairs(inputs) do
