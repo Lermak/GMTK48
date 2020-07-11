@@ -388,7 +388,7 @@ function love.run()
 		if love.update then love.update(dt) end -- will pass 0 if love.timer is disabled
     Profiler:End()
  
-		if love.window and love.graphics and love.window.isCreated() then
+		if love.window and love.graphics and love.window.isOpen() then
 		  Profiler:Start("Draw", Color(255,0,0,255))
 			love.graphics.clear()
 			love.graphics.origin()
