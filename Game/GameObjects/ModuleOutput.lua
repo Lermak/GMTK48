@@ -24,7 +24,8 @@ end
 function ModuleOutput:onUpdate(dt)
   -- Called every frame
   local mx, my = MainCamera:mousePosition()
-  if math.floor(mx+0.5) == math.floor(self.position.x) and math.floor(my) == math.floor(self.position.y) then
+  local l = (self.position - Vector2D(mx, my)):len()
+  if l < 0.5 then
     self:onHover()
     if love.mouse.isLeftClick() and Cursor.outBoard ~= self.board and IsOutputUsed(self.board, self.port) == false then
       Cursor.outBoard = self.board
