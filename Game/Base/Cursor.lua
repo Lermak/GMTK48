@@ -31,3 +31,11 @@ function CheckCursorPlacement(obj)
     GetAllConnections()
   end
 end
+
+function CursorHasInput()
+  return Cursor.inPort ~= nil and Cursor.inBoard ~= nil
+end
+
+function CursorHasOutput()
+  return Cursor.outPort ~= nil and Cursor.outBoard ~= nil
+end

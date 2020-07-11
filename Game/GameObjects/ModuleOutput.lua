@@ -8,9 +8,9 @@
 
 local ModuleOutput = ...
 
-function ModuleOutput:onInitialize(color, b, p)
+function ModuleOutput:onInitialize(b, p)
   -- Called when the game object is constructed
-  self.color = color
+  self.color = Color(128, 0, 0)
   self:setImage("ModuleOutput.png")
   
   self.pivot.x = 0.5
@@ -46,11 +46,9 @@ end
 
 
 function ModuleOutput:onHover()
-<<<<<<< HEAD
-  self.color = Color(0,0,0)
-=======
+  if CursorHasOutput() then return end
+
   self.color = Color(255,0,0)
->>>>>>> f4fa4fb4ebdbd7e4b18b534aa08bb33be659caae
 end
 
 function ModuleOutput:onNotHover()

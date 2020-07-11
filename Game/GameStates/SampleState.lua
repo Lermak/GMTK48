@@ -26,16 +26,16 @@ function SampleState:enter(previous, ...)
   Boards[4]:performOperation()
 
   GameObject("Module", {x = -5, y = 2}, 
-  {{GameObject("ModuleInput", Color(0,0,0,0), Boards[1], 1), -1, -1}}, 
-  {{GameObject("ModuleOutput", Color(0,0,255,0), Boards[1], 1), 1, -1}})
+  {{GameObject("ModuleInput", Boards[1], 1), -1, -1}}, 
+  {{GameObject("ModuleOutput", Boards[1], 1), 1, -1}})
 
   GameObject("Module", {x = 0, y = 2}, 
-  {{GameObject("ModuleInput", Color(0,0,0,0), Boards[2], 1), -1, -1}}, 
-  {{GameObject("ModuleOutput", Color(0,0,255,0), Boards[2], 1), 1, -1}})
+  {{GameObject("ModuleInput", Boards[2], 1), -1, -1}}, 
+  {{GameObject("ModuleOutput", Boards[2], 1), 1, -1}})
 
   GameObject("Module", {x = 5, y = 2}, 
-  {{GameObject("ModuleInput", Color(0,0,0,0), Boards[3], 1), -1, -1}}, 
-  {{GameObject("ModuleOutput", Color(0,0,255,0), Boards[3], 1), 1, -1}})
+  {{GameObject("ModuleInput", Boards[3], 1), -1, -1}}, 
+  {{GameObject("ModuleOutput", Boards[3], 1), 1, -1}})
 
   GetAllConnections()
 end
