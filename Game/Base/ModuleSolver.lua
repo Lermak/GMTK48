@@ -33,12 +33,12 @@ Boards["Combiner"] = {
 
   recipes = {
     {
-      input = { "Moon", "Moon" },
-      output = "Star"
+      input = { "Star", "Star" },
+      output = "Crab"
     },
     {
-      input = { "Star", "Star" },
-      output = "Crab" 
+      input = { "Crab", "Crab" },
+      output = "Electricity" 
     },
   },
 
@@ -58,7 +58,7 @@ Boards["Producer"] = {
   outputs = 1,
 
   tick = function(self)
-    return {"Moon"}
+    return {"Star"}
   end
 }
 

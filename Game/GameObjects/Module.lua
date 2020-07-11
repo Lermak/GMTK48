@@ -51,12 +51,12 @@ end
 local Module = ...
 
 function Module:declareInput(x, y)
-  local inputObj = { GameObject("ModuleInput", self.moduleIdx, (#self.initializedInputs) + 1), x, y }
+  local inputObj = { GameObject("ModuleSocket", "input", self.moduleIdx, (#self.initializedInputs) + 1), x, y }
   table.insert(self.initializedInputs, inputObj)
 end
 
 function Module:declareOutput(x, y, imgPos)
-  local outObj = { GameObject("ModuleOutput", self.moduleIdx, (#self.initializedOutputs) + 1, imgPos), x, y }
+  local outObj = { GameObject("ModuleSocket", "output", self.moduleIdx, (#self.initializedOutputs) + 1, {iconPos = imgPos}), x, y }
   table.insert(self.initializedOutputs, outObj)
 end
 
