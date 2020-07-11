@@ -8,9 +8,9 @@
 
 local ModuleInput = ...
 
-function ModuleInput:onInitialize(color, b, p)
+function ModuleInput:onInitialize(b, p)
   -- Called when the game object is constructed
-  self.color = color
+  self.color = Color(0, 128, 0)
   self:setImage("ModuleInput.png")
   
   self.pivot.x = 0.5
@@ -41,7 +41,9 @@ function ModuleInput:onUpdate(dt)
 end
 
 function ModuleInput:onHover()
-  self.color = Color(0,255,0)
+  if CursorHasInput() then return end
+
+  self.color = Color(0, 255, 0, 255)
 end
 
 function ModuleInput:onNotHover()
