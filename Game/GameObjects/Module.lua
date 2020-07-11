@@ -45,6 +45,9 @@ Init_Module["Ship System"] = function(self)
   self:declareInput(CENTER, CENTER)
 end
 
+Init_Module["Empty"] = function(self)
+end
+
 
 -----------------------------------
 
@@ -60,9 +63,9 @@ function Module:declareOutput(x, y, imgPos)
   table.insert(self.initializedOutputs, outObj)
 end
 
-function Module:onInitialize(name, position)
+function Module:onInitialize(name, position, params)
   self.board = Boards[name]
-  self.moduleIdx = AddModule(self.board)
+  self.moduleIdx = AddModule(self.board, params)
   self.initializedInputs = {}
   self.initializedOutputs = {}
   Init_Module[name](self)

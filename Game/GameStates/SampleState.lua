@@ -25,29 +25,29 @@ function SampleState:enter(previous, ...)
   local  y4 = -180
 
   Modules = {
-  GameObject("Module", "Producer", {x = -640, y = y}),
-  GameObject("Module", "Producer", {x = -384, y = y}),
-  GameObject("Module", "Producer", {x = -128, y = y}),
-  GameObject("Module", "Producer", {x = 128, y = y}),
-  GameObject("Module", "Combiner", {x = 384, y = y}),
+  GameObject("Module", "Producer", {x = -640, y = y}, { resource = "Star" }),
+  GameObject("Module", "Producer", {x = -384, y = y}, { resource = "Crab" }),
+  GameObject("Module", "Producer", {x = -128, y = y}, { resource = "Electricity" }),
+  GameObject("Module", "Producer", {x = 128, y = y},  { resource = "Fire" }),
+  GameObject("Module", "Producer", {x = 384, y = y},  { resource = "Star" }),
   
-  GameObject("Module", "Combiner", {x = -640, y = y2}),
+  GameObject("Module", "Empty", {x = -640, y = y2}),
   GameObject("Module", "Combiner", {x = -384, y = y2}),
   GameObject("Module", "Combiner", {x = -128, y = y2}),
   GameObject("Module", "Combiner", {x = 128, y = y2}),
-  GameObject("Module", "Combiner", {x = 384, y = y2}),
+  GameObject("Module", "Empty", {x = 384, y = y2}),
   
-  GameObject("Module", "Combiner", {x = -640, y = y3}),
-  GameObject("Module", "Combiner", {x = -384, y = y3}),
-  GameObject("Module", "Combiner", {x = -128, y = y3}),
-  GameObject("Module", "Combiner", {x = 128, y = y3}),
-  GameObject("Module", "Combiner", {x = 384, y = y3}),
+  GameObject("Module", "Doubler", {x = -640, y = y3}),
+  GameObject("Module", "Doubler", {x = -384, y = y3}),
+  GameObject("Module", "Doubler", {x = -128, y = y3}),
+  GameObject("Module", "Empty", {x = 128, y = y3}),
+  GameObject("Module", "Empty", {x = 384, y = y3}),
 
-  GameObject("Module", "Combiner", {x = -640, y = y4}),
-  GameObject("Module", "Combiner", {x = -384, y = y4}),
-  GameObject("Module", "Combiner", {x = -128, y = y4}),
-  GameObject("Module", "Combiner", {x = 128, y = y4}),
-  GameObject("Module", "Combiner", {x = 384, y = y4})
+  GameObject("Module", "Empty", {x = -640, y = y4}),
+  GameObject("Module", "Empty", {x = -384, y = y4}),
+  GameObject("Module", "Empty", {x = -128, y = y4}),
+  GameObject("Module", "Empty", {x = 128, y = y4}),
+  GameObject("Module", "Empty", {x = 384, y = y4})
   }
 end
 

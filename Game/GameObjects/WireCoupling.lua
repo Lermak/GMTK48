@@ -67,6 +67,7 @@ function WireCoupling:onUpdate(dt)
         for i,w in pairs(self.wireEnds) do 
           if l < y.scale.x then
             --left clicking on an empty node while carrying this node
+            
             if y.isConnected == false and Cursor.wireEnd == w then
               y.wireEnd = w
               y.isConnected = true
@@ -75,6 +76,14 @@ function WireCoupling:onUpdate(dt)
               w.position = y.position
               Cursor.wireEnd = nil
               flag = true
+<<<<<<< HEAD
+=======
+
+              if self.wireEnds[1].myNode and self.wireEnds[2].myNode then
+                ConnectNode(self.wireEnds[1].myNode.nodeIdx, self.wireEnds[2].myNode.nodeIdx)
+              end
+              
+>>>>>>> df1199101def3310b9473ab3f6d7ffb1001df6ee
             elseif Cursor.wireEnd == nil and y.isConnected == true and y.wireEnd == w then
               y.isConnected = false
               Cursor.wireEnd = y.wireEnd
