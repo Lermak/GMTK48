@@ -22,19 +22,19 @@ function SampleState:enter(previous, ...)
   ConnectBoards(Boards[4], 1, Boards[3], 1)
   UpdateBoards()
   GetAllConnections()
-  print("enter sample state")
 end
 
 function SampleState:update()
+  
   if love.keyboard.isTriggered("space") then
-    print("1!")
     if Boards[2].inputs[1] == nil then
+      print("Connecting!")
       ConnectBoards(Boards[2], 1, Boards[1], 1)
-      print("Connect!")
     else
+      print("Disconnecting!")
       DisconnectBoards(Boards[2],1)
-      print("Disconnect!")
     end
+    GetAllConnections()
   end
 end
 

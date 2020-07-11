@@ -15,14 +15,7 @@ function Board:onInitialize(n, op)
   self.inputs = {}
   self.name = n
   self.performOperation = op
-  self.inputs = {}
-  for k,v in pairs(self.inputs) do
-    local mi = GameObject("ModuleInput", Color(255,255,255))
-    mi.position.x = -1
-    mi.position.y = i
-    
-    self.inputs[i] = mi
-  end
+  
   
 end
 
