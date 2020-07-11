@@ -29,8 +29,13 @@ function WireCoupling:show(b)
 end
 
 function WireCoupling:attachCable()
-  self.cable.p0 = self.wireEnds[1].position:clone()
-  self.cable.p1 = self.wireEnds[2].position:clone()
+  if self.cable.dropPoint == "none" then
+    self.cable.p0 = self.wireEnds[1].position:clone()
+    self.cable.p1 = self.wireEnds[2].position:clone()
+  else
+    self.wireEnds[1].position = self.cable.p0:clone()
+    self.wireEnds[2].position = self.cable.p1:clone()
+  end
 end
 
 function WireCoupling:onUpdate(dt)
@@ -38,6 +43,7 @@ function WireCoupling:onUpdate(dt)
   
 
   local mx, my = MainCamera:mousePosition()
+  
   local w1 = (self.wireEnds[1].position - Vector2D(mx, my)):len()
   local w2 = (self.wireEnds[2].position - Vector2D(mx, my)):len()
   
@@ -91,19 +97,23 @@ function WireCoupling:onUpdate(dt)
         if self.wireEnds[1].dragged then
           self.wireEnds[1].dragged = false
           Cursor.wireEnd = nil
+          self.cable:drop("p0")
         elseif Cursor.wireEnd == nil then
           self.wireEnds[1].dragged = true
           Cursor.wireEnd = self.wireEnds[1]
+          self.cable.dropPoint = "none"
         end
       end
     
       if w2 < self.wireEnds[2].scale.x then
         if self.wireEnds[2].dragged then
+          self.cable:drop("p1")
           self.wireEnds[2].dragged = false
           Cursor.wireEnd = nil
         elseif Cursor.wireEnd == nil then
           self.wireEnds[2].dragged = true
           Cursor.wireEnd = self.wireEnds[2]
+          self.cable.dropPoint = "none"
         end
       end
     end
