@@ -6,7 +6,7 @@
 ]]
 ----------------------------------------------------------------------
 
-SampleState = {
+SampleState = { 
   
 }
 
@@ -32,7 +32,7 @@ function SampleState:update()
   if love.keyboard.isTriggered("space") then
     if Boards[2].inputs[1] == nil then
       print("Connecting!")
-      ConnectBoards(Boards[2], 1, Boards[1], 1)
+      ConnectBoards(Boards[2], 1, Boards[5], 1)
     else
       print("Disconnecting!")
       DisconnectBoards(Boards[2],1)
