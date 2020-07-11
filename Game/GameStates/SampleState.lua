@@ -12,7 +12,7 @@ SampleState = {
 
 function SampleState:init()
   -- Called once, and only once, before entering the state the first time. See Gamestate.switch().
-  GameObject("Cable", Vector2D(0, 0), Vector2D(2,2))
+  --GameObject("Cable", Vector2D(0, 0), Vector2D(2,2))
 end
 
 function SampleState:enter(previous, ...)
