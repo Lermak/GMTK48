@@ -1,6 +1,7 @@
 Resources = {
+  "Red",
   "Green",
-  "Red"
+  "Blue"
 }
 
 CombinerRecipies = {
@@ -36,7 +37,7 @@ end
 
 Boards = {
   GameObject("Board", "Resources", function(self)end),
-  GameObject("Board", "b1", function(self)
+  GameObject("Board", "Continue", function(self)
     if self.inputs[1] ~= nil then
       if Contains(CombinerRecipies[1], GetAllInputsFor(self)) then
         self.outputs = CombinerRecipies[1].produce
@@ -48,7 +49,7 @@ Boards = {
       DisconnectBoards(self.outputs[1].board, self.outputs[i].port)
     end
   end),
-  GameObject("Board", "b2", function(self)
+  GameObject("Board", "Red to Green", function(self)
     if self.inputs[1] ~= nil then
       if self.inputs[1].board.outputs[self.inputs[1].port] == Resources[1] then
         self.outputs[1] = Resources[2]
@@ -58,11 +59,16 @@ Boards = {
       self:cascade()
     end   
   end),
-  GameObject("Board", "b3", function(self)
-    if self.inputs[1] ~= nil and self.inputs[1].board.outputs[self.inputs[1].port] == Resources[2] then
-      print("yes")
-    else
-      print("no")
+  GameObject("Board", "Output", function(self)
+    if self.inputs[1] ~= nil then
+      local inputResource = self.inputs[1].board.outputs[self.inputs[1].port]
+      local inR = ""
+      if inputResource ~= nil then
+        inR = inputResource
+      else
+        inR = "nil"
+      end
+      print("Need: "..Resources[3].." Have: "..inR)
     end
   end),
   GameObject("Board", "ThreeSplitter", function(self)
@@ -109,8 +115,15 @@ function GetAllConnections()
   local t = {}
   for k,v in pairs(Boards) do
     for x,y in pairs(v.inputs) do
-      t[#t + 1] = {v, x, y.board, y.port}
-      print(v.name .. " input " .. x .. " to " .. y.board.name .. " output " .. y.port)
+      t[#t + 1] = {v.name, x, y.board.name, y.port}
+      local out = ""
+      if y.board.outputs[y.port] ~= nil then
+        out = y.board.outputs[y.port]
+      else
+        out = "nil"
+      end
+      print(""..y.board.name.."["..y.port.."]("..out..") connects to "..v.name.."["..x.."]")
+      
     end
   end
   return t

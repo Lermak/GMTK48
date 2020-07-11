@@ -15,6 +15,8 @@ function Board:onInitialize(n, op)
   self.inputs = {}
   self.name = n
   self.performOperation = op
+  
+  
 end
 
 function Board:cascade()
