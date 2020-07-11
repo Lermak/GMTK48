@@ -17,8 +17,25 @@ function ModuleOutput:onInitialize(b, p)
   self.pivot.y = 0.5
   self.defaultColor = self.color
 
+  self.icon = nil
+
   self.board = b
   self.port = p
+
+  self:setupIcon()
+end
+
+function ModuleOutput:setupIcon()
+  if self.board.outputs[self.port] ~= nil then
+    if self.icon == nil then
+      self.icon = GameObject("ResourceIcon", self.board.outputs[self.port], Color(255,0,0))
+    else
+      self.icon:onInitialize(self.board.outputs[self.port], Color(255,0,0))
+    end
+    self.icon.zOrder = 10
+    self.icon.visible = true
+    self.icon.position = {x = self.position.x + 1, y = self.position.y}
+  end
 end
 
 function ModuleOutput:onUpdate(dt)
@@ -44,6 +61,11 @@ function ModuleOutput:onUpdate(dt)
   end
 end
 
+function ModuleOutput:drawIcon()
+  if self.board[self.port] ~= nil then
+    
+  end
+end
 
 function ModuleOutput:onHover()
   if CursorHasOutput() then return end

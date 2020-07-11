@@ -32,6 +32,7 @@ function Module:onInitialize(img,position, inputs, outputs)
     self.output[#self.output].position.x = self.position.x + v[2]
     self.output[#self.output].position.y = self.position.y + v[3]
     self.output[#self.output].zOrder = 1
+    self.output[#self.output]:setupIcon()
   end
 end
 

@@ -14,7 +14,6 @@ function Cable:onInitialize(p0, p1)
   self.tension = 0.5
   self.placing = true
   self.dropPoint = "none"
-
   self:rebuild()
 end
 

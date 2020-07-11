@@ -1,7 +1,7 @@
 Resources = {
-  "Red",
-  "Green",
-  "Blue"
+  "Crab",
+  "Electricity",
+  "Fire"
 }
 
 CombinerRecipies = {
