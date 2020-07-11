@@ -11,7 +11,7 @@ local Module = ...
 function Module:onInitialize(img,position, inputs, outputs)
   -- Called when the game object is constructed
   --this is for the module
-  self:setImage(img..".png")
+  self:setImage("ModuleAssets/Frame.png")
   self.scale.x = 4.0
   self.scale.y = 4.0
   self.pivot.x = 0.5
