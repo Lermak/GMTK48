@@ -13,6 +13,9 @@ function WireEnd:onInitialize()
   -- Called when the game object is constructed
   self:setImage("WireEnd.png")
   
+  self.scale.x = 38
+  self.scale.y = 38
+
   self.pivot.x = 0.5
   self.pivot.y = 0.5
   self.zOrder = 10
