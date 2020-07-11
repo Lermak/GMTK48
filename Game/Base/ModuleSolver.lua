@@ -56,9 +56,23 @@ Boards["Combiner"] = {
 Boards["Producer"] = {
   inputs = 0,
   outputs = 1,
+  resource = "Star",
+
+  init = function(self, params)
+    self.resource = params.resource
+  end,
 
   tick = function(self)
-    return {"Star"}
+    return { self.resource }
+  end
+}
+
+Boards["Empty"] = {
+  inputs = 0,
+  outputs = 0,
+
+  tick = function(self)
+    return {}
   end
 }
 
@@ -86,12 +100,13 @@ MODULE_IDX = 0
 NODE_LIST = {}
 NODE_IDX = 0
 
-function AddModule(board)
+function AddModule(board, params)
   local module = {
     idx = MODULE_IDX,
     board = board,
     input = {},
     output = {},
+    params = params,
 
     setOutputError = function(self)
       for k,v in pairs(self.output) do
@@ -173,6 +188,7 @@ function tickModule(module, inputs)
   end
 
   local board = module.board
+  if board.init ~= nil then board:init(module.params) end
 
   local valid, res = pcall(board.tick, board, unpack(inputs))
   if valid then
