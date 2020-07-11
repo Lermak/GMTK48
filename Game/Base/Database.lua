@@ -30,6 +30,7 @@ function Contains(t1, t2)
     for x,y in pairs(t2) do
       if v == y then
         i = i + 1
+        break
       end
     end
   end
@@ -44,16 +45,16 @@ Boards = {
   GameObject("Board", "Resources", function(self)end),
   GameObject("Board", "c1", function(self)
     if Contains(CombinerRecipies[1].needed, GetAllInputsFor(self)) then
-      self.outputs = CombinerRecipies[1].produce[1]
+      self.outputs = CombinerRecipies[1].produce
     else
       self.outputs = {}
     end
   end),
   GameObject("Board", "c2", function(self)
     if Contains(CombinerRecipies[2].needed, GetAllInputsFor(self)) then
-      self.outputs[1] = CombinerRecipies[2].produce[2]
+      self.outputs = CombinerRecipies[2].produce
     else
-      self.outputs[1] = nil     
+      self.outputs = {}     
     end
   end),
   GameObject("Board", "Splitter", function(self)
