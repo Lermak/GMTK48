@@ -64,9 +64,10 @@ Boards = {
         self.outputs[1] = r
         self.outputs[2] = r
       else
-        self.outputs[1] = nil
-        self.outputs[2] = nil
+        self.outputs = {}
       end
+    else
+      self.outputs = {}
     end
   end),
   GameObject("Board", "System1", function(self)

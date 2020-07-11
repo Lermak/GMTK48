@@ -35,11 +35,14 @@ function ModuleOutput:setupIcon()
     self.icon.zOrder = 10
     self.icon.visible = true
     self.icon.position = {x = self.position.x + 1, y = self.position.y}
+  elseif self.icon ~= nil then
+    self.icon.visible = false
   end
 end
 
 function ModuleOutput:onUpdate(dt)
   -- Called every frame
+  self:setupIcon()
   local mx, my = MainCamera:mousePosition()
   local l = (self.position - Vector2D(mx, my)):len()
   if l < 0.5 then
