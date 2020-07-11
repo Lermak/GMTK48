@@ -62,6 +62,8 @@ end
 
 function DisconnectBoards(b, i)
   b.inputs[i] = nil
+  b:performOperation()   
+  b:cascade()
 end
 
 function GetAllConnections()
