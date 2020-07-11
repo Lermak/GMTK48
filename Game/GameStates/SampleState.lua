@@ -26,33 +26,35 @@ function SampleState:enter(previous, ...)
   Boards[4]:performOperation()
 
   local y = 360
-  GameObject("Module", "Combiner", {x = -640, y = y})
-  GameObject("Module", "Combiner", {x = -384, y = y})
-  GameObject("Module", "Combiner", {x = -128, y = y})
-  GameObject("Module", "Combiner", {x = 128, y = y})
-  GameObject("Module", "Combiner", {x = 384, y = y})
+  local y2 = 180
+  local y3 = 0
+  local  y4 = -180
 
-  y = 180
-  GameObject("Module", "Combiner", {x = -640, y = y})
-  GameObject("Module", "Combiner", {x = -384, y = y})
-  GameObject("Module", "Combiner", {x = -128, y = y})
-  GameObject("Module", "Combiner", {x = 128, y = y})
-  GameObject("Module", "Combiner", {x = 384, y = y})
+  Modules = {
+  GameObject("Module", "Combiner", {x = -640, y = y}),
+  GameObject("Module", "Combiner", {x = -384, y = y}),
+  GameObject("Module", "Combiner", {x = -128, y = y}),
+  GameObject("Module", "Combiner", {x = 128, y = y}),
+  GameObject("Module", "Combiner", {x = 384, y = y}),
+  
+  GameObject("Module", "Combiner", {x = -640, y = y2}),
+  GameObject("Module", "Combiner", {x = -384, y = y2}),
+  GameObject("Module", "Combiner", {x = -128, y = y2}),
+  GameObject("Module", "Combiner", {x = 128, y = y2}),
+  GameObject("Module", "Combiner", {x = 384, y = y2}),
+  
+  GameObject("Module", "Combiner", {x = -640, y = y3}),
+  GameObject("Module", "Combiner", {x = -384, y = y3}),
+  GameObject("Module", "Combiner", {x = -128, y = y3}),
+  GameObject("Module", "Combiner", {x = 128, y = y3}),
+  GameObject("Module", "Combiner", {x = 384, y = y3}),
 
-  y = 0
-  GameObject("Module", "Combiner", {x = -640, y = y})
-  GameObject("Module", "Combiner", {x = -384, y = y})
-  GameObject("Module", "Combiner", {x = -128, y = y})
-  GameObject("Module", "Combiner", {x = 128, y = y})
-  GameObject("Module", "Combiner", {x = 384, y = y})
-
-  y = -180
-  GameObject("Module", "Combiner", {x = -640, y = y})
-  GameObject("Module", "Combiner", {x = -384, y = y})
-  GameObject("Module", "Combiner", {x = -128, y = y})
-  GameObject("Module", "Combiner", {x = 128, y = y})
-  GameObject("Module", "Combiner", {x = 384, y = y})
-
+  GameObject("Module", "Combiner", {x = -640, y = y4}),
+  GameObject("Module", "Combiner", {x = -384, y = y4}),
+  GameObject("Module", "Combiner", {x = -128, y = y4}),
+  GameObject("Module", "Combiner", {x = 128, y = y4}),
+  GameObject("Module", "Combiner", {x = 384, y = y4})
+  }
   --GameObject("Module", "Doubler", {x = -1, y = -3})
   --GameObject("Module", "Ship System", {x = 5, y = -3})
   --GameObject("Module", "Ship System", {x = 5, y = 1})

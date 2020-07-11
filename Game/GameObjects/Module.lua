@@ -64,7 +64,7 @@ function Module:onInitialize(name, position)
   self.initializedInputs = {}
   self.initializedOutputs = {}
   Init_Module[name](self)
-  
+
   if self.boardIndex == nil then
     error("Failed to set board index!")
   end

@@ -17,7 +17,7 @@ function WireCoupling:onInitialize()
     GameObject("WireEnd"),
     GameObject("WireEnd")
   }
-  
+  self.birth = true
   self.cable = GameObject("Cable", self.wireEnds[1].position:clone(), self.wireEnds[2].position:clone())
   self:show(true)
 end
@@ -28,13 +28,89 @@ function WireCoupling:show(b)
   self.cable.visible = b
 end
 
-function WireCoupling:onUpdate(dt)
-  -- Called every frame
+function WireCoupling:attachCable()
   self.cable.p0 = self.wireEnds[1].position:clone()
   self.cable.p1 = self.wireEnds[2].position:clone()
+end
+
+function WireCoupling:onUpdate(dt)
+  -- Called every frame
+  
+
+  local mx, my = MainCamera:mousePosition()
+  local w1 = (self.wireEnds[1].position - Vector2D(mx, my)):len()
+  local w2 = (self.wireEnds[2].position - Vector2D(mx, my)):len()
+  
+  if love.mouse.isLeftClick() and self.born == false then
+
+    local flag = false
+    for k,v in pairs(Modules) do
+      local t = {}
+      for q,x in pairs(v.initializedInputs) do
+        t[#t + 1] = x[1]
+      end
+      for q,x in pairs(v.initializedOutputs) do
+        t[#t + 1] = x[1]
+      end
+      for z,y in pairs(t) do
+        local l = (y.position - Vector2D(mx, my)):len()
+        for i,w in pairs(self.wireEnds) do 
+          if l < y.scale.x then
+            --left clicking on an empty node while carrying this node
+            if y.isConnected == false and Cursor.wireEnd == w then
+              y.wireEnd = w
+              y.isConnected = true
+              w.myNode = y
+              w.dragged = false
+              w.position = y.position
+              Cursor.wireEnd = nil
+              flag = true
+            elseif Cursor.wireEnd == nil and y.isConnected == true and y.wireEnd == w then
+              y.isConnected = false
+              Cursor.wireEnd = y.wireEnd
+              w.dragged = true
+              w.myNode = nil
+              y.wireEnd = nil
+              flag = true
+            end
+          end
+        end
+      end
+    end
+    if flag == false then
+      if w1 < self.wireEnds[1].scale.x then
+        if self.wireEnds[1].dragged then
+          self.wireEnds[1].dragged = false
+          Cursor.wireEnd = nil
+        elseif Cursor.wireEnd == nil then
+          self.wireEnds[1].dragged = true
+          Cursor.wireEnd = self.wireEnds[1]
+        end
+      end
+    
+      if w2 < self.wireEnds[2].scale.x then
+        if self.wireEnds[2].dragged then
+          self.wireEnds[2].dragged = false
+          Cursor.wireEnd = nil
+        elseif Cursor.wireEnd == nil then
+          self.wireEnds[2].dragged = true
+          Cursor.wireEnd = self.wireEnds[2]
+        end
+      end
+    end
+  else
+    self.born = false
+  end
+  
+
+  self:attachCable()
 end
 
 function WireCoupling:onDestroy()
   -- Called when the object is destroyed
 end
     
+
+function f()
+  
+end
