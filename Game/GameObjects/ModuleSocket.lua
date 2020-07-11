@@ -73,7 +73,19 @@ function ModuleSocket:onUpdate(dt)
   if l < self.scale.x then
     self:onHover()
     if love.mouse.isLeftClick() then
-      CheckCursorPlacement(self)
+      if self.isConnected == false and Cursor.wireEnd == nil then
+        self.isConnected = true
+        local w = GameObject("WireCoupling")
+
+        self.wireEnd = w.wireEnds[1]
+        self.wireEnd.myNode = self
+        w.wireEnds[1].position = self.position
+        
+        Cursor.wireEnd = w.wireEnds[2]
+        w.wireEnds[2].position = Vector2D(MainCamera:mousePosition())
+        w.wireEnds[2].dragged = true
+        w:attachCable()
+      end
     end
   else
     self:onNotHover()

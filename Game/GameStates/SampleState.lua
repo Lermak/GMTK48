@@ -49,8 +49,6 @@ function SampleState:enter(previous, ...)
   GameObject("Module", "Combiner", {x = 128, y = y4}),
   GameObject("Module", "Combiner", {x = 384, y = y4})
   }
-
-  GetAllConnections()
 end
 
 function SampleState:update()  
