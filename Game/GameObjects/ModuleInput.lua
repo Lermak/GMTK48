@@ -11,6 +11,8 @@ local ModuleInput = ...
 function ModuleInput:onInitialize(b, p)
   -- Called when the game object is constructed
   self.color = Color(0, 128, 0)
+  self.scale.x = 38
+  self.scale.y = 38
   self:setImage("ModuleAssets/WireSlot.png")
   
   self.pivot.x = 0.5
