@@ -38,6 +38,8 @@ function ModuleOutput:onUpdate(dt)
           DisconnectBoards(v[1], v[2])
         end
       end
+
+      self.cable:destroy()
     end
   else
     self:onNotHover()
