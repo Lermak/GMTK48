@@ -2,7 +2,7 @@ require "Base/Global"
 
 PUBLISH = false
 
-WorldScale = 64
+WorldScale = 1
 FontSize = 128
 Fade = 255
 UnderHUDFade = 255

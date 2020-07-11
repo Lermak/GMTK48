@@ -11,6 +11,8 @@ local IconScreen = ...
 
 function IconScreen:onInitialize()
   -- Called when the game object is constructed
+  self.scale.x = 40
+  self.scale.y = 40
   self:setImage("ModuleAssets/IconScreen.png")
   
   self.pivot.x = 0.5

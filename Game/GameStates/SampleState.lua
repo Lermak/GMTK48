@@ -25,36 +25,37 @@ function SampleState:enter(previous, ...)
   --ConnectBoards(Boards[5], 1, Boards[1], 2)
   Boards[4]:performOperation()
 
-  GameObject("Module", "LayoutTemplate", {x = -7, y = 4}, 
-  {},
-  {{GameObject("ModuleOutput", Boards[1], 1, {x = 1, y = 0}), -1, 1}})
+  local y = 360
+  GameObject("Module", "Combiner", {x = -640, y = y})
+  GameObject("Module", "Combiner", {x = -384, y = y})
+  GameObject("Module", "Combiner", {x = -128, y = y})
+  GameObject("Module", "Combiner", {x = 128, y = y})
+  GameObject("Module", "Combiner", {x = 384, y = y})
 
-  GameObject("Module", "LayoutTemplate", {x = -3, y = 4}, 
-  {},
-  {{GameObject("ModuleOutput", Boards[1], 1, {x = 1, y = 0}), -1, 1}})
+  y = 180
+  GameObject("Module", "Combiner", {x = -640, y = y})
+  GameObject("Module", "Combiner", {x = -384, y = y})
+  GameObject("Module", "Combiner", {x = -128, y = y})
+  GameObject("Module", "Combiner", {x = 128, y = y})
+  GameObject("Module", "Combiner", {x = 384, y = y})
 
-  GameObject("Module", "Combiner", {x = -6, y = 0}, 
-  {{GameObject("ModuleInput", Boards[2], 1), -1, 1},
-  {GameObject("ModuleInput", Boards[2], 2), 1, 1}}, 
-  {{GameObject("ModuleOutput", Boards[2], 1, {x = 0, y = 1}), 0, -1}})
+  y = 0
+  GameObject("Module", "Combiner", {x = -640, y = y})
+  GameObject("Module", "Combiner", {x = -384, y = y})
+  GameObject("Module", "Combiner", {x = -128, y = y})
+  GameObject("Module", "Combiner", {x = 128, y = y})
+  GameObject("Module", "Combiner", {x = 384, y = y})
 
-  GameObject("Module", "Combiner", {x = -1, y = 0}, 
-  {{GameObject("ModuleInput", Boards[3], 1), -1, 1},
-  {GameObject("ModuleInput", Boards[3], 2), 1, 1}}, 
-  {{GameObject("ModuleOutput", Boards[3], 1, {x = 0, y = 1}), 0, -1}})
+  y = -180
+  GameObject("Module", "Combiner", {x = -640, y = y})
+  GameObject("Module", "Combiner", {x = -384, y = y})
+  GameObject("Module", "Combiner", {x = -128, y = y})
+  GameObject("Module", "Combiner", {x = 128, y = y})
+  GameObject("Module", "Combiner", {x = 384, y = y})
 
-  GameObject("Module", "Doubler", {x = -1, y = -4}, 
-  {{GameObject("ModuleInput", Boards[4], 1), 0, 1}}, 
-  {{GameObject("ModuleOutput", Boards[4], 1, {x = 0, y = 1}), -1, -1},
-  {GameObject("ModuleOutput", Boards[4], 2, {x = 0, y = 1}), 1, -1}})
-
-  GameObject("Module", "Ship System", {x = 5, y = -3}, 
-  {{GameObject("ModuleInput", Boards[5], 1), -.25, 1.25}}, 
-  {})
-
-  GameObject("Module", "Ship System", {x = 5, y = 1}, 
-  {{GameObject("ModuleInput", Boards[6], 1), -.25, 1.25}}, 
-  {})
+  --GameObject("Module", "Doubler", {x = -1, y = -3})
+  --GameObject("Module", "Ship System", {x = 5, y = -3})
+  --GameObject("Module", "Ship System", {x = 5, y = 1})
 
   GetAllConnections()
 end

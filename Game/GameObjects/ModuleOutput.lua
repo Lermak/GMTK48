@@ -11,6 +11,8 @@ local ModuleOutput = ...
 function ModuleOutput:onInitialize(b, p, iconPos)
   -- Called when the game object is constructed
   self.color = Color(128, 0, 0)
+  self.scale.x = 38
+  self.scale.y = 38
   self:setImage("ModuleAssets/WireSlot.png")
   
   self.pivot.x = 0.5
@@ -73,7 +75,7 @@ function ModuleOutput:onUpdate(dt)
   end
   local mx, my = MainCamera:mousePosition()
   local l = (self.position - Vector2D(mx, my)):len()
-  if l < 0.5 then
+  if l < self.scale.x then
     self:onHover()
     if love.mouse.isLeftClick() and Cursor.outBoard ~= self.board and IsOutputUsed(self.board, self.port) == false and Cursor.outBoard == nil then
       self.wireEnd.visible = true
