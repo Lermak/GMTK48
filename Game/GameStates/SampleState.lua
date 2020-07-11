@@ -10,9 +10,7 @@ SampleState = {}
 
 function SampleState:init()
   -- Called once, and only once, before entering the state the first time. See Gamestate.switch().
-
-  local x = GameObject("TestObject")
-  wwise.postEvent("Woosh")
+  GameObject("Cable", Vector2D(0, 0), Vector2D(2,2))
 end
 
 function SampleState:enter(previous, ...)
@@ -20,7 +18,6 @@ function SampleState:enter(previous, ...)
 end
 
 function SampleState:update()
-  UpdateBoards()
 end
 
 function SampleState:draw()

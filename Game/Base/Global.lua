@@ -331,7 +331,10 @@ Vector2D = require "Base/Vector2D"
 Color = require "Base/Color"
 Camera = require "Base/Camera"
 Gamestate = require "Base/GameState"
-Profiler = require "Base/ProfGraph"
+Profiler = {}
+function Profiler:End(...) end
+function Profiler:Start(...) end
+function Profiler:Draw(...) end
 HC = require "Base/HC"
 
 require "Base/RenderTarget"
@@ -349,3 +352,4 @@ require "Base/CollisionShape"
 require "Base/CollisionManager"
 require "Base/SquashFunctions"
 require "Base/UpgradeManager"
+tove = require "tove"
