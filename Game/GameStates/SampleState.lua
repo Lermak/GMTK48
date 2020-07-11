@@ -25,11 +25,17 @@ function SampleState:enter(previous, ...)
   --ConnectBoards(Boards[5], 1, Boards[1], 2)
   Boards[4]:performOperation()
 
+  GameObject("Module", {x = -5, y = 2}, 
+  {{GameObject("ModuleInput", Color(0,0,0), Boards[1], 1), -1, -1}}, 
+  {{GameObject("ModuleOutput", Color(0,0,0), Boards[1], 1), 1, -1}})
 
-  local o = GameObject("ModuleOutput", Color(0,0,0), Boards[1], 1)
-  o.position.x = 6
-  local i = GameObject("ModuleInput", Color(0,0,0), Boards[5], 1)
+  GameObject("Module", {x = 0, y = 2}, 
+  {{GameObject("ModuleInput", Color(0,0,0), Boards[2], 1), -1, -1}}, 
+  {{GameObject("ModuleOutput", Color(0,0,0), Boards[2], 1), 1, -1}})
 
+  GameObject("Module", {x = 5, y = 2}, 
+  {{GameObject("ModuleInput", Color(0,0,0), Boards[3], 1), -1, -1}}, 
+  {{GameObject("ModuleOutput", Color(0,0,0), Boards[3], 1), 1, -1}})
 
   GetAllConnections()
 end

@@ -26,7 +26,7 @@ function ModuleOutput:onUpdate(dt)
   local mx, my = MainCamera:mousePosition()
   if math.floor(mx+0.5) == math.floor(self.position.x) and math.floor(my) == math.floor(self.position.y) then
     self:onHover()
-    if love.mouse.isLeftClick() and Cursor.outBoard ~= self.board and IsOutputUsed(self.board, self.port) == false then
+    if love.mouse.isLeftClick() and Cursor.outBoard ~= self.board and IsOutputUsed(self.board, self.port) == false and Cursor.inBoard ~= self.board then
       Cursor.outBoard = self.board
       Cursor.outPort = self.port
       CheckCursorPlacement()
