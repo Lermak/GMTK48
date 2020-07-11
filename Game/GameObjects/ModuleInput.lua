@@ -67,7 +67,7 @@ function ModuleInput:onUpdate(dt)
   end
   local mx, my = MainCamera:mousePosition()
   local l = (self.position - Vector2D(mx, my)):len()
-  if l < 0.5 then
+  if l < self.scale.x then
     self:onHover()
     if love.mouse.isLeftClick() and Cursor.inBoard ~= self.board and IsInputUsed(self.board, self.port) == false and Cursor.inBoard == nil then
       Cursor.inBoard = self.board

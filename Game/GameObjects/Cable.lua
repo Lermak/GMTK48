@@ -35,7 +35,7 @@ function Cable:rebuild()
   local cp2 = Vector2D(p1.x + 2.0/3.0*(cx - p1.x), p1.y + 2.0/3.0*(cy - p1.y))
 
   local g = tove.newGraphics(nil, 1024)
-  g:setLineWidth(0.16)
+  g:setLineWidth(10)
   g:moveTo(p0.x, p0.y)
   g:curveTo(cp1.x, cp1.y, cp2.x, cp2.y, p1.x, p1.y)
 

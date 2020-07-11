@@ -75,7 +75,7 @@ function ModuleOutput:onUpdate(dt)
   end
   local mx, my = MainCamera:mousePosition()
   local l = (self.position - Vector2D(mx, my)):len()
-  if l < 0.5 then
+  if l < self.scale.x then
     self:onHover()
     if love.mouse.isLeftClick() and Cursor.outBoard ~= self.board and IsOutputUsed(self.board, self.port) == false and Cursor.outBoard == nil then
       self.wireEnd.visible = true
