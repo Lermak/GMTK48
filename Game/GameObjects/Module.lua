@@ -82,6 +82,11 @@ function Module:onInitialize(name, position)
   -- Called when the game object is constructed
   --this is for the module
   self:setImage("ModuleAssets/Frame.png")
+
+  self.bgImage = ImageManager.getImage("Data/Images/ModuleAssets/Background.png")
+  self.bgImage:setWrap("repeat", "repeat")
+  self.bgImageQuad = love.graphics.newQuad( 0,0, 256,180, 18,26 )
+
   self.scale.x = 256
   self.scale.y = 180
   self.pivot.x = 0
@@ -105,6 +110,14 @@ function Module:onInitialize(name, position)
     self.output[#self.output]:setupIconScreen()
     self.output[#self.output]:setupIcon()
   end
+end
+
+function Module:drawMesh()
+  -- Set color
+  love.graphics.setColor(self.color.r / 255, self.color.g / 255, self.color.b / 255, self.color.a / 255)
+
+  --love.graphics.draw(self.bgImage, self.bgImageQuad, self.position.x, self.position.y - 180)
+  self:coreDraw()
 end
 
 function Module:onUpdate(dt)

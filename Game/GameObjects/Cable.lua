@@ -15,7 +15,6 @@ function Cable:onInitialize(p0, p1)
   self.placing = true
   self.dropPoint = "none"
   self:rebuild()
-  self.visible = true
 end
 
 function Cable:rebuild()
@@ -36,10 +35,6 @@ function Cable:rebuild()
   local cp2 = Vector2D(p1.x + 2.0/3.0*(cx - p1.x), p1.y + 2.0/3.0*(cy - p1.y))
 
   local g = tove.newGraphics(nil, 1024)
-  g:setLineWidth(10)
-  g:moveTo(p0.x, p0.y)
-  g:curveTo(cp1.x, cp1.y, cp2.x, cp2.y, p1.x, p1.y)
-
   local polyLen = (controlPoint - p0):len() + (controlPoint - p1):len()
   local lineLen = (p1 - p0):len()
   self.bezierLen = ((2 * lineLen + polyLen) / 3)
@@ -49,8 +44,29 @@ function Cable:rebuild()
     alpha = 0.75
   end
 
-  g:setLineColor(1, 0, 0, alpha)
+  local shadow_cx = controlPoint.x
+  local shadow_cy = controlPoint.y + slump.y * 0.1
+  local shadow_cp1 = Vector2D(p0.x + 2.0/3.0*(shadow_cx - p0.x), p0.y + 2.0/3.0*(shadow_cy - p0.y))
+  local shadow_cp2 = Vector2D(p1.x + 2.0/3.0*(shadow_cx - p1.x), p1.y + 2.0/3.0*(shadow_cy - p1.y))
+
+  g:setLineColor(0, 0, 0, alpha * 0.5)
+  g:setLineWidth(10)
+  g:moveTo(p0.x, p0.y)
+  g:curveTo(shadow_cp1.x, shadow_cp1.y, shadow_cp2.x, shadow_cp2.y, p1.x, p1.y)
   g:stroke()
+
+  g:setLineColor(0, 0, 0, alpha)
+  g:setLineWidth(10)
+  g:moveTo(p0.x, p0.y)
+  g:curveTo(cp1.x, cp1.y, cp2.x, cp2.y, p1.x, p1.y)
+  g:stroke()
+
+  g:setLineColor(255, 0, 0, alpha)
+  g:setLineWidth(7)
+  g:moveTo(p0.x, p0.y)
+  g:curveTo(cp1.x, cp1.y, cp2.x, cp2.y, p1.x, p1.y)
+  g:stroke()
+
   g:setDisplay("mesh")
   self.cableMesh = g
 end
@@ -72,7 +88,7 @@ function Cable:onUpdate(dt)
   if self.placing then
     self.dropPoint = "none"
 
-    --self.p1 = Vector2D(MainCamera:mousePosition())
+    self.p1 = Vector2D(MainCamera:mousePosition())
     self:rebuild()
   end
 
@@ -112,10 +128,8 @@ function Cable:onUpdate(dt)
 end
 
 function Cable:draw()
-  if self.visible then
-    love.graphics.setColor(self.color.r, self.color.g, self.color.b, self.color.a)
-    self.cableMesh:draw()
-  end
+  love.graphics.setColor(self.color.r, self.color.g, self.color.b, self.color.a)
+  self.cableMesh:draw()
 end
 
 function Cable:onDestroy()
