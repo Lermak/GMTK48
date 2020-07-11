@@ -248,6 +248,19 @@ function love.mouse.isLeftClick()
   return false
 end
 
+function love.mouse.isRightClick()
+  local mouseButton = 2
+  local res = love.mouse.isDown(mouseButton)
+  
+  if res then
+    mouse_events[mouseButton] = true
+    
+    return mouse_events_old[mouseButton] == nil
+  end
+  
+  return false
+end
+
 function math.floatEqual(a, b)
   return a-b < 0.01 and a-b > -0.01
 end
@@ -354,3 +367,4 @@ require "Base/SquashFunctions"
 require "Base/UpgradeManager"
 tove = require "tove"
 require "Base/Database"
+require "Base/Cursor"

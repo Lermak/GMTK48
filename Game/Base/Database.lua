@@ -70,15 +70,17 @@ Boards = {
     end
   end),
   GameObject("Board", "ThreeSplitter", function(self)
-    local r = self.inputs[1].board.outputs[self.inputs[1].port]
-    if self.inputs[1] ~= nil and r ~= nil then
-      self.outputs[1] = r
-      self.outputs[2] = r
-      self.outputs[3] = r
-    else
-      self.outputs[1] = nil
-      self.outputs[2] = nil
-      self.outputs[3] = nil
+    if self.inputs[1] ~= nil then
+      local r = self.inputs[1].board.outputs[self.inputs[1].port]
+      if r ~= nil then
+        self.outputs[1] = r
+        self.outputs[2] = r
+        self.outputs[3] = r
+      else
+        self.outputs[1] = nil
+        self.outputs[2] = nil
+        self.outputs[3] = nil
+      end
     end
   end),
 }
@@ -96,6 +98,14 @@ function IsOutputUsed(b, i)
   return false;
 end
 
+function IsInputUsed(b, p)
+  if b.inputs[p] == nil then
+    return false
+  else
+    return true
+  end
+end
+
 function ConnectBoards(b1, i, b2, o)
   if b1.inputs[i] == nil and not IsOutputUsed(b2,o) then
     b1.inputs[i] = {board = b2, port = o}
@@ -108,6 +118,7 @@ function DisconnectBoards(b, i)
     b.inputs[i] = nil
     b:performOperation()   
     b:cascade()
+    print("break")
   end
 end
 
@@ -115,7 +126,7 @@ function GetAllConnections()
   local t = {}
   for k,v in pairs(Boards) do
     for x,y in pairs(v.inputs) do
-      t[#t + 1] = {v.name, x, y.board.name, y.port}
+      t[#t + 1] = {v, x, y.board, y.port}
       local out = ""
       if y.board.outputs[y.port] ~= nil then
         out = y.board.outputs[y.port]

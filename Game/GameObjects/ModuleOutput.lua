@@ -8,7 +8,7 @@
 
 local ModuleOutput = ...
 
-function ModuleOutput:onInitialize(color)
+function ModuleOutput:onInitialize(color, b, p)
   -- Called when the game object is constructed
   self.color = color
   self:setImage("ModuleOutput.png")
@@ -16,6 +16,9 @@ function ModuleOutput:onInitialize(color)
   self.pivot.x = 0.5
   self.pivot.y = 0.5
   self.defaultColor = self.color
+
+  self.board = b
+  self.port = p
 end
 
 function ModuleOutput:onUpdate(dt)
@@ -23,6 +26,15 @@ function ModuleOutput:onUpdate(dt)
   local mx, my = MainCamera:mousePosition()
   if math.floor(mx+0.5) == math.floor(self.position.x) and math.floor(my) == math.floor(self.position.y) then
     self:onHover()
+    if love.mouse.isLeftClick() and Cursor.outBoard ~= self.board and IsOutputUsed(self.board, self.port) == false then
+      Cursor.outBoard = self.board
+      Cursor.outPort = self.port
+      CheckCursorPlacement()
+    end
+    if love.mouse.isRightClick() and IsOutputUsed(self.board, self.port) then
+      DisconnectBoards(self.board, self.port)
+      GetAllConnections()
+    end
   else
     self:onNotHover()
   end
