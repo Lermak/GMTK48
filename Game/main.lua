@@ -165,7 +165,7 @@ end
 
 function love.draw()
   -- Draw background
-  love.graphics.setColor(0,0,0,255)
+  love.graphics.setColor(100,100,100,255)
   love.graphics.rectangle("fill", 0,0, love.graphics.getWidth(), love.graphics.getHeight())
   
   if Map then

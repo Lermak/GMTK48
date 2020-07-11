@@ -18,12 +18,14 @@ function VisualConnection:onInitialize(p1, p2)
   self.scale.y = 0.25
   self.color = Color(127,255,255)
   self.shape = "rectangle"
+  print("Drawing from: x:"..p1.x..", y:"..p1.y)
+  print("to x:"..p2.x.."y:"..p2.y)
 
-  local dx = p1.x - p2.x
-  local dy = p1.y - p2.y
+  local dx = p2.x - p1.x
+  local dy = p2.y - p1.y
   local length = math.sqrt(dx*dx + dy*dy)
   self.scale.x = length
-  local angle = math.atan(dy, dx)
+  local angle = math.atan(dy/dx)
   self.rotation = math.deg(angle)
   self.zOrder = 2
   

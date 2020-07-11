@@ -21,15 +21,22 @@ function Module:onInitialize(position)
   self.input.zOrder = 1
   self.output = GameObject("ModuleOutput", Color(0,255,0))
   self.output.zOrder = 1
+
+  --do this here to update the drawing
+  self.input.position.x = self.position.x - 1
+  self.input.position.y = self.position.y - 0.5
+
+  self.output.position.x = self.position.x + 1
+  self.output.position.y = self.position.y - 0.5
   
 end
 
 function Module:onUpdate(dt)
   -- Called every frame
-  self.input.position.x = self.position.x + 1
+  self.input.position.x = self.position.x - 1
   self.input.position.y = self.position.y - 0.5
 
-  self.output.position.x = self.position.x - 1
+  self.output.position.x = self.position.x + 1
   self.output.position.y = self.position.y - 0.5
   
 end
