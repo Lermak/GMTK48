@@ -10,7 +10,7 @@ SampleState = {}
 
 function SampleState:init()
   -- Called once, and only once, before entering the state the first time. See Gamestate.switch().
-  GameObject("Cable", Vector2D(0, 0), Vector2D(2,2))
+  self.cableState = 0
 end
 
 function SampleState:enter(previous, ...)
@@ -23,6 +23,27 @@ function SampleState:enter(previous, ...)
 end
 
 function SampleState:update()
+  if love.mouse.isLeftClick() then
+    if self.cableState == 0 then
+      --if self.cable then self.cable:destroy() end
+      self.cable = GameObject("Cable", Vector2D(MainCamera:mousePosition()), Vector2D(MainCamera:mousePosition()))
+      self.cableState = 1
+    elseif self.cableState == 1 then
+      self.cable.temporary = false
+      self.cableState = 0
+      self.cable:rebuild()
+    end
+  end
+
+  if love.mouse.isRightClick() then
+    self.cable:drop("p1")
+  end 
+
+  if self.cableState == 1 then
+    self.cable.p1 = Vector2D(MainCamera:mousePosition())
+    self.cable:rebuild()
+  end
+
   if love.keyboard.isTriggered('1') then
     if Boards[2].inputs[1] == nil then
       ConnectBoards(Boards[2], 1, Boards[1], 1)
