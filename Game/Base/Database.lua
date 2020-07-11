@@ -11,6 +11,10 @@ SeperatorRecipies = {
   { needed = {Resources[1]}, produce = {Resources[2]}}
 }
 
+NumberRecipies = {
+  { needed = {Resources[1]}, number = 3, produce = {Resources[2]}}
+}
+
 function Contains(t1, t2)
   if #t1 ~= #t2 then
     return false
