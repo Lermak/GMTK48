@@ -27,7 +27,7 @@ function ModuleOutput:onUpdate(dt)
   local l = (self.position - Vector2D(mx, my)):len()
   if l < 0.5 then
     self:onHover()
-    if love.mouse.isLeftClick() and Cursor.outBoard ~= self.board and IsOutputUsed(self.board, self.port) == false and Cursor.inBoard ~= self.board and Cursor.outBoard == nil then
+    if love.mouse.isLeftClick() and Cursor.outBoard ~= self.board and IsOutputUsed(self.board, self.port) == false and Cursor.outBoard == nil then
       Cursor.outBoard = self.board
       Cursor.outPort = self.port
       CheckCursorPlacement(self)
