@@ -70,7 +70,7 @@ end
 
 function Cable:onUpdate(dt)
   if self.placing then
-    self.dropPoint = "none"
+    --self.dropPoint = "none"
 
     --self.p1 = Vector2D(MainCamera:mousePosition())
     self:rebuild()
