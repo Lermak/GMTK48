@@ -63,16 +63,8 @@ function WireCoupling:onUpdate(dt)
         for i,w in pairs(self.wireEnds) do 
           if l < y.scale.x then
             --left clicking on an empty node while carrying this node
-            local otherIdx = 1
-            if i == 1 then
-              otherIdx = 2
-            end
             
-            local otherNode = self.wireEnds[otherIdx].myNode
-            local connectingToSameNode = otherNode ~= nil and otherNode.nodeType == y.nodeType
-            if connectingToSameNode then
-              flag = true
-            elseif y.isConnected == false and Cursor.wireEnd == w then
+            if y.isConnected == false and Cursor.wireEnd == w then
               y.wireEnd = w
               y.isConnected = true
               w.myNode = y
