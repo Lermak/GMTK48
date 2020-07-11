@@ -10,10 +10,14 @@ local WireCoupling = ...
 
 function WireCoupling:onInitialize()
   -- Called when the game object is constructed
+  self.zOrder = 10
+  self.visible = false
+
   self.wireEnds = {
     GameObject("WireEnd"),
     GameObject("WireEnd")
   }
+  
   self.cable = GameObject("Cable", self.wireEnds[1].position:clone(), self.wireEnds[2].position:clone())
   self:show(true)
 end
