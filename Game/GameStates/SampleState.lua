@@ -6,7 +6,9 @@
 ]]
 ----------------------------------------------------------------------
 
-SampleState = {}
+SampleState = { 
+  
+}
 
 function SampleState:init()
   -- Called once, and only once, before entering the state the first time. See Gamestate.switch().
@@ -15,10 +17,13 @@ end
 
 function SampleState:enter(previous, ...)
   -- Called every time when entering the state. See Gamestate.switch().
-  ConnectBoards(Boards[2], 1, Boards[1], 2)
-  ConnectBoards(Boards[3], 1, Boards[2], 1)
-  ConnectBoards(Boards[4], 1, Boards[3], 1)
-  UpdateBoards()
+  
+  Boards[1].outputs = Resources
+  ConnectBoards(Boards[2], 1, Boards[5], 1)
+  ConnectBoards(Boards[3], 1, Boards[1], 1)
+  ConnectBoards(Boards[4], 1, Boards[5], 2)
+  ConnectBoards(Boards[5], 1, Boards[1], 2)
+  Boards[4]:performOperation()
   GetAllConnections()
 end
 
@@ -43,13 +48,16 @@ function SampleState:update()
     self.cable.p1 = Vector2D(MainCamera:mousePosition())
     self.cable:rebuild()
   end
-
-  if love.keyboard.isTriggered('1') then
+  
+  if love.keyboard.isTriggered("space") then
     if Boards[2].inputs[1] == nil then
-      ConnectBoards(Boards[2], 1, Boards[1], 1)
+      print("Connecting!")
+      ConnectBoards(Boards[2], 1, Boards[5], 1)
     else
+      print("Disconnecting!")
       DisconnectBoards(Boards[2],1)
     end
+    GetAllConnections()
   end
 end
 
