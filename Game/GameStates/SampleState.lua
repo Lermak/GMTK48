@@ -25,22 +25,25 @@ function SampleState:enter(previous, ...)
   --ConnectBoards(Boards[5], 1, Boards[1], 2)
   Boards[4]:performOperation()
 
-  GameObject("Module", "LayoutTemplate", {x = -6, y = -4}, 
+  GameObject("Module", "LayoutTemplate", {x = -7, y = 4}, 
   {},
-  {{GameObject("ModuleOutput", Boards[1], 1, {x = 1, y = 0}), -1, 1},
-  {GameObject("ModuleOutput", Boards[1], 2, {x = 1, y = 0}), -1, 0}})
+  {{GameObject("ModuleOutput", Boards[1], 1, {x = 1, y = 0}), -1, 1}})
 
-  GameObject("Module", "Combiner", {x = -6, y = 2}, 
+  GameObject("Module", "LayoutTemplate", {x = -3, y = 4}, 
+  {},
+  {{GameObject("ModuleOutput", Boards[1], 1, {x = 1, y = 0}), -1, 1}})
+
+  GameObject("Module", "Combiner", {x = -6, y = 0}, 
   {{GameObject("ModuleInput", Boards[2], 1), -1, 1},
   {GameObject("ModuleInput", Boards[2], 2), 1, 1}}, 
   {{GameObject("ModuleOutput", Boards[2], 1, {x = 0, y = 1}), 0, -1}})
 
-  GameObject("Module", "Combiner", {x = -1, y = 2}, 
+  GameObject("Module", "Combiner", {x = -1, y = 0}, 
   {{GameObject("ModuleInput", Boards[3], 1), -1, 1},
   {GameObject("ModuleInput", Boards[3], 2), 1, 1}}, 
   {{GameObject("ModuleOutput", Boards[3], 1, {x = 0, y = 1}), 0, -1}})
 
-  GameObject("Module", "Doubler", {x = -1, y = -3}, 
+  GameObject("Module", "Doubler", {x = -1, y = -4}, 
   {{GameObject("ModuleInput", Boards[4], 1), 0, 1}}, 
   {{GameObject("ModuleOutput", Boards[4], 1, {x = 0, y = 1}), -1, -1},
   {GameObject("ModuleOutput", Boards[4], 2, {x = 0, y = 1}), 1, -1}})
