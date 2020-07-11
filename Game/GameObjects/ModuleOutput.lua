@@ -22,12 +22,17 @@ function ModuleOutput:onInitialize(b, p, iconPos)
   self.board = b
   self.port = p
 
-  self.iconScreen = GameObject("IconScreen")
-  self.iconScreen.position.x = self.position.x + iconPos.x
-  self.iconScreen.position.y = self.position.y + iconPos.y
-  self.iconScreen.zOrder = self.zOrder + 1
-
+  self.iconPos = iconPos
+  
+  self:setupIconScreen()
   self:setupIcon()
+end
+
+function ModuleOutput:setupIconScreen()
+  self.iconScreen = GameObject("IconScreen")
+  self.iconScreen.position.x = self.position.x + self.iconPos.x
+  self.iconScreen.position.y = self.position.y + self.iconPos.y
+  self.iconScreen.zOrder = self.zOrder + 1
 end
 
 function ModuleOutput:setupIcon()

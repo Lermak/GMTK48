@@ -27,23 +27,23 @@ function SampleState:enter(previous, ...)
 
   GameObject("Module", "LayoutTemplate", {x = -6, y = -4}, 
   {},
-  {{GameObject("ModuleOutput", Boards[1], 1, {x = 1, y = 1}), -1, 1},
-  {GameObject("ModuleOutput", Boards[1], 2, {x = 1, y = 1}), -1, 0}})
+  {{GameObject("ModuleOutput", Boards[1], 1, {x = 1, y = 0}), -1, 1},
+  {GameObject("ModuleOutput", Boards[1], 2, {x = 1, y = 0}), -1, 0}})
 
   GameObject("Module", "Combiner", {x = -6, y = 2}, 
   {{GameObject("ModuleInput", Boards[2], 1), -1.5, 1.25},
   {GameObject("ModuleInput", Boards[2], 2), 1.75, 1.25}}, 
-  {{GameObject("ModuleOutput", Boards[2], 1, {x = 1, y = 1}), -.75, -1.25}})
+  {{GameObject("ModuleOutput", Boards[2], 1, {x = 1, y = 0}), -.75, -1.25}})
 
   GameObject("Module", "Combiner", {x = -1, y = 2}, 
   {{GameObject("ModuleInput", Boards[3], 1), -1.5, 1.25},
   {GameObject("ModuleInput", Boards[3], 2), 1.75, 1.25}}, 
-  {{GameObject("ModuleOutput", Boards[3], 1, {x = 1, y = 1}), -.75, -1.25}})
+  {{GameObject("ModuleOutput", Boards[3], 1, {x = 1, y = 0}), -.75, -1.25}})
 
   GameObject("Module", "Doubler", {x = -1, y = -3}, 
   {{GameObject("ModuleInput", Boards[4], 1), -.25, 1.25}}, 
-  {{GameObject("ModuleOutput", Boards[4], 1, {x = 1, y = 1}), -1.75, -1.25},
-  {GameObject("ModuleOutput", Boards[4], 2, {x = 2, y = 1}), 1.25, -1.25}})
+  {{GameObject("ModuleOutput", Boards[4], 1, {x = 1, y = 0}), -1.75, -1.25},
+  {GameObject("ModuleOutput", Boards[4], 2, {x = 2, y = 0}), 1.25, -1.25}})
 
   GameObject("Module", "Ship System", {x = 5, y = -3}, 
   {{GameObject("ModuleInput", Boards[5], 1), -.25, 1.25}}, 
