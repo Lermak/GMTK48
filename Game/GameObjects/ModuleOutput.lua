@@ -46,7 +46,11 @@ end
 
 
 function ModuleOutput:onHover()
+<<<<<<< HEAD
   self.color = Color(0,0,0)
+=======
+  self.color = Color(255,0,0)
+>>>>>>> f4fa4fb4ebdbd7e4b18b534aa08bb33be659caae
 end
 
 function ModuleOutput:onNotHover()
