@@ -71,7 +71,11 @@ function WireCoupling:onUpdate(dt)
               w.position = y.position
               Cursor.wireEnd = nil
               flag = true
+
+              ConnectNode(self.wireEnds[1].myNode.nodeIdx, self.wireEnds[2].myNode.nodeIdx)
             elseif Cursor.wireEnd == nil and y.isConnected == true and y.wireEnd == w then
+              DisconnectNode(w.myNode.nodeIdx)
+
               y.isConnected = false
               Cursor.wireEnd = y.wireEnd
               w.dragged = true
@@ -83,6 +87,9 @@ function WireCoupling:onUpdate(dt)
         end
       end
     end
+
+
+    --Didn't click on valid node
     if flag == false then
       if w1 < self.wireEnds[1].scale.x then
         if self.wireEnds[1].dragged then

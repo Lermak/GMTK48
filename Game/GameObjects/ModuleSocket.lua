@@ -6,11 +6,21 @@
 ]]
 ----------------------------------------------------------------------
 
-local ModuleInput = ...
+local ModuleSocket = ...
 
-function ModuleInput:onInitialize(b, p)
+function ModuleSocket:onInitialize(type, moduleId, idx, paramTable)
   -- Called when the game object is constructed
-  self.color = Color(0, 128, 0)
+  self.nodeType = type
+  if type == "input" then
+    self.color = Color(0, 128, 0)
+    self.hoverColor = Color(0, 255, 0)
+  else
+    self.iconPos = paramTable["iconPos"]
+    self:setupIconScreen()
+    self.color = Color(128, 0, 0)
+    self.hoverColor = Color(255, 0, 0)
+  end
+
   self.scale.x = 38
   self.scale.y = 38
   self:setImage("ModuleAssets/WireSlot.png")
@@ -21,23 +31,32 @@ function ModuleInput:onInitialize(b, p)
 
   self.icon = nil
 
+  self.moduleIdx = moduleId
+  self.nodeIdx = AddNode(self.nodeType, moduleId, idx)
+
   self.isConnected = false
   self.wireEnd = nil
-
-  self.board = b
-  self.port = p
-
-  self:setupIcon()
 end
 
-function ModuleInput:setupIcon()
-  if self.board.inputs[self.port] ~= nil and self.board.inputs[self.port].board.outputs[self.board.inputs[self.port].port] ~= nil then
-    local v = self.board.inputs[self.port].board.outputs[self.board.inputs[self.port].port]
+function ModuleSocket:setupIconScreen()
+  if self.iconScreen == nil then
+    self.iconScreen = GameObject("IconScreen")
+  end
+  self.iconScreen.position.x = self.position.x + self.iconPos.x
+  self.iconScreen.position.y = self.position.y + self.iconPos.y
+  self.iconScreen.zOrder = self.zOrder + 1
+end
+
+function ModuleSocket:setupIcon()
+  local node = NODE_LIST[self.nodeIdx]
+
+  if node.value ~= nil and node.value ~= "" then
     if self.icon == nil then
-      self.icon = GameObject("ResourceIcon", v, Color(0,255,0))
+      self.icon = GameObject("ResourceIcon", node.value, Color(0,0,255))
     else
-      self.icon:onInitialize(v, Color(0,255,0))
+      self.icon:onInitialize(node.value, Color(0,0,255))
     end
+    
     self.icon.zOrder = 10
     self.icon.visible = true
     self.icon.position = self.position
@@ -46,15 +65,9 @@ function ModuleInput:setupIcon()
   end
 end
 
-function ModuleInput:onUpdate(dt)
-  -- Called every frame
-  if IsInputUsed(self.board, self.port) == false and (Cursor.inBoard == self.board and Cursor.inPort == self.port) == false then
-    if self.icon ~= nil then
-      self.icon.visible = false
-    end
-  else
-    self:setupIcon()
-  end
+function ModuleSocket:onUpdate(dt)
+  self:setupIcon()
+
   local mx, my = MainCamera:mousePosition()
   local l = (self.position - Vector2D(mx, my)):len()
   if l < self.scale.x then
@@ -71,29 +84,24 @@ function ModuleInput:onUpdate(dt)
         Cursor.wireEnd = w.wireEnds[2]
         w.wireEnds[2].position = Vector2D(MainCamera:mousePosition())
         w.wireEnds[2].dragged = true
-
         w:attachCable()
       end
-      Cursor.outBoard = self.board
-      Cursor.outPort = self.port
-      CheckCursorPlacement(self)
     end
   else
     self:onNotHover()
   end
 end
 
-function ModuleInput:onHover()
+function ModuleSocket:onHover()
   if CursorHasInput() then return end
 
-  self.color = Color(0, 255, 0, 255)
+  self.color = self.hoverColor
 end
 
-function ModuleInput:onNotHover()
+function ModuleSocket:onNotHover()
   self.color = self.defaultColor
 end
 
-function ModuleInput:onDestroy()
+function ModuleSocket:onDestroy()
   -- Called when the object is destroyed
 end
-    
