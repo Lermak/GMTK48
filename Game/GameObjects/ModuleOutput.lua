@@ -29,7 +29,9 @@ function ModuleOutput:onInitialize(b, p, iconPos)
 end
 
 function ModuleOutput:setupIconScreen()
-  self.iconScreen = GameObject("IconScreen")
+  if self.iconScreen == nil then
+    self.iconScreen = GameObject("IconScreen")
+  end
   self.iconScreen.position.x = self.position.x + self.iconPos.x
   self.iconScreen.position.y = self.position.y + self.iconPos.y
   self.iconScreen.zOrder = self.zOrder + 1

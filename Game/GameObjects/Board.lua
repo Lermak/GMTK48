@@ -16,7 +16,6 @@ function Board:onInitialize(n, op)
   self.name = n
   self.performOperation = op
   self.visible = false
-  
 end
 
 function Board:cascade()
