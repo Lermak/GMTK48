@@ -5,11 +5,12 @@ Resources = {
 }
 
 CombinerRecipies = {
-  { needed = {Resources[1]}, produce = {Resources[2]}}
+  { needed = {Resources[1], Resources[2]}, produce = {Resources[3]}},
+  { needed = {Resources[2], Resources[3]}, produce = {Resources[1]}}
 }
 
 SeperatorRecipies = {
-  { needed = {Resources[1]}, produce = {Resources[2]}}
+  { needed = {Resources[1]}, produce = {Resources[2], Resources[2]}}
 }
 
 NumberRecipies = {
@@ -37,9 +38,11 @@ end
 
 Boards = {
   GameObject("Board", "Resources", function(self)end),
-  GameObject("Board", "Continue", function(self)
+  GameObject("Board", "c1", function(self)
     if self.inputs[1] ~= nil then
-      if Contains(CombinerRecipies[1], GetAllInputsFor(self)) then
+      print(#CombinerRecipies[1].needed, #GetAllInputsFor(self))
+      if Contains(CombinerRecipies[1].needed, GetAllInputsFor(self)) then
+        print("changed")
         self.outputs = CombinerRecipies[1].produce
       else
         self.outputs = {}
@@ -47,39 +50,25 @@ Boards = {
       self:cascade()
     end
   end),
-  GameObject("Board", "Red to Green", function(self)
+  GameObject("Board", "c2", function(self)
     if self.inputs[1] ~= nil then
-      if self.inputs[1].board.outputs[self.inputs[1].port] == Resources[1] then
-        self.outputs[1] = Resources[2]
+      if Contains(CombinerRecipies[2].needed, GetAllInputsFor(self)) then
+        self.outputs[1] = CombinerRecipies[2].produce
       else
         self.outputs[1] = nil     
       end
       self:cascade()
     end   
   end),
-  GameObject("Board", "Output", function(self)
-    if self.inputs[1] ~= nil then
-      local inputResource = self.inputs[1].board.outputs[self.inputs[1].port]
-      local inR = ""
-      if inputResource ~= nil then
-        inR = inputResource
-      else
-        inR = "nil"
-      end
-      print("Need: "..Resources[3].." Have: "..inR)
-    end
-  end),
-  GameObject("Board", "ThreeSplitter", function(self)
+  GameObject("Board", "Splitter", function(self)
     if self.inputs[1] ~= nil then
       local r = self.inputs[1].board.outputs[self.inputs[1].port]
       if r ~= nil then
         self.outputs[1] = r
         self.outputs[2] = r
-        self.outputs[3] = r
       else
         self.outputs[1] = nil
         self.outputs[2] = nil
-        self.outputs[3] = nil
       end
     end
   end),
@@ -98,7 +87,7 @@ function IsOutputUsed(b, i)
 end
 
 function IsInputUsed(b, p)
-  if b.inputs[p] == nil then
+  if b.inputs == nil or b.inputs[p] == nil then
     return false
   else
     return true
@@ -106,7 +95,7 @@ function IsInputUsed(b, p)
 end
 
 function ConnectBoards(b1, i, b2, o)
-  if b1.inputs[i] == nil and not IsOutputUsed(b2,o) then
+  if b1.inputs[i] == nil and IsOutputUsed(b2,o) == false then
     b1.inputs[i] = {board = b2, port = o}
     b1:performOperation()    
   end
@@ -131,7 +120,7 @@ function GetAllConnections()
       else
         out = "nil"
       end
-      print(""..y.board.name.."["..y.port.."]("..out..") connects to "..v.name.."["..x.."]")
+      print("Output "..y.board.name.."["..y.port.."]("..out..") connects to Input "..v.name.."["..x.."]")
       
     end
   end
@@ -142,7 +131,9 @@ function GetAllInputsFor(b)
   local t = {}
   for k,v in pairs(Boards) do
     for x,y in pairs(v.inputs) do
-      t[#t + 1] = y.board[y.port]
+      if v == b then
+        t[#t + 1] = y.board.outputs[y.port]
+      end
     end
   end
   return t
