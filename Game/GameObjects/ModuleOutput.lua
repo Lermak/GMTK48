@@ -24,21 +24,13 @@ function ModuleOutput:onInitialize(b, p, iconPos)
   self.board = b
   self.port = p
 
+  self.isConnected = false
+  self.wireEnd = nil
+
   self.iconPos = iconPos
   
   self:setupIconScreen()
   self:setupIcon()
-  self:setupWireEnd()
-end
-
-function ModuleOutput:setupWireEnd()
-  if self.wireEnd == nil then
-    self.wireEnd = GameObject("WireEnd")
-    self.wireEnd.visible = false
-  end
-  self.wireEnd.position.x = self.position.x
-  self.wireEnd.position.y = self.position.y
-  self.wireEnd.zOrder = self.zOrder + 1
 end
 
 function ModuleOutput:setupIconScreen()
@@ -68,17 +60,34 @@ end
 function ModuleOutput:onUpdate(dt)
   -- Called every frame
   self:setupIcon()
-  if IsOutputUsed(self.board, self.port) == false and (Cursor.outBoard == self.board and Cursor.outPort == self.port) == false then
-    self.wireEnd.visible = false
-  else
-    self.wireEnd.visible = true
-  end
   local mx, my = MainCamera:mousePosition()
   local l = (self.position - Vector2D(mx, my)):len()
   if l < self.scale.x then
     self:onHover()
-    if love.mouse.isLeftClick() and Cursor.outBoard ~= self.board and IsOutputUsed(self.board, self.port) == false and Cursor.outBoard == nil then
-      self.wireEnd.visible = true
+    if love.mouse.isLeftClick() then
+      if self.isConnected == false then
+        self.isConnected = true
+        if Cursor.wireEnd == nil then
+          local w = GameObject("WireCoupling")
+
+          self.wireEnd = w.wireEnds[1]
+          self.wireEnd.myNode = self
+          w.wireEnds[1].position = self.position
+          
+          Cursor.wireEnd = w.wireEnds[2]
+          w.wireEnds[2].dragged = true
+        else
+          self.wireEnd = Cursor.wireEnd
+          self.wireEnd.dragged = false
+          Cursor.wireEnd = nil
+        end
+      elseif Cursor.wireEnd == nil then
+        self.isConnected = false
+        Cursor.wireEnd = self.wireEnd
+        Cursor.wireEnd.dragged = true
+        Cursor.wireEnd.myNode = nil
+        self.wireEnd = nil
+      end
       Cursor.outBoard = self.board
       Cursor.outPort = self.port
       CheckCursorPlacement(self)
@@ -89,8 +98,6 @@ function ModuleOutput:onUpdate(dt)
           DisconnectBoards(v[1], v[2])
         end
       end
-
-      self.cable:destroy()
     end
   else
     self:onNotHover()

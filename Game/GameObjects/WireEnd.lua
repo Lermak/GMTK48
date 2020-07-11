@@ -15,10 +15,16 @@ function WireEnd:onInitialize()
   
   self.pivot.x = 0.5
   self.pivot.y = 0.5
+  self.zOrder = 10
+  self.myNode = nil
+  self.dragged = false
 end
 
 function WireEnd:onUpdate(dt)
   -- Called every frame
+  if self.dragged then
+    self.position = Vector2D(MainCamera:mousePosition())
+  end
 end
 
 function WireEnd:onDestroy()

@@ -15,6 +15,7 @@ function Cable:onInitialize(p0, p1)
   self.placing = true
   self.dropPoint = "none"
   self:rebuild()
+  self.visible = true
 end
 
 function Cable:rebuild()
@@ -71,7 +72,7 @@ function Cable:onUpdate(dt)
   if self.placing then
     self.dropPoint = "none"
 
-    self.p1 = Vector2D(MainCamera:mousePosition())
+    --self.p1 = Vector2D(MainCamera:mousePosition())
     self:rebuild()
   end
 
@@ -111,8 +112,10 @@ function Cable:onUpdate(dt)
 end
 
 function Cable:draw()
-  love.graphics.setColor(self.color.r, self.color.g, self.color.b, self.color.a)
-  self.cableMesh:draw()
+  if self.visible then
+    love.graphics.setColor(self.color.r, self.color.g, self.color.b, self.color.a)
+    self.cableMesh:draw()
+  end
 end
 
 function Cable:onDestroy()
