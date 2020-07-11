@@ -20,9 +20,12 @@ local RIGHT_CENTER = 192
 local ICON_OFFSET = 45
 
 local Init_Module = {}
-Init_Module["Combiner"] = function(self)
-  self.boardIndex = 2
 
+Init_Module["Producer"] = function(self)
+  self:declareOutput(CENTER, BOTTOM_ROW_Y, {x = 0, y = ICON_OFFSET})
+end
+
+Init_Module["Combiner"] = function(self)
   self:declareInput(LEFT_CENTER, TOP_ROW_Y)
   self:declareInput(RIGHT_CENTER, TOP_ROW_Y)
 
@@ -31,8 +34,6 @@ end
 
 
 Init_Module["Doubler"] = function(self)
-  self.boardIndex = 4
-
   self:declareInput(CENTER, TOP_ROW_Y)
 
   self:declareOutput(LEFT_CENTER, BOTTOM_ROW_Y, {x = 0, y = ICON_OFFSET})
@@ -41,7 +42,6 @@ end
 
 
 Init_Module["Ship System"] = function(self)
-  self.boardIndex = 5
   self:declareInput(CENTER, CENTER)
 end
 
@@ -51,32 +51,33 @@ end
 local Module = ...
 
 function Module:declareInput(x, y)
-  local inputObj = { GameObject("ModuleInput", Boards[self.boardIndex], (#self.initializedInputs) + 1), x, y }
+  local inputObj = { GameObject("ModuleInput", self.moduleIdx, (#self.initializedInputs) + 1), x, y }
   table.insert(self.initializedInputs, inputObj)
 end
 
 function Module:declareOutput(x, y, imgPos)
-  local outObj = { GameObject("ModuleOutput", Boards[self.boardIndex], (#self.initializedOutputs) + 1, imgPos), x, y }
+  local outObj = { GameObject("ModuleOutput", self.moduleIdx, (#self.initializedOutputs) + 1, imgPos), x, y }
   table.insert(self.initializedOutputs, outObj)
 end
 
 function Module:onInitialize(name, position)
+  self.board = Boards[name]
+  self.moduleIdx = AddModule(self.board)
   self.initializedInputs = {}
   self.initializedOutputs = {}
   Init_Module[name](self)
-  
-  if self.boardIndex == nil then
-    error("Failed to set board index!")
+
+  if self.board == nil then
+    error("No board exists with name \"" .. name .. "\"!")
   end
 
-  --local board  = Boards[self.boardIndex]
-  --if #board.inputs ~= #self.initializedInputs then
-  --  error("Failed to set all of the inputs to module " .. name .. "! Expected " .. #board.inputs .. ", got " .. #self.initializedInputs .. ".")
-  --end
-  --
-  --if #board.outputs ~= #self.initializedOutputs then
-  --  error("Failed to set all of the outputs to module " .. name .. "! Expected " .. #board.outputs .. " got " .. #self.initializedOutputs .. ".")
-  --end
+  if self.board.inputs ~= #self.initializedInputs then
+    error("Failed to set all of the inputs to module " .. name .. "! Expected " .. #board.inputs .. ", got " .. #self.initializedInputs .. ".")
+  end
+  
+  if self.board.outputs ~= #self.initializedOutputs then
+    error("Failed to set all of the outputs to module " .. name .. "! Expected " .. #board.outputs .. " got " .. #self.initializedOutputs .. ".")
+  end
 
   -- Called when the game object is constructed
   --this is for the module
@@ -115,4 +116,3 @@ end
 function Module:onDestroy()
   -- Called when the object is destroyed
 end
-    
