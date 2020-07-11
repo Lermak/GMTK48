@@ -87,25 +87,23 @@ function Module:onInitialize(name, position)
   self.pivot.x = 0
   self.pivot.y = 0
   self.position = position
-  self.zOrder = -1
+  self.zOrder = -10
   self.input = {}
   self.output = {}
   for k,v in pairs(self.initializedInputs) do
     self.input[#self.input + 1] = v[1]
     self.input[#self.input].position.x = self.position.x + v[2]
     self.input[#self.input].position.y = self.position.y + v[3]
-    self.input[#self.input].zOrder = 1
-    self.input[#self.input]:setupWireEnd()
+    self.input[#self.input].zOrder = -9
   end
 
   for k,v in pairs(self.initializedOutputs) do
     self.output[#self.output + 1] = v[1]
     self.output[#self.output].position.x = self.position.x + v[2]
     self.output[#self.output].position.y = self.position.y + v[3]
-    self.output[#self.output].zOrder = 1
+    self.output[#self.output].zOrder = -9
     self.output[#self.output]:setupIconScreen()
     self.output[#self.output]:setupIcon()
-    self.output[#self.output]:setupWireEnd()
   end
 end
 

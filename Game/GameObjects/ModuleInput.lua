@@ -25,8 +25,10 @@ function ModuleInput:onInitialize(moduleId, idx)
   self.nodeType = "input"
   self.nodeIdx = AddNode(self.nodeType, moduleId, idx)
 
+  self.isConnected = false
+  self.wireEnd = nil
+
   self:setupIcon()
-  self:setupWireEnd()
 end
 
 function ModuleInput:setupIcon()
@@ -45,29 +47,51 @@ function ModuleInput:setupIcon()
   --end
 end
 
-function ModuleInput:setupWireEnd()
-  --if self.wireEnd == nil then
-  --  self.wireEnd = GameObject("WireEnd")
-  --  self.wireEnd.visible = false
-  --end
-  --self.wireEnd.position.x = self.position.x
-  --self.wireEnd.position.y = self.position.y
-  --self.wireEnd.zOrder = self.zOrder + 1
-end
-
 function ModuleInput:onUpdate(dt)
-
+  -- Called every frame
+  if IsInputUsed(self.board, self.port) == false and (Cursor.inBoard == self.board and Cursor.inPort == self.port) == false then
+    if self.icon ~= nil then
+      self.icon.visible = false
+    end
+  else
+    self:setupIcon()
+  end
   local mx, my = MainCamera:mousePosition()
   local l = (self.position - Vector2D(mx, my)):len()
   if l < self.scale.x then
     self:onHover()
     if love.mouse.isLeftClick() then
+      if self.isConnected == false then
+        self.isConnected = true
+        if Cursor.wireEnd == nil then
+          local w = GameObject("WireCoupling")
+
+          self.wireEnd = w.wireEnds[1]
+          self.wireEnd.myNode = self
+          w.wireEnds[1].position = self.position
+          
+          Cursor.wireEnd = w.wireEnds[2]
+          w.wireEnds[2].dragged = true
+        else
+          self.wireEnd = Cursor.wireEnd
+          self.wireEnd.dragged = false
+          self.wireEnd.position = self.position
+          Cursor.wireEnd = nil
+        end
+      elseif Cursor.wireEnd == nil then
+        self.isConnected = false
+        Cursor.wireEnd = self.wireEnd
+        Cursor.wireEnd.dragged = true
+        Cursor.wireEnd.myNode = nil
+        self.wireEnd = nil
+      end
+      Cursor.outBoard = self.board
+      Cursor.outPort = self.port
       CheckCursorPlacement(self)
     end
-    --if love.mouse.isRightClick() and IsInputUsed(self.board, self.port) then
-    --  DisconnectBoards(self.board, self.port)
-    --  self.cable:destroy()
-    --end
+    if love.mouse.isRightClick() and IsInputUsed(self.board, self.port) then
+      DisconnectBoards(self.board, self.port)
+    end
   else
     self:onNotHover()
   end
