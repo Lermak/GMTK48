@@ -94,6 +94,7 @@ function Module:onInitialize(name, position)
     self.input[#self.input].position.x = self.position.x + v[2]
     self.input[#self.input].position.y = self.position.y + v[3]
     self.input[#self.input].zOrder = 1
+    self.input[#self.input]:setupWireEnd()
   end
 
   for k,v in pairs(self.initializedOutputs) do
@@ -103,6 +104,7 @@ function Module:onInitialize(name, position)
     self.output[#self.output].zOrder = 1
     self.output[#self.output]:setupIconScreen()
     self.output[#self.output]:setupIcon()
+    self.output[#self.output]:setupWireEnd()
   end
 end
 
