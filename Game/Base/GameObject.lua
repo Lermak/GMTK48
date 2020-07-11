@@ -68,7 +68,7 @@ end
 
 function GameObject:drawMesh()
   -- Set color
-  love.graphics.setColor(self.color.r, self.color.g, self.color.b, self.color.a)
+  love.graphics.setColor(self.color.r / 255, self.color.g / 255, self.color.b / 255, self.color.a / 255)
 
   self:coreDraw()
 end

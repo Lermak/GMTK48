@@ -10,6 +10,7 @@ function CheckCursorPlacement(obj)
   if Cursor.cable == nil then
     local v = obj.position:clone()
     Cursor.cable = GameObject("Cable", v, v)
+    obj.cabl = Cursor.cable
   end
 
   if Cursor.inBoard ~= nil and
@@ -20,11 +21,21 @@ function CheckCursorPlacement(obj)
     Cursor.cable.placing = false
     Cursor.cable.p1 = obj.position:clone()
     Cursor.cable:rebuild()
-
+    obj.cabl = Cursor.cable
+    
+    Cursor.cable = nil
     Cursor.inBoard = nil 
     Cursor.inPort = nil 
     Cursor.outBoard = nil
     Cursor.outPort = nil 
     GetAllConnections()
   end
+end
+
+function CursorHasInput()
+  return Cursor.inPort ~= nil and Cursor.inBoard ~= nil
+end
+
+function CursorHasOutput()
+  return Cursor.outPort ~= nil and Cursor.outBoard ~= nil
 end

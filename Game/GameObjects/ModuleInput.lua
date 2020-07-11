@@ -8,9 +8,9 @@
 
 local ModuleInput = ...
 
-function ModuleInput:onInitialize(color, b, p)
+function ModuleInput:onInitialize(b, p)
   -- Called when the game object is constructed
-  self.color = color
+  self.color = Color(0, 128, 0)
   self:setImage("ModuleInput.png")
   
   self.pivot.x = 0.5
@@ -27,7 +27,7 @@ function ModuleInput:onUpdate(dt)
   local l = (self.position - Vector2D(mx, my)):len()
   if l < 0.5 then
     self:onHover()
-    if love.mouse.isLeftClick() and Cursor.inBoard ~= self.board and IsInputUsed(self.board, self.port) == false and Cursor.outBoard ~= self.board then
+    if love.mouse.isLeftClick() and Cursor.inBoard ~= self.board and IsInputUsed(self.board, self.port) == false and Cursor.inBoard == nil then
       Cursor.inBoard = self.board
       Cursor.inPort = self.port
       CheckCursorPlacement(self)
@@ -38,11 +38,12 @@ function ModuleInput:onUpdate(dt)
   else
     self:onNotHover()
   end
-
 end
 
 function ModuleInput:onHover()
-  self.color = Color(0,0,255)
+  if CursorHasInput() then return end
+
+  self.color = Color(0, 255, 0, 255)
 end
 
 function ModuleInput:onNotHover()
