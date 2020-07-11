@@ -45,8 +45,6 @@ Boards = {
         self.outputs = {}
       end
       self:cascade()
-    else
-      DisconnectBoards(self.outputs[1].board, self.outputs[i].port)
     end
   end),
   GameObject("Board", "Red to Green", function(self)
@@ -106,9 +104,11 @@ function ConnectBoards(b1, i, b2, o)
 end
 
 function DisconnectBoards(b, i)
-  b.inputs[i] = nil
-  b:performOperation()   
-  b:cascade()
+  if b.inputs ~= nil and b.inputs[i] ~= nil then
+    b.inputs[i] = nil
+    b:performOperation()   
+    b:cascade()
+  end
 end
 
 function GetAllConnections()
