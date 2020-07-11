@@ -60,36 +60,23 @@ function ModuleInput:onUpdate(dt)
   if l < self.scale.x then
     self:onHover()
     if love.mouse.isLeftClick() then
-      if self.isConnected == false then
+      if self.isConnected == false and Cursor.wireEnd == nil then
         self.isConnected = true
-        if Cursor.wireEnd == nil then
-          local w = GameObject("WireCoupling")
+        local w = GameObject("WireCoupling")
 
-          self.wireEnd = w.wireEnds[1]
-          self.wireEnd.myNode = self
-          w.wireEnds[1].position = self.position
-          
-          Cursor.wireEnd = w.wireEnds[2]
-          w.wireEnds[2].dragged = true
-        else
-          self.wireEnd = Cursor.wireEnd
-          self.wireEnd.dragged = false
-          self.wireEnd.position = self.position
-          Cursor.wireEnd = nil
-        end
-      elseif Cursor.wireEnd == nil then
-        self.isConnected = false
-        Cursor.wireEnd = self.wireEnd
-        Cursor.wireEnd.dragged = true
-        Cursor.wireEnd.myNode = nil
-        self.wireEnd = nil
+        self.wireEnd = w.wireEnds[1]
+        self.wireEnd.myNode = self
+        w.wireEnds[1].position = self.position
+        
+        Cursor.wireEnd = w.wireEnds[2]
+        w.wireEnds[2].position = Vector2D(MainCamera:mousePosition())
+        w.wireEnds[2].dragged = true
+
+        w:attachCable()
       end
       Cursor.outBoard = self.board
       Cursor.outPort = self.port
       CheckCursorPlacement(self)
-    end
-    if love.mouse.isRightClick() and IsInputUsed(self.board, self.port) then
-      DisconnectBoards(self.board, self.port)
     end
   else
     self:onNotHover()
