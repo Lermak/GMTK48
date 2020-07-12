@@ -39,13 +39,13 @@ function WireCoupling:show(b)
 end
 
 function WireCoupling:attachCable()
-  print(self.cable.dropPointTwo)
+  --print(self.cable.dropPointTwo)
   if self.cable.dropPointOne == false or self.cable.dropPointOne == nil then
     self.cable.p0 = self.wireEnds[1].position:clone()
   else
     self.wireEnds[1].position = self.cable.p0:clone()
   end
-  print(self.wireEnds[2])
+  --print(self.wireEnds[2])
   if self.cable.dropPointTwo == false or self.cable.dropPointTwo == nil then
     self.cable.p1 = self.wireEnds[2].position:clone()   
   else

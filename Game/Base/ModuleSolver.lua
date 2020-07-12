@@ -183,7 +183,7 @@ Boards["Converter"] = {
   tick = function(self, input)
     for k,recipe in pairs(self.recipes) do
       if recipe.input[1] == input and self.slider == recipe.input[2] then
-        print(self.slider)
+        dbg_print(self.slider)
         return { recipe.output }
       end
     end
@@ -350,8 +350,8 @@ function tickModule(module, inputs)
       return
     end
   else
-    print("  Module had an error when ticking!")
-    print(res)
+    dbg_print("  Module had an error when ticking!")
+    dbg_print(res)
     module:setOutputError()
   end
 end

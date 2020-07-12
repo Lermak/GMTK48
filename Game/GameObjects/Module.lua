@@ -19,7 +19,7 @@ local X_CENTER_RIGHT = 192
 
 local ICON_OFFSET = 45
 
-local Init_Module = {}
+Init_Module = {}
 
 Init_Module["Producer"] = function(self)
   self:declareOutput(X_CENTER_LEFT, Y_BOTTOM_ROW, Vector2D(0, 0), 0)
@@ -81,11 +81,13 @@ Init_Module["Ship System"] = function(self)
 
   local energyBar = GameObject("EnergyBar", self)
   energyBar.position = self.position:clone()
-  energyBar.position.y = energyBar.position.y - energyBar.image:getHeight()
+  energyBar.position.x = energyBar.position.x + X_CENTER
+  energyBar.position.y = energyBar.position.y - 160
+  --energyBar.position.y = energyBar.position.y - energyBar.image:getHeight()
   self.energyBar = energyBar
   self.systemIconScreen = iconScreen
   self.system_icon = icon
-  self.systemTime = math.random(1, 10)
+  self.systemTime = 120--math.random(5, 100)
 end
 
 Init_Module["Empty"] = function(self)
@@ -149,7 +151,6 @@ function Module:onInitialize(name, position, params)
   self.pivot.x = 0
   self.pivot.y = 0
   self.zOrder = -10
-  self.cooldown = 10
   self.input = {}
   self.output = {}
   for k,v in pairs(self.initializedInputs) do
@@ -180,9 +181,18 @@ function Module:drawMesh()
   --drawText(self.name, self.position + self.namePos, 500, 64, nil, Color(0.1, 0.1, 0.1))
 
   if self.moduleName == "Ship System" then
-    drawText(string.format("%.0f", self.systemTime), self.position + Vector2D(200, -84), 500, 128, nil, Color(0.1, 0.1, 0.1))
-  end
+    love.graphics.setColor(255,255,255,255)
+    love.graphics.draw(love.graphics.newImage("Data/Images/ModuleAssets/TimerFrame.png"), self.position.x + 155, self.position.y - 110)
+    love.graphics.setColor(255,0,0,175)
+    local s = (math.floor(self.systemTime%60))
+    if s < 10 then
+      s = "0"..s
+    end
+    love.graphics.printf((math.floor(self.systemTime/60))..":"..s, self.position.x + 170, self.position.y + -60, self.image:getWidth(), "center", 0, 1, -1, 0.5 * 200, 0)
 
+    --drawText(string.format("%.0f", self.systemTime), self.position + Vector2D(200, -84), 500, 128, nil, Color(0.1, 0.1, 0.1))
+  end
+  love.graphics.setColor(0,0,0,255)
   self:coreDraw()
 end
 
@@ -312,35 +322,6 @@ function Module:onUpdate(dt)
       Gamestate.current():moduleFail(self)
       self:clearConnections()
       self:animateOut()
-    end
-  end
-
-  if self.moduleName == nil then
-    self.cooldown = self.cooldown - dt
-    if self.cooldown < 0 then
-      self.cooldown = 10
-      local r = Resources[love.math.random(1, #Resources)]
-      self.params.resource = r
-      self.moduleName = "Ship System"
-      self.moduleIdx = AddModule(self.board, self.params)
-      Init_Module[self.name](self)
-
-      for k,v in pairs(self.initializedInputs) do
-        print(v[1].nodeIdx)
-        self.input[#self.input + 1] = v[1]
-        self.input[#self.input].position.x = self.position.x + v[2]
-        self.input[#self.input].position.y = self.position.y + v[3]
-        self.input[#self.input].zOrder = -9
-      end
-    
-      for k,v in pairs(self.initializedOutputs) do
-        self.output[#self.output + 1] = v[1]
-        self.output[#self.output].position.x = self.position.x + v[2]
-        self.output[#self.output].position.y = self.position.y + v[3]
-        self.output[#self.output].zOrder = -9
-        self.output[#self.output]:setupIconScreen()
-        self.output[#self.output]:setupIcon()
-      end
     end
   end
 end
