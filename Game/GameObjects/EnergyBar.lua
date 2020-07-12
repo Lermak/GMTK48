@@ -30,13 +30,16 @@ function EnergyBar:onInitialize(m)
 end
 
 function EnergyBar:onUpdate(dt) 
+  if self.invalid then return end
+  
   -- Called every frame
   if NODE_LIST[self.module.input[1].nodeIdx] and NODE_LIST[self.module.input[1].nodeIdx].value == self.module.params.resource then
     self.has = self.has + dt
   end
   if self.has > self.need then
     self.has = self.need
-    self.module:clear()
+    self.invalid = true
+    self.module:animateOut()
     Gamestate.current().systemCooldown -= 0.5
   end
 end

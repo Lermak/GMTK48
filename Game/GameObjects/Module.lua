@@ -197,6 +197,10 @@ function Module:drawMesh()
 end
 
 function Module:animateOut()
+  if self.exitCo then return end
+
+  self:clearConnections()
+  
   self.exitCo = makeCoroutine(function()
     wwise.postEvent("GoAway")
     self:propegatezOrder(200)
@@ -320,7 +324,6 @@ function Module:onUpdate(dt)
 
     if self.systemTime < 0 then
       Gamestate.current():moduleFail(self)
-      self:clearConnections()
       self:animateOut()
     end
   end
@@ -365,6 +368,8 @@ function Module:clear()
   for k,v in pairs(self.detail) do
     v:destroy()
   end
+
+  self.moduleName = nil
 end
 
 function Module:onDestroy()
