@@ -22,7 +22,9 @@ local ICON_OFFSET = 45
 local Init_Module = {}
 
 Init_Module["Producer"] = function(self)
-  self:declareOutput(CENTER, BOTTOM_ROW_Y, Vector2D(0, ICON_OFFSET + 30), 80)
+  self:declareOutput(LEFT_CENTER, BOTTOM_ROW_Y, Vector2D(0, ICON_OFFSET + 15), 40)
+  self:declareOutput(CENTER, BOTTOM_ROW_Y, Vector2D(0, ICON_OFFSET + 15), 40)
+  self:declareOutput(RIGHT_CENTER, BOTTOM_ROW_Y, Vector2D(0, ICON_OFFSET + 15), 40)
 end
 
 Init_Module["Combiner"] = function(self)
