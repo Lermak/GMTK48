@@ -87,7 +87,7 @@ Init_Module["Ship System"] = function(self)
   self.energyBar = energyBar
   self.systemIconScreen = iconScreen
   self.system_icon = icon
-  self.systemTime = 120--math.random(5, 100)
+  self.systemTime = 120
 end
 
 Init_Module["Empty"] = function(self)
