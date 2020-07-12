@@ -7,20 +7,20 @@
 ----------------------------------------------------------------------
 
 SampleState = { 
-  
 }
-  local y1 = 360
-  local y2 = 180
-  local y3 = 0
-  local y4 = -180
-  local y = {y1, y2, y3, y4}
-  
-  local x1 = -640
-  local x2 = -384
-  local x3 = -128
-  local x4 =  128
-  local x5  = 384
-  local x = {x1, x2, x3, x4, x5}
+
+local y1 = 360
+local y2 = 180
+local y3 = 0
+local y4 = -180
+local y = {y1, y2, y3, y4}
+
+local x1 = -640
+local x2 = -384
+local x3 = -128
+local x4 =  128
+local x5  = 384
+local x = {x1, x2, x3, x4, x5}
 
 function setTutOne()
   Modules = {
@@ -79,8 +79,9 @@ function SampleState:init()
   -- Called once, and only once, before entering the state the first time. See Gamestate.switch().
   self.cableState = 0
 
-  self.systemCooldown = 30
+  self.systemCooldown = 20
   self.systemTimer = 0
+  self.completedModules = 0
 
   wwise.postEvent("Main_Music")
 end
@@ -114,7 +115,7 @@ function SampleState:update()
   end
 
   if #emptySystems == 5 or (self.systemTimer <= 0 and #emptySystems ~= 0) then
-    self.systemTimer = self.systemCooldown
+    self.systemTimer = math.max(self.systemCooldown - self.completedModules, 5)
 
     local module = emptySystems[love.math.random(1, #emptySystems)]
 
