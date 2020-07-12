@@ -82,6 +82,8 @@ function SampleState:init()
   self.systemCooldown = 20
   self.systemTimer = 0
   self.completedModules = 0
+  self.firstHookedUp = false
+  self.firstModule = true
 
   wwise.postEvent("Main_Music")
 end
@@ -106,6 +108,8 @@ function SampleState:update()
     return
   end
 
+  SolveGraph()
+
   -- Get all current Producer modules
   local emptySystems = {}
   for k,obj in pairs(Modules) do
@@ -114,13 +118,9 @@ function SampleState:update()
     end
   end
 
-  if #emptySystems == 5 or (self.systemTimer <= 0 and #emptySystems ~= 0) then
-    self.systemTimer = math.max(self.systemCooldown - self.completedModules, 5)
-
-    local module = emptySystems[love.math.random(1, #emptySystems)]
-
+  local makeModule = function(module, max)
     local setupModule = function()
-      local r = Resources[love.math.random(1, #Resources)]
+      local r = Resources[love.math.random(1, max)]
       module.params.resource = r
       module.moduleName = "Ship System"
       module.moduleIdx = AddModule(module.board, module.params)
@@ -132,7 +132,7 @@ function SampleState:update()
         module.input[#module.input].position.y = module.position.y + v[3]
         module.input[#module.input].zOrder = -9
       end
-    
+
       for k,v in pairs(module.initializedOutputs) do
         module.output[#module.output + 1] = v[1]
         module.output[#module.output].position.x = module.position.x + v[2]
@@ -148,11 +148,46 @@ function SampleState:update()
     else
       setupModule()
     end
-  else
-    self.systemTimer -= dt
   end
 
-  SolveGraph()
+
+  if self.firstModule == true then
+
+    local module = emptySystems[love.math.random(1, #emptySystems)]
+    makeModule(module, 4)
+    self.firstModule = false
+
+  elseif self.firstHookedUp == false then
+
+    local hookedUp = false
+    for k,obj in pairs(Modules) do
+      if obj.moduleName == "Ship System" then
+        if NODE_LIST[obj.input[1].nodeIdx] and NODE_LIST[obj.input[1].nodeIdx].value == obj.params.resource then
+          hookedUp = true
+        end
+      end
+    end
+
+    if hookedUp == true then
+      self.firstHookedUp = true
+
+      for k,obj in pairs(emptySystems) do
+        makeModule(obj, #Resources)
+      end
+    end
+
+  else
+
+    if #emptySystems == 5 or (self.systemTimer <= 0 and #emptySystems ~= 0) or (foundShip == true and shipIncomplete == false and #emptySystems ~= 0) then
+      self.systemTimer = math.max(self.systemCooldown - (self.completedModules * 0.75), 5)
+  
+      local module = emptySystems[love.math.random(1, #emptySystems)]
+      makeModule(module, #Resources)
+    else
+      self.systemTimer -= dt
+    end
+
+  end
 end
 
 function SampleState:moduleFail()
