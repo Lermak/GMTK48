@@ -45,23 +45,29 @@ end
 
 function setLevel()
   Modules = {
-    GameObject("Module", "Producer", {x = -640, y = y}, { resource = "Star" }),
-    GameObject("Module", "Producer", {x = -384, y = y}, { resource = "Crab" }),
-    GameObject("Module", "Producer", {x = -128, y = y}, { resource = "Electricity" }),
-    GameObject("Module", "Producer", {x = 128, y = y},  { resource = "Fire" }),
-    GameObject("Module", "Producer", {x = 384, y = y},  { resource = "Star" }),
+    GameObject("Module", "Producer", {x = x1, y = y1}, { resource = "Star" }),
+    GameObject("Module", "Producer", {x = x2, y = y1}, { resource = "Crab" }),
+    GameObject("Module", "Producer", {x = x3, y = y1}, { resource = "Electricity" }),
+    GameObject("Module", "Producer", {x = x4, y = y1},  { resource = "Fire" }),
+    GameObject("Module", "Producer", {x = x5, y = y1},  { resource = "Star" }),
     
-    GameObject("Module", "Empty", {x = -640, y = y2}),
-    GameObject("Module", "Combiner", {x = -384, y = y2}),
-    GameObject("Module", "Separator", {x = -128, y = y2}),
-    GameObject("Module", "Combiner", {x = 128, y = y2}),
-    GameObject("Module", "Empty", {x = 384, y = y2}),
+    GameObject("Module", "Empty", {x = x1, y = y2}),
+    GameObject("Module", "Combiner", {x = x2, y = y2}),
+    GameObject("Module", "Separator", {x = x3, y = y2}),
+    GameObject("Module", "Combiner", {x = x4, y = y2}),
+    GameObject("Module", "Empty", {x = x5, y = y2}),
     
-    GameObject("Module", "Doubler", {x = -640, y = y3}),
-    GameObject("Module", "Converter", {x = -384, y = y3}),
-    GameObject("Module", "Doubler", {x = -128, y = y3}),
-    GameObject("Module", "Empty", {x = 128, y = y3}),
-    GameObject("Module", "Empty", {x = 384, y = y3}),
+    GameObject("Module", "Doubler", {x = x1, y = y3}),
+    GameObject("Module", "Converter", {x = x2, y = y3}),
+    GameObject("Module", "Doubler", {x = x3, y = y3}),
+    GameObject("Module", "Empty", {x = x4, y = y3}),
+    GameObject("Module", "Empty", {x = x5, y = y3}),
+
+    GameObject("Module", "Empty", {x = x1, y = y4}),
+    GameObject("Module", "Empty", {x = x2, y = y4}),
+    GameObject("Module", "Empty", {x = x3, y = y4}),
+    GameObject("Module", "Empty", {x = x4, y = y4}),
+    GameObject("Module", "Empty", {x = x5, y = y4}),
     }
 end
 
