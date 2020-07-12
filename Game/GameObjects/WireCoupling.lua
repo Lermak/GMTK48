@@ -77,15 +77,21 @@ function WireCoupling:onUpdate(dt)
               Cursor.wireEnd = nil
               flag = true
 
+              self.cable.placing = false
+              self:attachCable()
+              self.cable:rebuild()
+
               if self.wireEnds[1].myNode and self.wireEnds[2].myNode then
                 ConnectNode(self.wireEnds[1].myNode.nodeIdx, self.wireEnds[2].myNode.nodeIdx)
               end
 
             elseif Cursor.wireEnd == nil and y.isConnected == true and y.wireEnd == w then
               DisconnectNode(w.myNode.nodeIdx)
-              
+
               y.isConnected = false
               Cursor.wireEnd = y.wireEnd
+              self.cable.placing = true
+              self.cable:rebuild()
               w.dragged = true
               w.myNode = nil
               y.wireEnd = nil

@@ -14,8 +14,10 @@ function ModuleSocket:onInitialize(type, moduleId, idx, paramTable)
   if type == "input" then
     self.color = Color(0, 128, 0)
     self.hoverColor = Color(0, 255, 0)
+    self.iconPos = Vector2D(0,0)
   else
     self.iconPos = paramTable["iconPos"]
+    self.iconScale = paramTable["imgScale"]
     self:setupIconScreen()
     self.color = Color(128, 0, 0)
     self.hoverColor = Color(255, 0, 0)
@@ -29,6 +31,8 @@ function ModuleSocket:onInitialize(type, moduleId, idx, paramTable)
   self.pivot.y = 0.5
   self.defaultColor = self.color
 
+  self.zOrder = 10
+
   self.icon = nil
 
   self.moduleIdx = moduleId
@@ -40,7 +44,7 @@ end
 
 function ModuleSocket:setupIconScreen()
   if self.iconScreen == nil then
-    self.iconScreen = GameObject("IconScreen")
+    self.iconScreen = GameObject("IconScreen", self.iconScale)
   end
   self.iconScreen.position.x = self.position.x + self.iconPos.x
   self.iconScreen.position.y = self.position.y + self.iconPos.y
@@ -59,14 +63,16 @@ function ModuleSocket:setupIcon()
     
     self.icon.zOrder = 15
     self.icon.visible = true
-    self.icon.position = self.position
+    self.icon.position = self.position + self.iconPos
   elseif self.icon ~= nil then
     self.icon.visible = false
   end
 end
 
 function ModuleSocket:onUpdate(dt)
-  self:setupIcon()
+  if self.nodeType == "output" then
+    self:setupIcon()
+  end
 
   local mx, my = MainCamera:mousePosition()
   local l = (self.position - Vector2D(mx, my)):len()

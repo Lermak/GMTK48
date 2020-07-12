@@ -38,7 +38,7 @@ function SampleState:enter(previous, ...)
   GameObject("Module", "Empty", {x = 384, y = y2}),
   
   GameObject("Module", "Doubler", {x = -640, y = y3}),
-  GameObject("Module", "Doubler", {x = -384, y = y3}),
+  GameObject("Module", "Converter", {x = -384, y = y3}),
   GameObject("Module", "Doubler", {x = -128, y = y3}),
   GameObject("Module", "Empty", {x = 128, y = y3}),
   GameObject("Module", "Empty", {x = 384, y = y3}),
