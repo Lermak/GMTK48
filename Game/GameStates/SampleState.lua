@@ -84,8 +84,6 @@ function SampleState:init()
   self.completedModules = 0
   self.firstHookedUp = false
   self.firstModule = true
-
-  wwise.postEvent("Main_Music")
 end
 
 function SampleState:enter(previous, ...)
@@ -158,6 +156,7 @@ function SampleState:update()
     self.firstModule = false
 
   elseif self.firstHookedUp == false then
+    if self.hookUpCo ~= nil then self.hookUpCo:resume() return end
 
     local hookedUp = false
     for k,obj in pairs(Modules) do
@@ -169,11 +168,19 @@ function SampleState:update()
     end
 
     if hookedUp == true then
-      self.firstHookedUp = true
+      self.hookUpCo = makeCoroutine(function()
+        wwise.postEvent("Main_Music")
+        waitSeconds(1)
+        
 
-      for k,obj in pairs(emptySystems) do
-        makeModule(obj, #Resources)
-      end
+        for k,obj in pairs(emptySystems) do
+          makeModule(obj, #Resources)
+          waitSeconds(0.5)
+        end
+
+        self.firstHookedUp = true
+        self.hookUpCo = false
+      end)
     end
 
   else
