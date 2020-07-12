@@ -81,7 +81,7 @@ Boards = {
   end),
   GameObject("Board", "System2", function(self)
     if self.inputs[1] ~= nil then
-      print(self.inputs[1])
+      --print(self.inputs[1])
       if(Contains(SystemRecipies[1].needed, GetAllInputsFor(self))) then
         print("System 2 online")
       else

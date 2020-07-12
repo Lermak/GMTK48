@@ -16,7 +16,7 @@ end
 
 function print_table(tab)
   for k,v in pairs(tab) do
-    print(k,v)
+    --print(k,v)
   end
 end
 
@@ -156,7 +156,7 @@ function makeCoroutine(f, ...)
   
     local ok, err = coroutine.resume(self.co, obj.loop)
     if not ok then
-      print((debug.traceback(self.co, "Error: " .. tostring(err), 0):gsub("\n[^\n]+$", "")))
+      --print((debug.traceback(self.co, "Error: " .. tostring(err), 0):gsub("\n[^\n]+$", "")))
     end
   end
   

@@ -96,7 +96,6 @@ function SampleState:enter(previous, ...)
     self.fadeIn = nil
   end)
   setLevel()
-  systemTimer = 0
   --setTutOne()
   
 end
@@ -115,8 +114,8 @@ function SampleState:update()
     end
   end
 
-  if #emptySystems == 5 or (systemTimer <= 0 and #emptySystems ~= 0) then
-    systemTimer = systemCooldown
+  if #emptySystems == 5 or (self.systemTimer <= 0 and #emptySystems ~= 0) then
+    self.systemTimer = self.systemCooldown
 
     local module = emptySystems[love.math.random(1, #emptySystems)]
     local r = Resources[love.math.random(1, #Resources)]
@@ -126,7 +125,6 @@ function SampleState:update()
     Init_Module[module.name](module)
 
     for k,v in pairs(module.initializedInputs) do
-      print(v[1].nodeIdx)
       module.input[#module.input + 1] = v[1]
       module.input[#module.input].position.x = module.position.x + v[2]
       module.input[#module.input].position.y = module.position.y + v[3]
@@ -142,7 +140,7 @@ function SampleState:update()
       module.output[#module.output]:setupIcon()
     end
   else
-    systemTimer -= dt
+    self.systemTimer -= dt
   end
 
   SolveGraph()
