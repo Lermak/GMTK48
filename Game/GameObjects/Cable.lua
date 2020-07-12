@@ -158,8 +158,8 @@ function Cable:fnDropPoint(point, otherPoint)
 
   if pullBack then
     local v = (self[otherPoint] - self[point]):normalize()
-    self.dropVec += v * self.dropVec:len()
-    self.dropVec *= 0.9 
+    self.dropVec += v * self.dropVec:len() * 0.7
+    self.dropVec *= 0.9
     self[point] = self[otherPoint] - v * self.dropBezierLen
   end
 
