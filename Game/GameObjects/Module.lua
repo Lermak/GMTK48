@@ -54,7 +54,7 @@ end
 
 
 Init_Module["Ship System"] = function(self)
-  self:declareInput(CENTER, CENTER)
+  self:declareInput(CENTER, TOP_ROW_Y)
 end
 
 Init_Module["Empty"] = function(self)

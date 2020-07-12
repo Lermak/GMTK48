@@ -135,6 +135,18 @@ Boards["Doubler"] = {
   end
 }
 
+Boards["Ship System"] = {
+  inputs = 1,
+  outputs = 0,
+  
+  init = function(self, params)
+    self.neededResource = params.resource
+  end,
+  tick = function(self, input)
+    if input == self.neededResource then return {} else return nil end
+  end
+}
+
 MODULE_LIST = {}
 MODULE_IDX = 0
 
@@ -234,7 +246,7 @@ function tickModule(module, inputs)
   local valid, res = pcall(board.tick, board, unpack(inputs))
   if valid then
     if res == nil then
-      dgb_print("NO OUTPUT!")
+      dbg_print("NO OUTPUT!")
       module:setOutputError()
       return
     end
