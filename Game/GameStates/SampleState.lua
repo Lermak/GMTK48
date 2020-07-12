@@ -29,6 +29,8 @@ function setTutOne()
   }
 end
 
+GameObject("Slider")
+
 function setTutTwo()
   Modules = {
     GameObject("Module", "Producer", {x = x2, y = y1},{ resource = "Star" }),
