@@ -138,7 +138,7 @@ end
 function Cable:fnDropPoint(point, otherPoint)
 
 
-  self.dropVec.y -= dt * 2
+  self.dropVec.y -= dt * 80
   self[point] += self.dropVec
 
   local lineLen = ((self[point] - self[otherPoint]):len())
@@ -149,6 +149,11 @@ function Cable:fnDropPoint(point, otherPoint)
     local v = math.map(lenDiff, -self.initialLen, self.dropBezierLen, 0, 1)
     self.tension = Easing.InOutQuad(v, 0, 1, 1)
     pullBack = self.tension >= 1
+  end
+
+  --When both are dropping, no tension physics
+  if self.dropPointOne and self.dropPointTwo then
+    pullBack = false
   end
 
   if pullBack then
