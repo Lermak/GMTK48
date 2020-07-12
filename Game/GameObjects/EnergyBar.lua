@@ -8,7 +8,7 @@
 
 local EnergyBar = ...
 
-function EnergyBar:onInitialize()
+function EnergyBar:onInitialize(m)
   -- Called when the game object is constructed
   self:setImage("ModuleAssets/EnergyBar.png")
   
@@ -20,18 +20,23 @@ function EnergyBar:onInitialize()
   self.pivot.x = 0
   self.pivot.y = 0
 
-  self.position.x = -640
-  self.position.y = 0
+  self.position.x = -500
+  self.position.y = 100
 
-  self.need = 10
+  self.module = m
+
+  self.need = 1
   self.has = 0
 end
 
-function EnergyBar:onUpdate(dt)
+function EnergyBar:onUpdate(dt) 
   -- Called every frame
-  self.has = self.has + dt
+  if NODE_LIST[self.module.input[1].nodeIdx].value == self.module.params.resource then
+    self.has = self.has + dt
+  end
   if self.has > self.need then
     self.has = self.need
+    self.module:clear()
   end
 end
 
@@ -44,9 +49,8 @@ function EnergyBar:onDestroy()
 end
 
 function EnergyBar:onDraw()
-  print(love.graphics.getWidth())
   love.graphics.draw(love.graphics.newImage("Data/Images/ModuleAssets/EnergyBarBackground.png"), self.position.x, self.position.y)
-  love.graphics.setScissor(self.position.x + love.graphics.getWidth( )/2, self.position.y - self.image:getHeight() + love.graphics.getHeight( )/2, self.image:getWidth() * self.has/self.need, self.image:getHeight())
+  love.graphics.setScissor(self.position.x + love.graphics.getWidth( )/2, love.graphics.getHeight( )/2 - self.position.y - self.image:getHeight(), self.image:getWidth() * self.has/self.need, self.image:getHeight())
   love.graphics.draw(self.image, self.position.x, self.position.y)
   love.graphics.setScissor() -- disable the clipping
   love.graphics.draw(love.graphics.newImage("Data/Images/ModuleAssets/EnergyBarCage.png"), self.position.x, self.position.y)
