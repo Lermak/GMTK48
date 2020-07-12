@@ -49,15 +49,15 @@ function setLevel()
     GameObject("Module", "Producer", {x = x3, y = y1}, { resource = "Fish" }),
     GameObject("Module", "Producer", {x = x4, y = y1},  { resource = "Fire" }),
     
-    GameObject("Module", "Combiner", {x = x1, y = y2}),
-    GameObject("Module", "Combiner", {x = x2, y = y2}),
-    GameObject("Module", "Combiner", {x = x3, y = y2}),
+    GameObject("Module", "Separator", {x = x1, y = y2}),
+    GameObject("Module", "Separator", {x = x2, y = y2}),
+    GameObject("Module", "Separator", {x = x3, y = y2}),
     GameObject("Module", "Converter", {x = x4, y = y2}),
     GameObject("Module", "Converter", {x = x5, y = y2}),
     
-    GameObject("Module", "Separator", {x = x1, y = y3}),
-    GameObject("Module", "Separator", {x = x2, y = y3}),
-    GameObject("Module", "Separator", {x = x3, y = y3}),
+    GameObject("Module", "Combiner", {x = x1, y = y3}),
+    GameObject("Module", "Combiner", {x = x2, y = y3}),
+    GameObject("Module", "Combiner", {x = x3, y = y3}),
     GameObject("Module", "Doubler", {x = x4, y = y3}),
     GameObject("Module", "Doubler", {x = x5, y = y3}),
 
