@@ -22,10 +22,10 @@ Boards = {}
 Resources = {
   "Star",
   "Electricity",
+  "Fire",
+  "Fish",
   "Leaf",
   "Crab",
-  "Fish",
-  "Fire",
   "Gear",
   "Snowman",
   "Moon",
