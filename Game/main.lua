@@ -78,7 +78,7 @@ function love.load(args)
   if(args[2] ~= nil) then
     Gamestate.switch(_G[args[2]])
   else
-    Gamestate.switch(SampleState)
+    Gamestate.switch(MenuState)
   end
 end
 
@@ -279,9 +279,9 @@ function love.draw()
   
   -- Sort main render
   table.sort(mainRender, function(a,b)
-    if a.zOrder == b.zOrder then
-      return (a.position.y) > (b.position.y)
-    end
+    --if a.zOrder == b.zOrder then
+    --  return (a.position.y) > (b.position.y)
+    --end
 
     return a.zOrder < b.zOrder
   end)

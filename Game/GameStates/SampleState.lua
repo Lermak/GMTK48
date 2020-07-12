@@ -83,11 +83,23 @@ end
 
 function SampleState:enter(previous, ...)
   -- Called every time when entering the state. See Gamestate.switch().
+  self.fadeIn = makeCoroutine(function()
+    overTime(1, function(p)
+      p = Easing.OutQuad(p,0,1,1)
+      Fade = 1 * p
+    end)
+    self.fadeIn = nil
+  end)
   setLevel()
   --setTutOne()
+  
 end
 
 function SampleState:update()  
+  if self.fadeIn then
+    self.fadeIn:resume()
+    return
+  end
   SolveGraph()
 end
 
