@@ -196,11 +196,13 @@ function Module:drawMesh()
   self:coreDraw()
 end
 
-function Module:animateOut()
+function Module:animateOut(callbackFn)
   if self.exitCo then return end
 
+  if callbackFn then self.valid = false end
+
   self:clearConnections()
-  
+
   self.exitCo = makeCoroutine(function()
     wwise.postEvent("GoAway")
     self:propegatezOrder(200)
@@ -222,11 +224,16 @@ function Module:animateOut()
       lastP = p
     end)
 
+    self:clear()
+    if callbackFn then self.valid = false end
+
     waitSeconds(0.5)
+
+    self.valid = false
+    if callbackFn then callbackFn() end
 
     wwise.postEvent("ComeBack")
 
-    self:clear()
 
     local d = Vector2D(0, 256)
     local lastP = 0
