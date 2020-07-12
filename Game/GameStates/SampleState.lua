@@ -118,26 +118,35 @@ function SampleState:update()
     self.systemTimer = math.max(self.systemCooldown - self.completedModules, 5)
 
     local module = emptySystems[love.math.random(1, #emptySystems)]
-    local r = Resources[love.math.random(1, #Resources)]
-    module.params.resource = r
-    module.moduleName = "Ship System"
-    module.moduleIdx = AddModule(module.board, module.params)
-    Init_Module[module.name](module)
 
-    for k,v in pairs(module.initializedInputs) do
-      module.input[#module.input + 1] = v[1]
-      module.input[#module.input].position.x = module.position.x + v[2]
-      module.input[#module.input].position.y = module.position.y + v[3]
-      module.input[#module.input].zOrder = -9
+    local setupModule = function()
+      local r = Resources[love.math.random(1, #Resources)]
+      module.params.resource = r
+      module.moduleName = "Ship System"
+      module.moduleIdx = AddModule(module.board, module.params)
+      Init_Module[module.name](module)
+
+      for k,v in pairs(module.initializedInputs) do
+        module.input[#module.input + 1] = v[1]
+        module.input[#module.input].position.x = module.position.x + v[2]
+        module.input[#module.input].position.y = module.position.y + v[3]
+        module.input[#module.input].zOrder = -9
+      end
+    
+      for k,v in pairs(module.initializedOutputs) do
+        module.output[#module.output + 1] = v[1]
+        module.output[#module.output].position.x = module.position.x + v[2]
+        module.output[#module.output].position.y = module.position.y + v[3]
+        module.output[#module.output].zOrder = -9
+        module.output[#module.output]:setupIconScreen()
+        module.output[#module.output]:setupIcon()
+      end
     end
-  
-    for k,v in pairs(module.initializedOutputs) do
-      module.output[#module.output + 1] = v[1]
-      module.output[#module.output].position.x = module.position.x + v[2]
-      module.output[#module.output].position.y = module.position.y + v[3]
-      module.output[#module.output].zOrder = -9
-      module.output[#module.output]:setupIconScreen()
-      module.output[#module.output]:setupIcon()
+
+    if not module.exitCo then
+      module:animateOut(setupModule)
+    else
+      setupModule()
     end
   else
     self.systemTimer -= dt
