@@ -24,10 +24,9 @@ SampleState = {
 
 function setTutOne()
   Modules = {
-    GameObject("Module", "Producer", {x = x2, y = y1},{ resource = "Star" }),
-    GameObject("Module", "Producer", {x = x4, y = y1},{ resource = "Star" }),
+    GameObject("Module", "Producer", {x = x2, y = y2},{ resource = "Star" }),
 
-    GameObject("Module", "Combiner", {x = x3, y = y2}),
+    GameObject("Module", "Ship System", {x = x4, y = y2},{ resource = "Star" }),
   }
 end
 
@@ -83,7 +82,7 @@ function SampleState:enter(previous, ...)
   
 
   --setLevel()
-  setTutTwo()
+  setTutOne()
 end
 
 function SampleState:update()  

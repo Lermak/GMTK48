@@ -53,6 +53,29 @@ Boards["Combiner"] = {
   end
 }
 
+
+Boards["Separator"] = {
+  inputs = 1,
+  outputs = 2,
+
+  recipes = {
+    {
+      input = "Star",
+      output = {"Crab", "Electricity"}
+    },
+  },
+
+  tick = function(self, input1)
+    for k,recipe in pairs(self.recipes) do
+      if recipe.input == input1 then
+        return { recipe.output[1], recipe.output[2] }
+      end
+    end
+
+    return { "", "" }
+  end
+}
+
 Boards["Producer"] = {
   inputs = 0,
   outputs = 1,
@@ -139,7 +162,7 @@ function AddNode(type, module_id, index)
 
     setValue = function(self, value)
       self.value = value
-      if self.connection ~= nil then
+      if self.connection ~= nil and NODE_LIST[self.connection].value == nil then
         dbg_print("  Propegation to Node #" .. self.connection)
         NODE_LIST[self.connection].value = value
       end
