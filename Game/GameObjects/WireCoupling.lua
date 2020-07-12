@@ -13,6 +13,8 @@ function WireCoupling:onInitialize()
   self.zOrder = 10
   self.visible = false
 
+  self.color = Color(love.math.random(0,255),love.math.random(0,255), love.math.random(0,255),255)
+
   self.wireEnds = {
     GameObject("WireEnd"),
     GameObject("WireEnd")
@@ -20,6 +22,10 @@ function WireCoupling:onInitialize()
   self.birth = true
   self.cable = GameObject("Cable", self.wireEnds[1].position:clone(), self.wireEnds[2].position:clone())
   self:show(true)
+
+  self.cable.color = self.color
+  self.wireEnds[1].color = self.color
+  self.wireEnds[2].color = self.color
 end
 
 function WireCoupling:show(b)

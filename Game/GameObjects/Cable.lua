@@ -67,7 +67,7 @@ function Cable:rebuild()
   g:curveTo(cp1.x, cp1.y, cp2.x, cp2.y, p1.x, p1.y)
   g:stroke()
 
-  g:setLineColor(255, 0, 0, alpha)
+  g:setLineColor(self.color["r"]/255, self.color["g"]/255, self.color["b"]/255, alpha)
   g:setLineWidth(7)
   g:moveTo(p0.x, p0.y)
   g:curveTo(cp1.x, cp1.y, cp2.x, cp2.y, p1.x, p1.y)
