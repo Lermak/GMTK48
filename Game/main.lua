@@ -279,9 +279,9 @@ function love.draw()
   
   -- Sort main render
   table.sort(mainRender, function(a,b)
-    if a.zOrder == b.zOrder then
-      return (a.position.y) > (b.position.y)
-    end
+    --if a.zOrder == b.zOrder then
+    --  return (a.position.y) > (b.position.y)
+    --end
 
     return a.zOrder < b.zOrder
   end)

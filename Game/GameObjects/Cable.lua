@@ -135,6 +135,11 @@ function Cable:onUpdate(dt)
 
     local rad = 50
     local force = 1000
+    if mouseDelta:len() < 5 then
+      rad = 25
+      force = 100
+    end
+
     local mp = (self.controlPoint + (self.p0 + self.p1) / 2) / 2
     local r, p = CollisionManager.lineToCircle(self.p0, mp, mousePos, rad)
     if r then
