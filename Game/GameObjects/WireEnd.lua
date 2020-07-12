@@ -26,9 +26,9 @@ end
 function WireEnd:setupIcon(node)
   if node ~= nil and node.value ~= nil and node.value ~= "" then
     if self.icon == nil then
-      self.icon = GameObject("ResourceIcon", node.value, Color(0,0,255))
+      self.icon = GameObject("ResourceIcon", node.value, self.color)
     else
-      self.icon:onInitialize(node.value, Color(0,0,255))
+      self.icon:onInitialize(node.value, self.color)
     end
     
     self.icon.zOrder = self.zOrder + 15
