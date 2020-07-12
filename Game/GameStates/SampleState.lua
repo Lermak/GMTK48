@@ -67,6 +67,9 @@ function setLevel()
     GameObject("Module", "Ship System", {x = x4, y = y4}, { resource = "Spider" }),
     GameObject("Module", "Ship System", {x = x5, y = y4}, { resource = "Radiation" }),
     }
+
+
+    
 end
 
 function SampleState:init()
@@ -85,6 +88,9 @@ end
 
 function SampleState:update()  
   SolveGraph()
+end
+
+function SampleState:moduleFail()
 end
 
 function SampleState:draw()

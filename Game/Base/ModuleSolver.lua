@@ -19,6 +19,26 @@ end
 
 Boards = {}
 
+Resources = {
+  "Star",
+  "Electricity",
+  "Leaf",
+  "Crab",
+  "Fish",
+  "Fire",
+  "Gear",
+  "Snowman",
+  "Moon",
+  "Heart",
+  "Clock",
+  "Radiation",
+  "Illuminati",
+  "Money",
+  "Music",
+  "Sun",
+  "Squirrel"
+}
+
 DEBUG_GRAPH = false
 local dbg_print = function(...)
   if DEBUG_GRAPH then print(...) end
@@ -300,7 +320,8 @@ function ConnectNode(i1, i2)
   local n2 = NODE_LIST[i2]
 
   if n1 == nil or n2 == nil then
-    error("INVALID INDEX SPECIFIED FOR CONNECTION! " .. i1 .. " <--> " .. i2)
+    dbg_print("INVALID INDEX SPECIFIED FOR CONNECTION! " .. i1 .. " <--> " .. i2)
+    return
   end
 
   dbg_print("Connect Node " .. i1 .. " to Node " .. i2)
@@ -321,6 +342,7 @@ function DisconnectNode(idx)
 end
 
 function RemoveNode(idx)
+  DisconnectNode(idx)
   NODE_LIST[idx] = nil
 end
 
