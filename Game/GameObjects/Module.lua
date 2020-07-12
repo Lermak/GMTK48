@@ -25,7 +25,7 @@ Init_Module["Producer"] = function(self)
   self:declareOutput(X_CENTER_LEFT, Y_BOTTOM_ROW, Vector2D(0, 0), 0)
   self:declareOutput(X_CENTER, Y_BOTTOM_ROW, Vector2D(0, ICON_OFFSET + 30), 80)
   self:declareOutput(X_CENTER_RIGHT, Y_BOTTOM_ROW, Vector2D(0, 0), 0)
-  self.name = self.moduleName..": "..self.params.resource
+  self.name = self.moduleName
 end
 
 Init_Module["Combiner"] = function(self)
