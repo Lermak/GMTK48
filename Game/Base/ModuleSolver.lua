@@ -89,8 +89,11 @@ Boards["Ship System"] = {
   inputs = 1,
   outputs = 0,
   
+  init = function(self, params)
+    self.neededResource = params.resource
+  end,
   tick = function(self, input)
-    if input == "Crab" then return {} else return nil end
+    if input == self.neededResource then return {} else return nil end
   end
 }
 

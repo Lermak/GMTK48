@@ -24,8 +24,8 @@ SampleState = {
 
 function setTutOne()
   Modules = {
-    GameObject("Module", "Producer", {x = x2, y = y1}),
-    GameObject("Module", "Producer", {x = x4, y = y1}),
+    GameObject("Module", "Producer", {x = x2, y = y1},{ resource = "Star" }),
+    GameObject("Module", "Producer", {x = x4, y = y1},{ resource = "Star" }),
 
     GameObject("Module", "Combiner", {x = x3, y = y2}),
   }
@@ -33,12 +33,12 @@ end
 
 function setTutTwo()
   Modules = {
-    GameObject("Module", "Producer", {x = x2, y = y1}),
-    GameObject("Module", "Producer", {x = x4, y = y1}),
+    GameObject("Module", "Producer", {x = x2, y = y1},{ resource = "Star" }),
+    GameObject("Module", "Producer", {x = x4, y = y1},{ resource = "Star" }),
 
     GameObject("Module", "Combiner", {x = x3, y = y2}),
 
-    GameObject("Module", "Ship System", {x = x3, y = y3}),
+    GameObject("Module", "Ship System", {x = x3, y = y3},{ resource = "Crab" }),
   }
 end
 
