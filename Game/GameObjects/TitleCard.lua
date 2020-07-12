@@ -19,6 +19,7 @@ function TitleCard:onInitialize()
   
   self.textFont = love.graphics.newFont("Data/Fonts/KenPixel Mini Square.ttf", 40)
   self.textFont2 = love.graphics.newFont("Data/Fonts/KenPixel Mini Square.ttf", 24)
+  self.textFontTitle = love.graphics.newFont("Data/Fonts/KenPixel Mini Square.ttf", 100)
 
   self.backImg = ImageManager.getImage("Data/Images/Title/Background.png")
   self.backImgScale = Vector2D(1 / self.backImg:getWidth(), 1 / self.backImg:getHeight())
@@ -49,32 +50,31 @@ function TitleCard:drawHUD()
   local y = h / 2
 
   -- Draw Background
-  love.graphics.setColor(255,255,255,self.color.a)
+  love.graphics.setColor(1,1,1,self.color.a)
   love.graphics.draw(self.backImg, x, y, 0, w * self.backImgScale.x, h * self.backImgScale.y, self.pivot.x / math.abs(self.backImgScale.x), self.pivot.y / math.abs(self.backImgScale.y))
 
   -- Draw Title
-  love.graphics.draw(self.titleImg, x, y + self.titleHeightOff, 0, w * self.titleImgScale.x, h * self.titleImgScale.y, self.pivot.x / math.abs(self.titleImgScale.x), self.pivot.y / math.abs(self.titleImgScale.y))
-  --drawText("Engineering Chaos", Vector2D(0, 0 + self.titleHeightOff), 1280, 200, nil, Color(0.1, 0.1, 0.1))
-
+  --love.graphics.draw(self.titleImg, x, y + self.titleHeightOff, 0, w * self.titleImgScale.x, h * self.titleImgScale.y, self.pivot.x / math.abs(self.titleImgScale.x), self.pivot.y / math.abs(self.titleImgScale.y))
+  love.graphics.setFont(self.textFontTitle)
+  love.graphics.setColor(0,0,0,self.color.a)
+  love.graphics.printf("Engineering\nChaos",
+    0, y - h/3 + self.titleHeightOff, 1280-48, "center")
+  
+  local text_pos = 720/2 - 4*720/32
+  love.graphics.setFont(self.textFont2)
+  love.graphics.printf("You will need the PDF included with your executable\nplease open it before you continue",
+    0, y + 64, 1280-48, "center")
+    love.graphics.setColor(1,1,1,self.color.a)
   
 
   -- Draw Text
   local text_pos = 720/2 - 4*720/32
   love.graphics.setFont(self.textFont)
-  love.graphics.printf("Press any key to continue...",
-  -- 1280x720, 
-    0,
-    y + text_pos,
-    1280,
-    "center")
+  love.graphics.printf("Press any key to continue...", 0, y + text_pos, 1280,"center")
     
 
   love.graphics.setFont(self.textFont2)
-  love.graphics.printf("Press C for Credits",
-    0,
-    y + text_pos+32,
-    1280-48,
-    "right")
+  love.graphics.printf("Press C for Credits", 0, y + text_pos+8, 1280-48, "right")
 end
 
 function TitleCard:onDestroy()
