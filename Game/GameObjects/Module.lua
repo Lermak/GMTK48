@@ -76,6 +76,10 @@ Init_Module["Ship System"] = function(self)
   icon.scale.x = icon.scale.x * iconScale
   icon.scale.y = icon.scale.y * iconScale
 
+  local energyBar = GameObject("EnergyBar", self)
+  energyBar.position = self.position:clone()
+  energyBar.position.y = energyBar.position.y - energyBar.image:getHeight()
+  self.energyBar = energyBar
   self.systemIconScreen = iconScreen
   self.system_icon = icon
   self.systemTime = math.random(5, 100)
@@ -238,6 +242,7 @@ function Module:clear()
 
   if self.system_icon then self.system_icon:destroy() end
   if self.systemIconScreen then self.systemIconScreen:destroy() end
+  if self.energyBar then self.energyBar:destroy() end
 
   for k,v in pairs(self.detail) do
     v:destroy()
