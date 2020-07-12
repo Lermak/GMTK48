@@ -68,6 +68,7 @@ function setLevel()
     GameObject("Module", "Ship System", {x = x5, y = y4}, { resource = "Radiation" }),
     }
 
+    GameOver = GameObject("GameOver")
 
     
 end
@@ -82,15 +83,28 @@ end
 
 function SampleState:enter(previous, ...)
   -- Called every time when entering the state. See Gamestate.switch().
+  self.fadeIn = makeCoroutine(function()
+    overTime(1, function(p)
+      p = Easing.OutQuad(p,0,1,1)
+      Fade = 1 * p
+    end)
+    self.fadeIn = nil
+  end)
   setLevel()
   --setTutOne()
+  
 end
 
 function SampleState:update()  
+  if self.fadeIn then
+    self.fadeIn:resume()
+    return
+  end
   SolveGraph()
 end
 
 function SampleState:moduleFail()
+  GameOver.failiures = GameOver.failiures + 1
 end
 
 function SampleState:draw()

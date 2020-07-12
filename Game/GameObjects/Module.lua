@@ -30,34 +30,38 @@ Init_Module["Producer"] = function(self)
 end
 
 Init_Module["Combiner"] = function(self)
-  self:declareInput(X_CENTER_LEFT, Y_TOP_ROW)
-  self:declareInput(X_CENTER_RIGHT, Y_TOP_ROW)
+  self:declareInput(X_CENTER_LEFT - 20, Y_TOP_ROW + 12)
+  self:declareInput(X_CENTER_RIGHT + 20, Y_TOP_ROW + 12)
 
-  self:declareOutput(X_CENTER, Y_BOTTOM_ROW, Vector2D(0, ICON_OFFSET))
+  self:declareOutput(X_CENTER, Y_BOTTOM_ROW, Vector2D(0, ICON_OFFSET + 10), 50)
+
+  table.insert(self.detail, GameObject("Image", "ModuleAssets/WireFrameCombiner.png", self.position, Vector2D(256, 180), 0))
 end
 
 Init_Module["Separator"] = function(self)
   self:declareInput(X_CENTER, Y_TOP_ROW)
 
-  self:declareOutput(X_CENTER_LEFT, Y_BOTTOM_ROW, Vector2D(0, ICON_OFFSET))
-  self:declareOutput(X_CENTER_RIGHT, Y_BOTTOM_ROW, Vector2D(0, ICON_OFFSET))
+  self:declareOutput(X_CENTER_LEFT - 30, Y_BOTTOM_ROW + 14, Vector2D(50, 0))
+  self:declareOutput(X_CENTER_RIGHT + 30, Y_BOTTOM_ROW + 14, Vector2D(-50, 0))
+
+  table.insert(self.detail, GameObject("Image", "ModuleAssets/WireFrameSeparator.png", self.position, Vector2D(256, 180), 0))
 end
 
 Init_Module["Converter"] = function(self)
-  self:declareInput(X_CENTER, Y_TOP_ROW)
-  self.slider = GameObject("Slider", self.position.x + 75, self.position.y - 135, self)
-  self:declareOutput(X_CENTER_RIGHT, Y_BOTTOM_ROW, Vector2D(0, ICON_OFFSET))
+  self:declareInput(X_CENTER_LEFT - 30, Y_BOTTOM_ROW + 18)
+  self.slider = GameObject("Slider", self.position.x + 128, self.position.y - 50, self)
+  self:declareOutput(X_CENTER_RIGHT + 28, Y_BOTTOM_ROW + 18, Vector2D(-100, 0), 50)
+
+  table.insert(self.detail, GameObject("Image", "ModuleAssets/WireFrameConverter.png", self.position, Vector2D(256, 180), 0))
 end
 
 Init_Module["Doubler"] = function(self)
   self:declareInput(X_CENTER, Y_TOP_ROW + 20)
 
-  self:declareOutput(X_CENTER_LEFT - 20, Y_BOTTOM_ROW + 20, Vector2D(0, ICON_OFFSET), 0)
-  self:declareOutput(X_CENTER_RIGHT + 20, Y_BOTTOM_ROW + 20, Vector2D(-64 - 20, ICON_OFFSET - 40), 80)
+  self:declareOutput(X_CENTER_LEFT - 30, Y_BOTTOM_ROW + 24, Vector2D(0, ICON_OFFSET), 0)
+  self:declareOutput(X_CENTER_RIGHT + 30, Y_BOTTOM_ROW + 24, Vector2D(-64 - 30, ICON_OFFSET - 40), 80)
 
-  table.insert(self.detail, GameObject("Image", "ModuleAssets/LineVertical.png", self.position + Vector2D(128, -100), Vector2D(8, 80), self.zOrder - 10))
-  table.insert(self.detail, GameObject("Image", "ModuleAssets/ArrowLeft.png", self.position + Vector2D(84, -126), Vector2D(42, 23), self.zOrder - 10))
-  table.insert(self.detail, GameObject("Image", "ModuleAssets/ArrowRight.png", self.position + Vector2D(172, -126), Vector2D(42, 23), self.zOrder - 10))
+  table.insert(self.detail, GameObject("Image", "ModuleAssets/WireFrameDoubler.png", self.position, Vector2D(256, 180), 0))
 end
 
 
@@ -117,7 +121,7 @@ function Module:onInitialize(name, position, params)
   self.moduleIdx = AddModule(self.board, params)
   self.initializedInputs = {}
   self.initializedOutputs = {}
-  self.namePos = Vector2D(X_CENTER,Y_BOTTOM_ROW-20)
+  self.namePos = Vector2D(X_CENTER-10,Y_BOTTOM_ROW-20)
   self.name = self.moduleName
   Init_Module[name](self)
 
@@ -153,14 +157,14 @@ function Module:onInitialize(name, position, params)
     self.input[#self.input + 1] = v[1]
     self.input[#self.input].position.x = self.position.x + v[2]
     self.input[#self.input].position.y = self.position.y + v[3]
-    self.input[#self.input].zOrder = -9
+    self.input[#self.input].zOrder = 0
   end
 
   for k,v in pairs(self.initializedOutputs) do
     self.output[#self.output + 1] = v[1]
     self.output[#self.output].position.x = self.position.x + v[2]
     self.output[#self.output].position.y = self.position.y + v[3]
-    self.output[#self.output].zOrder = -9
+    self.output[#self.output].zOrder = 0
     self.output[#self.output]:setupIconScreen()
     self.output[#self.output]:setupIcon()
   end
@@ -168,10 +172,13 @@ end
 
 function Module:drawMesh()
   -- Set color
-  love.graphics.setColor(self.color.r / 255, self.color.g / 255, self.color.b / 255, self.color.a / 255)
+  love.graphics.setColor(self.color.r, self.color.g, self.color.b, self.color.a)
 
   love.graphics.draw(self.bgImage, self.bgImageQuad, self.position.x, self.position.y - 180)
-  drawText(self.name, self.position + self.namePos, 500, 64, nil, Color(0.1, 0.1, 0.1))
+  love.graphics.setColor(0,0,0,175)
+  love.graphics.printf(self.name, self.position.x + self.namePos.x, self.position.y + self.namePos.y, self.image:getWidth(), "center", 0, .5, -.5, 0.5 * 200, 0)
+
+  --drawText(self.name, self.position + self.namePos, 500, 64, nil, Color(0.1, 0.1, 0.1))
 
   if self.moduleName == "Ship System" then
     drawText(string.format("%.0f", self.systemTime), self.position + Vector2D(200, -84), 500, 128, nil, Color(0.1, 0.1, 0.1))

@@ -49,6 +49,7 @@ function EnergyBar:onDestroy()
 end
 
 function EnergyBar:onDraw()
+  love.graphics.setColor(255,255,255,255)
   love.graphics.draw(love.graphics.newImage("Data/Images/ModuleAssets/EnergyBarBackground.png"), self.position.x, self.position.y)
   love.graphics.setScissor(self.position.x + love.graphics.getWidth( )/2, love.graphics.getHeight( )/2 - self.position.y - self.image:getHeight(), self.image:getWidth() * self.has/self.need, self.image:getHeight())
   love.graphics.draw(self.image, self.position.x, self.position.y)

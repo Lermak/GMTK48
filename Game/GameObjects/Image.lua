@@ -13,7 +13,8 @@ function Image:onInitialize(name, position, scale, zOrder)
   self:setImage(name)
   self.position = position
   self.scale = scale
-  self.zOrder = zOrder
+  self.zOrder = -5
+  self.pivot = Vector2D(0, 0)
 end
 
 function Image:onUpdate(dt)
