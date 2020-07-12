@@ -37,6 +37,7 @@ function EnergyBar:onUpdate(dt)
   if self.has > self.need then
     self.has = self.need
     self.module:clear()
+    Gamestate.current().systemCooldown -= 0.5
   end
 end
 
