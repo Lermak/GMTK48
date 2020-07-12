@@ -28,4 +28,15 @@ end
 function ResourceIcon:onDestroy()
   -- Called when the object is destroyed
 end
+
+function ResourceIcon:propegatezOrder(dz)
+  self.zOrder -= dz
+end
+
+function ResourceIcon:propegatePosition(dv)
+  self.position -= dv
+end
     
+function ResourceIcon:propegateScale(s)
+  self.scale *= s
+end

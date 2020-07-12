@@ -82,7 +82,6 @@ function SampleState:init()
   self.systemCooldown = 30
   self.systemTimer = 0
 
-  wwise.postEvent("Music")
   wwise.postEvent("Main_Music")
 end
 
@@ -109,7 +108,7 @@ function SampleState:update()
   -- Get all current Producer modules
   local emptySystems = {}
   for k,obj in pairs(Modules) do
-    if obj.moduleName == nil then
+    if obj.moduleName == nil and obj.valid then
       table.insert(emptySystems, obj)
     end
   end

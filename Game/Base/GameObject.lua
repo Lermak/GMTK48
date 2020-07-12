@@ -38,7 +38,7 @@ function GameObject:GameObject(name, ...)
   -- Load the special game object information
   if name then
     local f,err = love.filesystem.load("GameObjects/" .. name .. ".lua")
-    if not f then love.errhand(err) end
+    if not f then print(err) end
     f(self)
   end
 

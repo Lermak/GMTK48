@@ -10,7 +10,6 @@ GameOverState = {}
 
 function GameOverState:init()
   -- Called once, and only once, before entering the state the first time. See Gamestate.switch().
-  wwise.postEvent("Music")
 end
 
 function GameOverState:enter(previous, ...)

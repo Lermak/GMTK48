@@ -27,3 +27,15 @@ function IconScreen:onDestroy()
   -- Called when the object is destroyed
 end
     
+
+function IconScreen:propegatezOrder(dz)
+  self.zOrder -= dz
+end
+
+function IconScreen:propegatePosition(dv)
+  self.position -= dv
+end
+
+function IconScreen:propegateScale(s)
+  self.scale *= s
+end

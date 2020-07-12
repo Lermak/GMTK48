@@ -23,6 +23,8 @@ function ModuleSocket:onInitialize(type, moduleId, idx, paramTable)
     self.hoverColor = Color(255, 0, 0)
   end
 
+  self.valid = true
+
   self.scale.x = 38
   self.scale.y = 38
   self:setImage("ModuleAssets/WireSlot.png")
@@ -74,6 +76,8 @@ function ModuleSocket:setupIcon()
 end
 
 function ModuleSocket:onUpdate(dt)
+  if not self.valid then return end
+
   if self.nodeType == "output" then
     self:setupIcon()
   end
@@ -120,4 +124,30 @@ function ModuleSocket:onDestroy()
   -- Called when the object is destroyed
   if self.iconScreen then self.iconScreen:destroy() end
   if self.icon then self.iconScreen:destroy() end
+end
+
+function ModuleSocket:clearConnections()
+  RemoveNode(self.nodeIdx)
+  self.valid = false
+end
+
+function ModuleSocket:propegatezOrder(dz)
+  self.zOrder -= dz
+
+  if self.iconScreen then self.iconScreen:propegatezOrder(dz) end
+  if self.icon then self.iconScreen:propegatezOrder(dz) end
+end
+
+function ModuleSocket:propegatePosition(dv)
+  self.position -= dv
+
+  if self.iconScreen then self.iconScreen:propegatePosition(dv) end
+  if self.icon then self.iconScreen:propegatePosition(dv) end
+end
+
+function ModuleSocket:propegateScale(s)
+  self.scale *= s
+
+  if self.iconScreen then self.iconScreen:propegateScale(dv) end
+  if self.icon then self.iconScreen:propegateScale(dv) end
 end

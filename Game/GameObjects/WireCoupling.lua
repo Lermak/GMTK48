@@ -76,7 +76,7 @@ function WireCoupling:onUpdate(dt)
       for z,y in pairs(t) do
         local l = (y.position - Vector2D(mx, my)):len()
         for i,w in pairs(self.wireEnds) do 
-          if l < y.scale.x and y.id ~= nil then
+          if l < y.scale.x and y.id ~= nil and y.valid then
             --left clicking on an empty node while carrying this node
             
             if y.isConnected == false and Cursor.wireEnd == w then
