@@ -46,4 +46,13 @@ end
 function Slider:onDestroy()
   -- Called when the object is destroyed
 end
+
+function Slider:onDraw()
+  local p = self.position:clone()
+  p.y = p.y + 40
+
+  love.graphics.setColor(0,0,0,175)
+  love.graphics.printf("0   1   2   3", self.position.x, self.position.y + 40, 200, "center", 0, .5, -.5, 0.5 * 200, 0)
+  self:coreDraw()
+end
     

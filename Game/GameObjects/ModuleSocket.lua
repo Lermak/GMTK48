@@ -62,7 +62,7 @@ function ModuleSocket:setupIcon()
     else
       self.icon:onInitialize(node.value, Color(0,0,255))
     end
-    local iconScale = 2
+    local iconScale = self.iconScale/40
     self.icon.zOrder = self.zOrder + 2
     self.icon.visible = true
     self.icon.position = self.position + self.iconPos

@@ -52,46 +52,16 @@ Boards["Combiner"] = {
   outputs = 1,
 
   recipes = {
-    {
-      input = { "Electricity", "Star" },
-      output = "Leaf"
-    },
-    {
-      input = { "Electricity", "Fish" },
-      output = "Crab"
-    },
-    {
-      input = { "Electricity", "Fire" },
-      output = "Gear"
-    },
-    {
-      input = { "Star", "Fish" },
-      output = "Snowman"
-    },
-    {
-      input = { "Star", "Fire" },
-      output = "Moon"
-    },
-    {
-      input = { "Fish", "Fire" },
-      output = "Heart"
-    },
-    {
-      input = { "Crab", "Clock" },
-      output = "Radiation"
-    },
-    {
-      input = { "Spider", "Snowman" },
-      output = "Illuminati"
-    },
-    {
-      input = { "Money", "Clock" },
-      output = "Music"
-    },
-    {
-      input = { "Leaf", "Sun" },
-      output = "Squirrel"
-    }
+    { input = { "Electricity", "Star" }, output = "Leaf" },
+    { input = { "Electricity", "Fish" }, output = "Crab" },
+    { input = { "Electricity", "Fire" }, output = "Gear" },
+    { input = { "Star", "Fish" }, output = "Snowman" },
+    { input = { "Star", "Fire" }, output = "Moon" },
+    { input = { "Fish", "Fire" }, output = "Heart" },
+    { input = { "Crab", "Clock" }, output = "Radiation" },
+    { input = { "Spider", "Snowman" }, output = "Illuminati" },
+    { input = { "Money", "Clock" }, output = "Music" },
+    { input = { "Leaf", "Sun" }, output = "Squirrel" }
   },
 
   tick = function(self, input1, input2)
@@ -112,22 +82,16 @@ Boards["Separator"] = {
   outputs = 2,
 
   recipes = {
-    {
-      input = "Electricity",
-      output = { "Sun", "Spider"}
-    },
-    {
-      input = "Star",
-      output = { "Sun", "Clock"}
-    },
-    {
-      input = "Fish",
-      output = { "Money", "Water"}
-    },
-    {
-      input = "Fire",
-      output = { "Clock", "Trash"}
-    },
+    { input = "Electricity", output = { "Sun", "Spider"} },
+    { input = "Star", output = { "Sun", "Clock"} },
+    { input = "Fish", output = { "Money", "Water"} },
+    { input = "Fire", output = { "Clock", "Trash"} },
+    { input = "Sun", output = { "Heart", "Gear"} },
+    { input = "Spider", output = { "Moon", "Snowman"} },
+    { input = "Clock", output = { "Crab", "Leaf"} },
+    { input = "Money", output = { "Gear", "Moon"} },
+    { input = "Water", output = { "Leaf", "Heart"} },
+    { input = "Trash", output = { "Snowman", "Crab"} },
   },
 
   tick = function(self, input1)
