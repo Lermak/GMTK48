@@ -49,7 +49,7 @@ function TitleCard:drawHUD()
   local y = h / 2
 
   -- Draw Background
-  love.graphics.setColor(255,255,255,self.color.a)
+  love.graphics.setColor(1,1,1,self.color.a)
   love.graphics.draw(self.backImg, x, y, 0, w * self.backImgScale.x, h * self.backImgScale.y, self.pivot.x / math.abs(self.backImgScale.x), self.pivot.y / math.abs(self.backImgScale.y))
 
   -- Draw Title
@@ -58,10 +58,10 @@ function TitleCard:drawHUD()
   
   local text_pos = 720/2 - 4*720/32
   love.graphics.setFont(self.textFont2)
-  love.graphics.setColor(0,0,0,1)
+  love.graphics.setColor(0,0,0,self.color.a)
   love.graphics.printf("You will need the PDF included with your executable\nplease open it before you continue",
     0, y + 64, 1280-48, "center")
-
+    love.graphics.setColor(1,1,1,self.color.a)
   
 
   -- Draw Text
