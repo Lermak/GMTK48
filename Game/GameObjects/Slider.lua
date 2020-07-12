@@ -50,7 +50,9 @@ end
 function Slider:onDraw()
   local p = self.position:clone()
   p.y = p.y + 40
-  drawText("0   1   2   3", p, 500, 64, nil, Color(0.1, 0.1, 0.1))
+
+  love.graphics.setColor(0,0,0,175)
+  love.graphics.printf("0   1   2   3", self.position.x, self.position.y + 40, 200, "center", 0, .5, -.5, 0.5 * 200, 0)
   self:coreDraw()
 end
     
