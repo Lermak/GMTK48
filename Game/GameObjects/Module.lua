@@ -67,7 +67,9 @@ Init_Module["Ship System"] = function(self)
   icon.zOrder = self.zOrder + 2
   icon.visible = true
 
+  self.systemIconScreen = iconScreen
   self.system_icon = icon
+  self.systemTime = 2
 end
 
 Init_Module["Empty"] = function(self)
@@ -161,8 +163,29 @@ function Module:onUpdate(dt)
       self.system_icon.color = Color(0, 0, 0)
     end
 
+    self.systemTime -= dt
 
+    if self.systemTime < 0 then
+      Gamestate.current():moduleFail(self)
+      self:clear()
+    end
   end
+end
+
+function Module:clear()
+  for k,v in pairs(self.initializedInputs) do
+    v[1]:destroy()
+  end
+
+  for k,v in pairs(self.initializedOutputs) do
+    v[1]:destroy()
+  end
+
+  if self.system_icon then self.system_icon:destroy() end
+  if self.systemIconScreen then self.systemIconScreen:destroy() end
+
+  RemoveModule(self.moduleIdx)
+  self.moduleName = nil
 end
 
 function Module:onDestroy()

@@ -41,6 +41,11 @@ end
 
 function WireEnd:onUpdate(dt)
   if self.myNode then
+    if NODE_LIST[self.myNode.nodeIdx] == nil then
+      self.coupling:disconnectEnd(self.myNode, self, false)
+      return
+    end
+
     self:setupIcon(NODE_LIST[self.myNode.nodeIdx])
   else
     self:setupIcon(nil)
