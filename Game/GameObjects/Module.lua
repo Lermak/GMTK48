@@ -71,7 +71,7 @@ Init_Module["Ship System"] = function(self)
 
   self.systemIconScreen = iconScreen
   self.system_icon = icon
-  self.systemTime = 2
+  self.systemTime = math.random(5, 100)
 end
 
 Init_Module["Empty"] = function(self)
@@ -157,6 +157,11 @@ function Module:drawMesh()
 
   love.graphics.draw(self.bgImage, self.bgImageQuad, self.position.x, self.position.y - 180)
   drawText(self.name, self.position + self.namePos, 500, 64, nil, Color(0.1, 0.1, 0.1))
+
+  if self.moduleName == "Ship System" then
+    drawText(string.format("%.0f", self.systemTime), self.position + Vector2D(200, -84), 500, 128, nil, Color(0.1, 0.1, 0.1))
+  end
+
   self:coreDraw()
 end
 

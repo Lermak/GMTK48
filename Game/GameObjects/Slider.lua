@@ -40,7 +40,6 @@ end
 
 function Slider:onUpdate(dt)
   -- Called every frame
-  print(self:getCurrentValue())
   self.module.params.slider = self:getCurrentValue()
 
 end

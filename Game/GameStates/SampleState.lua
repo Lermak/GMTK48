@@ -88,7 +88,6 @@ function SampleState:update()
 end
 
 function SampleState:moduleFail()
-  print("OHNO")
 end
 
 function SampleState:draw()
