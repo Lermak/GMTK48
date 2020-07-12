@@ -65,9 +65,12 @@ Init_Module["Ship System"] = function(self)
   iconScreen.zOrder = self.zOrder + 1
 
   local icon = GameObject("ResourceIcon", self.params.resource, Color(0,0,0))
+  local iconScale = 2
   icon.position = self.position + Vector2D(64, -120)
   icon.zOrder = self.zOrder + 2
   icon.visible = true
+  icon.scale.x = icon.scale.x * iconScale
+  icon.scale.y = icon.scale.y * iconScale
 
   self.systemIconScreen = iconScreen
   self.system_icon = icon

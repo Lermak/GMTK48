@@ -55,26 +55,23 @@ function TitleCard:drawHUD()
   -- Draw Title
   love.graphics.draw(self.titleImg, x, y + self.titleHeightOff, 0, w * self.titleImgScale.x, h * self.titleImgScale.y, self.pivot.x / math.abs(self.titleImgScale.x), self.pivot.y / math.abs(self.titleImgScale.y))
   --drawText("Engineering Chaos", Vector2D(0, 0 + self.titleHeightOff), 1280, 200, nil, Color(0.1, 0.1, 0.1))
+  
+  local text_pos = 720/2 - 4*720/32
+  love.graphics.setFont(self.textFont2)
+  love.graphics.setColor(0,0,0,1)
+  love.graphics.printf("You will need the PDF included with your executable\nplease open it before you continue",
+    0, y + 64, 1280-48, "center")
 
   
 
   -- Draw Text
   local text_pos = 720/2 - 4*720/32
   love.graphics.setFont(self.textFont)
-  love.graphics.printf("Press any key to continue...",
-  -- 1280x720, 
-    0,
-    y + text_pos,
-    1280,
-    "center")
+  love.graphics.printf("Press any key to continue...", 0, y + text_pos, 1280,"center")
     
 
   love.graphics.setFont(self.textFont2)
-  love.graphics.printf("Press C for Credits",
-    0,
-    y + text_pos+32,
-    1280-48,
-    "right")
+  love.graphics.printf("Press C for Credits", 0, y + text_pos+32, 1280-48, "right")
 end
 
 function TitleCard:onDestroy()
