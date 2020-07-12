@@ -13,7 +13,11 @@ function WireCoupling:onInitialize()
   self.zOrder = 10
   self.visible = false
 
-  self.color = Color(love.math.random(0,255),love.math.random(0,255), love.math.random(0,255),255)
+  local c = ColorList[love.math.random(1, #ColorList)]
+  c[1] = c[1]*255
+  c[2] = c[2]*255
+  c[3] = c[3]*255
+  self.color = Color(c[1], c[2], c[3], 255)
 
   self.wireEnds = {
     GameObject("WireEnd"),
