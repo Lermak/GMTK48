@@ -32,7 +32,7 @@ Init_Module["Combiner"] = function(self)
   self:declareInput(X_CENTER_LEFT - 20, Y_TOP_ROW + 12)
   self:declareInput(X_CENTER_RIGHT + 20, Y_TOP_ROW + 12)
 
-  self:declareOutput(X_CENTER, Y_BOTTOM_ROW, Vector2D(0, ICON_OFFSET + 10), 50)
+  self:declareOutput(X_CENTER, Y_BOTTOM_ROW, Vector2D(0, ICON_OFFSET + 10), 60)
 
   table.insert(self.detail, GameObject("Image", "ModuleAssets/WireFrameCombiner.png", self.position, Vector2D(256, 180), -5))
 end
@@ -40,8 +40,8 @@ end
 Init_Module["Separator"] = function(self)
   self:declareInput(X_CENTER, Y_TOP_ROW)
 
-  self:declareOutput(X_CENTER_LEFT - 30, Y_BOTTOM_ROW + 14, Vector2D(50, 0))
-  self:declareOutput(X_CENTER_RIGHT + 30, Y_BOTTOM_ROW + 14, Vector2D(-50, 0))
+  self:declareOutput(X_CENTER_LEFT - 30, Y_BOTTOM_ROW + 14, Vector2D(50, 0), 50)
+  self:declareOutput(X_CENTER_RIGHT + 30, Y_BOTTOM_ROW + 14, Vector2D(-50, 0), 50)
 
   table.insert(self.detail, GameObject("Image", "ModuleAssets/WireFrameSeparator.png", self.position, Vector2D(256, 180), -5))
 end
@@ -49,7 +49,7 @@ end
 Init_Module["Converter"] = function(self)
   self:declareInput(X_CENTER_LEFT - 30, Y_BOTTOM_ROW + 18)
   self.slider = GameObject("Slider", self.position.x + 128, self.position.y - 50, self)
-  self:declareOutput(X_CENTER_RIGHT + 28, Y_BOTTOM_ROW + 18, Vector2D(-100, 0), 50)
+  self:declareOutput(X_CENTER_RIGHT + 28, Y_BOTTOM_ROW + 18, Vector2D(-100, 0), 60)
 
   table.insert(self.detail, GameObject("Image", "ModuleAssets/WireFrameConverter.png", self.position, Vector2D(256, 180), -5))
 end
