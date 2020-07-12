@@ -58,8 +58,8 @@ function setLevel()
     GameObject("Module", "Separator", {x = x1, y = y3}),
     GameObject("Module", "Separator", {x = x2, y = y3}),
     GameObject("Module", "Separator", {x = x3, y = y3}),
-    GameObject("Module", "Converter", {x = x4, y = y3}),
-    GameObject("Module", "Converter", {x = x5, y = y3}),
+    GameObject("Module", "Doubler", {x = x4, y = y3}),
+    GameObject("Module", "Doubler", {x = x5, y = y3}),
 
     GameObject("Module", "Ship System", {x = x1, y = y4}, { resource = "Crab" }),
     GameObject("Module", "Ship System", {x = x2, y = y4}, { resource = "Moon" }),
@@ -72,6 +72,9 @@ end
 function SampleState:init()
   -- Called once, and only once, before entering the state the first time. See Gamestate.switch().
   self.cableState = 0
+
+  wwise.postEvent("Music")
+  wwise.postEvent("Main_Music")
 end
 
 function SampleState:enter(previous, ...)

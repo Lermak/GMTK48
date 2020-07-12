@@ -52,6 +52,8 @@ function ModuleSocket:setupIconScreen()
 end
 
 function ModuleSocket:setupIcon()
+  if self.iconScale == 0 then return end
+
   local node = NODE_LIST[self.nodeIdx]
 
   if node.value ~= nil and node.value ~= "" then
@@ -82,6 +84,8 @@ function ModuleSocket:onUpdate(dt)
       if self.isConnected == false and Cursor.wireEnd == nil then
         self.isConnected = true
         local w = GameObject("WireCoupling")
+
+        wwise.postEvent("Connect")
 
         self.wireEnd = w.wireEnds[1]
         self.wireEnd.myNode = self

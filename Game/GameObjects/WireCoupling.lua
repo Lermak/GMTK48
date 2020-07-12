@@ -14,10 +14,7 @@ function WireCoupling:onInitialize()
   self.visible = false
 
   local c = ColorList[love.math.random(1, #ColorList)]
-  c[1] = c[1]*255
-  c[2] = c[2]*255
-  c[3] = c[3]*255
-  self.color = Color(c[1], c[2], c[3], 255)
+  self.color = Color(c[1]*255, c[2]*255, c[3]*255, 255)
 
   self.wireEnds = {
     GameObject("WireEnd"),
@@ -90,6 +87,7 @@ function WireCoupling:onUpdate(dt)
               self.cable.placing = false
               self:attachCable()
               self.cable:rebuild()
+              wwise.postEvent("Connect")
 
               if self.wireEnds[1].myNode and self.wireEnds[2].myNode then
                 ConnectNode(self.wireEnds[1].myNode.nodeIdx, self.wireEnds[2].myNode.nodeIdx)
@@ -97,6 +95,8 @@ function WireCoupling:onUpdate(dt)
 
             elseif Cursor.wireEnd == nil and y.isConnected == true and y.wireEnd == w then
               DisconnectNode(w.myNode.nodeIdx)
+
+              wwise.postEvent("Disconnect")
 
               y.isConnected = false
               Cursor.wireEnd = y.wireEnd

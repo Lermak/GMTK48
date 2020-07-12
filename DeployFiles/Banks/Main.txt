@@ -1,15 +1,47 @@
 Event	ID	Name			Wwise Object Path	Notes
-	3099361103	Woosh			\Default Work Unit\Woosh	
+	63796330	Main_Music			\Default Work Unit\Main_Music	
+	480594535	Disconnect			\Default Work Unit\Disconnect	
+	3663186417	Connect			\Default Work Unit\Connect	
+	3991942870	Music			\Default Work Unit\Music	
 
-Effect plug-ins	ID	Name	Type				Notes
-	660968117	Wwise_Time_Stretch_(Custom)	Wwise Time Stretch			
+State Group	ID	Name			Wwise Object Path	Notes
+	1021618141	MusicState			\Default Work Unit\MusicState	
+
+State	ID	Name	State Group			Notes
+	0	None	MusicState			
+	1125500713	Intro	MusicState			
+	3161908922	Main	MusicState			
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
-	56389956	woosh7	D:\Mettra_User\Documents\WwiseProjects\LD47\.cache\Windows\SFX\woosh7_4FC06227.wem		\Actor-Mixer Hierarchy\Default Work Unit\Woosh\woosh7		126080
-	172714102	woosh2	D:\Mettra_User\Documents\WwiseProjects\LD47\.cache\Windows\SFX\woosh2_24E0882C.wem		\Actor-Mixer Hierarchy\Default Work Unit\Woosh\woosh2		62600
-	228391736	woosh5	D:\Mettra_User\Documents\WwiseProjects\LD47\.cache\Windows\SFX\woosh5_DBA29247.wem		\Actor-Mixer Hierarchy\Default Work Unit\Woosh\woosh5		56636
-	504583108	woosh3	D:\Mettra_User\Documents\WwiseProjects\LD47\.cache\Windows\SFX\woosh3_26962969.wem		\Actor-Mixer Hierarchy\Default Work Unit\Woosh\woosh3		77692
-	954002390	woosh1	D:\Mettra_User\Documents\WwiseProjects\LD47\.cache\Windows\SFX\woosh1_B425F635.wem		\Actor-Mixer Hierarchy\Default Work Unit\Woosh\woosh1		58384
-	1010366749	woosh4	D:\Mettra_User\Documents\WwiseProjects\LD47\.cache\Windows\SFX\woosh4_8DC99C79.wem		\Actor-Mixer Hierarchy\Default Work Unit\Woosh\woosh4		41292
-	1018262655	woosh8	D:\Mettra_User\Documents\WwiseProjects\LD47\.cache\Windows\SFX\woosh8_3C66F1AF.wem		\Actor-Mixer Hierarchy\Default Work Unit\Woosh\woosh8		93312
+	4470649	switch35	D:\Mettra_User\Documents\WwiseProjects\LD47\.cache\Windows\SFX\switch35_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Clicks\switch35		60736
+	24496022	switch6	D:\Mettra_User\Documents\WwiseProjects\LD47\.cache\Windows\SFX\switch6_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Clicks\switch6		64320
+	36662459	switch9	D:\Mettra_User\Documents\WwiseProjects\LD47\.cache\Windows\SFX\switch9_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Clicks\switch9		46400
+	189498151	split-in-synapse-by-kevin-macleod-from-filmmusic-io	D:\Mettra_User\Documents\WwiseProjects\LD47\.cache\Windows\SFX\split-in-synapse-by-kevin-macleod-from-filmmusic-io_D79FB2B7.wem		\Interactive Music Hierarchy\Default Work Unit\Music\Main\Main\split-in-synapse-by-kevin-macleod-from-filmmusic-io		7354432
+	221401256	switch36	D:\Mettra_User\Documents\WwiseProjects\LD47\.cache\Windows\SFX\switch36_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Clicks\switch36		58176
+	242165767	switch24	D:\Mettra_User\Documents\WwiseProjects\LD47\.cache\Windows\SFX\switch24_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Clicks\switch24		49984
+	244259704	switch16	D:\Mettra_User\Documents\WwiseProjects\LD47\.cache\Windows\SFX\switch16_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Clicks\switch16		66368
+	313655806	switch7	D:\Mettra_User\Documents\WwiseProjects\LD47\.cache\Windows\SFX\switch7_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Clicks\switch7		37696
+	346148507	switch27	D:\Mettra_User\Documents\WwiseProjects\LD47\.cache\Windows\SFX\switch27_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Clicks\switch27		52032
+	354629107	switch5	D:\Mettra_User\Documents\WwiseProjects\LD47\.cache\Windows\SFX\switch5_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Clicks\switch5		55616
+	360156742	switch8	D:\Mettra_User\Documents\WwiseProjects\LD47\.cache\Windows\SFX\switch8_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Clicks\switch8		60224
+	362305083	switch18	D:\Mettra_User\Documents\WwiseProjects\LD47\.cache\Windows\SFX\switch18_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Clicks\switch18		77120
+	367850591	switch3	D:\Mettra_User\Documents\WwiseProjects\LD47\.cache\Windows\SFX\switch3_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Clicks\switch3		64832
+	370062635	switch23	D:\Mettra_User\Documents\WwiseProjects\LD47\.cache\Windows\SFX\switch23_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Clicks\switch23		70464
+	454769402	switch30	D:\Mettra_User\Documents\WwiseProjects\LD47\.cache\Windows\SFX\switch30_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Clicks\switch30		65856
+	481190507	switch17	D:\Mettra_User\Documents\WwiseProjects\LD47\.cache\Windows\SFX\switch17_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Clicks\switch17		62272
+	507724173	switch21	D:\Mettra_User\Documents\WwiseProjects\LD47\.cache\Windows\SFX\switch21_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Clicks\switch21		74048
+	550819877	switch20	D:\Mettra_User\Documents\WwiseProjects\LD47\.cache\Windows\SFX\switch20_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Clicks\switch20		64320
+	625893281	switch37	D:\Mettra_User\Documents\WwiseProjects\LD47\.cache\Windows\SFX\switch37_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Clicks\switch37		55616
+	655781981	screen-saver-by-kevin-macleod-from-filmmusic-io	D:\Mettra_User\Documents\WwiseProjects\LD47\.cache\Windows\SFX\screen-saver-by-kevin-macleod-from-filmmusic-io_D79FB2B7.wem		\Interactive Music Hierarchy\Default Work Unit\Music\Intro\Intro\screen-saver-by-kevin-macleod-from-filmmusic-io		32117824
+	695337070	switch31	D:\Mettra_User\Documents\WwiseProjects\LD47\.cache\Windows\SFX\switch31_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Clicks\switch31		78656
+	730310446	switch28	D:\Mettra_User\Documents\WwiseProjects\LD47\.cache\Windows\SFX\switch28_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Clicks\switch28		38208
+	823804622	switch1	D:\Mettra_User\Documents\WwiseProjects\LD47\.cache\Windows\SFX\switch1_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Clicks\switch1		57152
+	891488277	switch22	D:\Mettra_User\Documents\WwiseProjects\LD47\.cache\Windows\SFX\switch22_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Clicks\switch22		65344
+	906876831	switch2	D:\Mettra_User\Documents\WwiseProjects\LD47\.cache\Windows\SFX\switch2_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Clicks\switch2		56128
+	909969324	switch15	D:\Mettra_User\Documents\WwiseProjects\LD47\.cache\Windows\SFX\switch15_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Clicks\switch15		46912
+	935640607	switch4	D:\Mettra_User\Documents\WwiseProjects\LD47\.cache\Windows\SFX\switch4_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Clicks\switch4		76096
+	957229280	switch26	D:\Mettra_User\Documents\WwiseProjects\LD47\.cache\Windows\SFX\switch26_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Clicks\switch26		41792
+	959070476	switch29	D:\Mettra_User\Documents\WwiseProjects\LD47\.cache\Windows\SFX\switch29_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Clicks\switch29		55616
+	1000456585	switch25	D:\Mettra_User\Documents\WwiseProjects\LD47\.cache\Windows\SFX\switch25_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Clicks\switch25		67904
+	1030136691	switch19	D:\Mettra_User\Documents\WwiseProjects\LD47\.cache\Windows\SFX\switch19_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Clicks\switch19		69440
 

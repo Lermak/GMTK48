@@ -95,7 +95,7 @@ function Cable:drop(point, isTrue)
   self.dropVec = Vector2D(0,0)
   self.initialPoint = self[point]
   self.initialLen = (self.p0 - self.p1):len()
-  self.dropBezierLen = self.bezierLen
+  self.dropBezierLen = math.max(self.bezierLen, 100)
 end
 
 function Cable:onUpdate(dt)
@@ -158,8 +158,8 @@ function Cable:fnDropPoint(point, otherPoint)
 
   if pullBack then
     local v = (self[otherPoint] - self[point]):normalize()
-    self.dropVec += v * self.dropVec:len()
-    self.dropVec *= 0.9 
+    self.dropVec += v * self.dropVec:len() * 0.7
+    self.dropVec *= 0.9
     self[point] = self[otherPoint] - v * self.dropBezierLen
   end
 

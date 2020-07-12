@@ -123,7 +123,7 @@ Boards["Separator"] = {
 
 Boards["Producer"] = {
   inputs = 0,
-  outputs = 1,
+  outputs = 3,
   resource = "Star",
 
   init = function(self, params)
@@ -131,7 +131,7 @@ Boards["Producer"] = {
   end,
 
   tick = function(self)
-    return { self.resource }
+    return { self.resource, self.resource, self.resource }
   end
 }
 
