@@ -46,4 +46,11 @@ end
 function Slider:onDestroy()
   -- Called when the object is destroyed
 end
+
+function Slider:onDraw()
+  local p = self.position:clone()
+  p.y = p.y + 40
+  drawText("0   1   2   3", p, 500, 64, nil, Color(0.1, 0.1, 0.1))
+  self:coreDraw()
+end
     
