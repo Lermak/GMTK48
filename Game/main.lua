@@ -1,6 +1,6 @@
 require "Base/Global"
 
-PUBLISH = false
+PUBLISH = true
 
 WorldScale = 1
 FontSize = 128

@@ -1,5 +1,5 @@
 function love.conf(t)
-  local publish = false
+  local publish = true
 
   if not publish then
     t.console = true
