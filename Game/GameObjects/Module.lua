@@ -10,53 +10,55 @@
 -- Inputs and outputs are declared IN ORDER, I.E the first declareInput() call will setup input 1, the second input 2, etc
 -- All functions must be declared in the form Init_Module_##MODULE_NAME
 
-local TOP_ROW_Y = -45
-local BOTTOM_ROW_Y = -135
+local Y_TOP_ROW = -45
+local Y_BOTTOM_ROW = -135
 
-local LEFT_CENTER = 64
-local CENTER = 128
-local RIGHT_CENTER = 192
+
+local X_CENTER_LEFT = 64
+local X_CENTER = 128
+local X_CENTER_RIGHT = 192
 
 local ICON_OFFSET = 45
 
 local Init_Module = {}
 
 Init_Module["Producer"] = function(self)
-  self:declareOutput(LEFT_CENTER, BOTTOM_ROW_Y, Vector2D(0, 0), 0)
-  self:declareOutput(CENTER, BOTTOM_ROW_Y, Vector2D(0, ICON_OFFSET + 30), 80)
-  self:declareOutput(RIGHT_CENTER, BOTTOM_ROW_Y, Vector2D(0, 0), 0)
+  self:declareOutput(X_CENTER_LEFT, Y_BOTTOM_ROW, Vector2D(0, 0), 0)
+  self:declareOutput(X_CENTER, Y_BOTTOM_ROW, Vector2D(0, ICON_OFFSET + 30), 80)
+  self:declareOutput(X_CENTER_RIGHT, Y_BOTTOM_ROW, Vector2D(0, 0), 0)
+  self.name = self.moduleName..": "..self.params.resource
 end
 
 Init_Module["Combiner"] = function(self)
-  self:declareInput(LEFT_CENTER, TOP_ROW_Y)
-  self:declareInput(RIGHT_CENTER, TOP_ROW_Y)
+  self:declareInput(X_CENTER_LEFT, Y_TOP_ROW)
+  self:declareInput(X_CENTER_RIGHT, Y_TOP_ROW)
 
-  self:declareOutput(CENTER, BOTTOM_ROW_Y, Vector2D(0, ICON_OFFSET))
+  self:declareOutput(X_CENTER, Y_BOTTOM_ROW, Vector2D(0, ICON_OFFSET))
 end
 
 Init_Module["Separator"] = function(self)
-  self:declareInput(CENTER, TOP_ROW_Y)
+  self:declareInput(X_CENTER, Y_TOP_ROW)
 
-  self:declareOutput(LEFT_CENTER, BOTTOM_ROW_Y, Vector2D(0, ICON_OFFSET))
-  self:declareOutput(RIGHT_CENTER, BOTTOM_ROW_Y, Vector2D(0, ICON_OFFSET))
+  self:declareOutput(X_CENTER_LEFT, Y_BOTTOM_ROW, Vector2D(0, ICON_OFFSET))
+  self:declareOutput(X_CENTER_RIGHT, Y_BOTTOM_ROW, Vector2D(0, ICON_OFFSET))
 end
 
 Init_Module["Converter"] = function(self)
-  self:declareInput(CENTER, TOP_ROW_Y)
+  self:declareInput(X_CENTER, Y_TOP_ROW)
   self.slider = GameObject("Slider", self.position.x + 75, self.position.y - 135, self)
-  self:declareOutput(RIGHT_CENTER, BOTTOM_ROW_Y, Vector2D(0, ICON_OFFSET))
+  self:declareOutput(X_CENTER_RIGHT, Y_BOTTOM_ROW, Vector2D(0, ICON_OFFSET))
 end
 
 Init_Module["Doubler"] = function(self)
-  self:declareInput(CENTER, TOP_ROW_Y)
+  self:declareInput(X_CENTER, Y_TOP_ROW)
 
-  self:declareOutput(LEFT_CENTER, BOTTOM_ROW_Y, Vector2D(0, ICON_OFFSET))
-  self:declareOutput(RIGHT_CENTER, BOTTOM_ROW_Y, Vector2D(0, ICON_OFFSET))
+  self:declareOutput(X_CENTER_LEFT, Y_BOTTOM_ROW, Vector2D(0, ICON_OFFSET))
+  self:declareOutput(X_CENTER_RIGHT, Y_BOTTOM_ROW, Vector2D(0, ICON_OFFSET))
 end
 
 
 Init_Module["Ship System"] = function(self)
-  self:declareInput(CENTER, TOP_ROW_Y)
+  self:declareInput(X_CENTER, Y_TOP_ROW)
 
   local iconScreen = GameObject("IconScreen", 80)
   iconScreen.position = self.position + Vector2D(64, -120)
@@ -99,6 +101,8 @@ function Module:onInitialize(name, position, params)
   self.moduleIdx = AddModule(self.board, params)
   self.initializedInputs = {}
   self.initializedOutputs = {}
+  self.namePos = Vector2D(X_CENTER,Y_BOTTOM_ROW-20)
+  self.name = self.moduleName
   Init_Module[name](self)
 
   if self.board == nil then
@@ -150,6 +154,7 @@ function Module:drawMesh()
   love.graphics.setColor(self.color.r / 255, self.color.g / 255, self.color.b / 255, self.color.a / 255)
 
   love.graphics.draw(self.bgImage, self.bgImageQuad, self.position.x, self.position.y - 180)
+  drawText(self.name, self.position + self.namePos, 500, 64, nil, Color(0.1, 0.1, 0.1))
   self:coreDraw()
 end
 
@@ -160,8 +165,6 @@ function Module:onUpdate(dt)
     else
       self.system_icon.color = Color(0, 0, 0)
     end
-
-
   end
 end
 
