@@ -225,13 +225,16 @@ function Module:animateOut(callbackFn)
     end)
 
     self:clear()
-    if callbackFn then 
-      self.valid = false
+    self.valid = false
+    
+    if callbackFn then
+      callbackFn()
+      self.valid = true
     else
-      while not self.valid do coroutine.yield() end
+      self.valid = true
     end
 
-    if callbackFn then callbackFn() end
+    while self.moduleName == nil do coroutine.yield() end
 
     wwise.postEvent("ComeBack")
 

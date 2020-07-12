@@ -55,6 +55,8 @@ end
 
 function WireCoupling:onUpdate(dt)
   -- Called every frame
+
+  if self.wireEnds[1].position.y < -2000 and self.wireEnds[2].position.y < -2000 then self:destroy() return end
   
 
   local mx, my = MainCamera:mousePosition()
@@ -172,9 +174,7 @@ end
 
 function WireCoupling:onDestroy()
   -- Called when the object is destroyed
-end
-    
-
-function f()
-  
+  self.wireEnds[1]:destroy()
+  self.wireEnds[2]:destroy()
+  self.cable:destroy()
 end
