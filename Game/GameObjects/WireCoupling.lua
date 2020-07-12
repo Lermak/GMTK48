@@ -14,10 +14,7 @@ function WireCoupling:onInitialize()
   self.visible = false
 
   local c = ColorList[love.math.random(1, #ColorList)]
-  c[1] = c[1]*255
-  c[2] = c[2]*255
-  c[3] = c[3]*255
-  self.color = Color(c[1], c[2], c[3], 255)
+  self.color = Color(c[1]*255, c[2]*255, c[3]*255, 255)
 
   self.wireEnds = {
     GameObject("WireEnd"),
