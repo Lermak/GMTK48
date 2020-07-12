@@ -45,8 +45,10 @@ end
 
 function EnergyBar:onDraw()
   print(love.graphics.getWidth())
+  love.graphics.draw(love.graphics.newImage("Data/Images/ModuleAssets/EnergyBarBackground.png"), self.position.x, self.position.y)
   love.graphics.setScissor(self.position.x + love.graphics.getWidth( )/2, self.position.y - self.image:getHeight() + love.graphics.getHeight( )/2, self.image:getWidth() * self.has/self.need, self.image:getHeight())
   love.graphics.draw(self.image, self.position.x, self.position.y)
   love.graphics.setScissor() -- disable the clipping
+  love.graphics.draw(love.graphics.newImage("Data/Images/ModuleAssets/EnergyBarCage.png"), self.position.x, self.position.y)
 end
     
