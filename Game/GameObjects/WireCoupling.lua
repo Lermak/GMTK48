@@ -87,6 +87,7 @@ function WireCoupling:onUpdate(dt)
               self.cable.placing = false
               self:attachCable()
               self.cable:rebuild()
+              wwise.postEvent("Connect")
 
               if self.wireEnds[1].myNode and self.wireEnds[2].myNode then
                 ConnectNode(self.wireEnds[1].myNode.nodeIdx, self.wireEnds[2].myNode.nodeIdx)
@@ -94,6 +95,8 @@ function WireCoupling:onUpdate(dt)
 
             elseif Cursor.wireEnd == nil and y.isConnected == true and y.wireEnd == w then
               DisconnectNode(w.myNode.nodeIdx)
+
+              wwise.postEvent("Disconnect")
 
               y.isConnected = false
               Cursor.wireEnd = y.wireEnd

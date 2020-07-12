@@ -95,7 +95,7 @@ function Cable:drop(point, isTrue)
   self.dropVec = Vector2D(0,0)
   self.initialPoint = self[point]
   self.initialLen = (self.p0 - self.p1):len()
-  self.dropBezierLen = self.bezierLen
+  self.dropBezierLen = math.max(self.bezierLen, 100)
 end
 
 function Cable:onUpdate(dt)

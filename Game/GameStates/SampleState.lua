@@ -44,10 +44,10 @@ end
 
 function setLevel()
   Modules = {
-    GameObject("Module", "Producer", {x = x1, y = y1}, { resource = "Electricity" }),
-    GameObject("Module", "Producer", {x = x2, y = y1}, { resource = "Star" }),
-    GameObject("Module", "Producer", {x = x3, y = y1}, { resource = "Fish" }),
-    GameObject("Module", "Producer", {x = x4, y = y1},  { resource = "Fire" }),
+    GameObject("Module", "Producer", {x = x1, y = y1}, { resource = {"Electricity", "Electricity", "Electricity"} }),
+    GameObject("Module", "Producer", {x = x2, y = y1}, { resource = {"Electricity", "Star", "Electricity"} }),
+    GameObject("Module", "Producer", {x = x3, y = y1}, { resource = {"Electricity", "Electricity", "Fire"} }),
+    GameObject("Module", "Producer", {x = x4, y = y1},  { resource = {"Electricity", "Electricity", "Electricity"} }),
     
     GameObject("Module", "Combiner", {x = x1, y = y2}),
     GameObject("Module", "Combiner", {x = x2, y = y2}),
@@ -72,6 +72,9 @@ end
 function SampleState:init()
   -- Called once, and only once, before entering the state the first time. See Gamestate.switch().
   self.cableState = 0
+
+  wwise.postEvent("Music")
+  wwise.postEvent("Main_Music")
 end
 
 function SampleState:enter(previous, ...)
