@@ -60,8 +60,8 @@ Boards["Combiner"] = {
     { input = { "Fish", "Fire" }, output = "Heart" },
     { input = { "Crab", "Clock" }, output = "Radiation" },
     { input = { "Spider", "Snowman" }, output = "Illuminati" },
-    { input = { "Money", "Clock" }, output = "Music" },
-    { input = { "Leaf", "Sun" }, output = "Squirrel" }
+    { input = { "Money", "Sun" }, output = "Music" },
+    { input = { "Leaf", "Heart" }, output = "Squirrel" }
   },
 
   tick = function(self, input1, input2)
