@@ -53,6 +53,29 @@ Boards["Combiner"] = {
   end
 }
 
+
+Boards["Separator"] = {
+  inputs = 1,
+  outputs = 2,
+
+  recipes = {
+    {
+      input = "Star",
+      output = {"Crab", "Electricity"}
+    },
+  },
+
+  tick = function(self, input1)
+    for k,recipe in pairs(self.recipes) do
+      if recipe.input == input1 then
+        return { recipe.output[1], recipe.output[2] }
+      end
+    end
+
+    return { "", "" }
+  end
+}
+
 Boards["Producer"] = {
   inputs = 0,
   outputs = 1,

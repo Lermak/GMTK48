@@ -32,6 +32,12 @@ Init_Module["Combiner"] = function(self)
   self:declareOutput(CENTER, BOTTOM_ROW_Y, {x = 0, y = ICON_OFFSET})
 end
 
+Init_Module["Separator"] = function(self)
+  self:declareInput(CENTER, TOP_ROW_Y)
+
+  self:declareOutput(LEFT_CENTER, BOTTOM_ROW_Y, {x = 0, y = ICON_OFFSET})
+  self:declareOutput(RIGHT_CENTER, BOTTOM_ROW_Y, {x = 0, y = ICON_OFFSET})
+end
 
 Init_Module["Doubler"] = function(self)
   self:declareInput(CENTER, TOP_ROW_Y)

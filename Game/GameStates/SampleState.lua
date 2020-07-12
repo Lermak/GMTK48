@@ -33,7 +33,7 @@ function SampleState:enter(previous, ...)
   
   GameObject("Module", "Empty", {x = -640, y = y2}),
   GameObject("Module", "Combiner", {x = -384, y = y2}),
-  GameObject("Module", "Combiner", {x = -128, y = y2}),
+  GameObject("Module", "Separator", {x = -128, y = y2}),
   GameObject("Module", "Combiner", {x = 128, y = y2}),
   GameObject("Module", "Empty", {x = 384, y = y2}),
   
