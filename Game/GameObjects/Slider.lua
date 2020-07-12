@@ -13,8 +13,8 @@ function Slider:onInitialize(x,y,m)
   
   self:setImage("ModuleAssets/SlideRail.png")
   
-  self.scale.x = 100
-  self.scale.y = 38
+  self.scale.x = 150
+  self.scale.y = 10
 
   self.zOrder = 1
 
@@ -51,7 +51,7 @@ function Slider:onDraw()
   local p = self.position:clone()
   p.y = p.y + 40
   love.graphics.setColor(0,0,0,255)
-  love.graphics.printf("0   1   2   3", self.position.x, self.position.y + 40, 200, "center", 0, .5, -.5, 0.5 * 200, 0)
+  love.graphics.printf("0      1      2      3", self.position.x, self.position.y + 40, 250, "center", 0, .5, -.5, 0.5 * 250, 0)
   
   love.graphics.setColor(255,255,255,255)
   self:coreDraw()
