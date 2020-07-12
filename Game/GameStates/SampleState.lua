@@ -56,7 +56,7 @@ function setLevel()
     GameObject("Module", "Separator", {x = x1, y = y3}),
     GameObject("Module", "Separator", {x = x2, y = y3}),
     GameObject("Module", "Separator", {x = x3, y = y3}),
-    GameObject("Module", "Doubler", {x = x4, y = y3}),
+    GameObject("Module", "Converter", {x = x4, y = y3}),
     GameObject("Module", "Doubler", {x = x5, y = y3}),
 
     GameObject("Module", "Ship System", {x = x1, y = y4}, { resource = "Electricity" }),
@@ -125,7 +125,7 @@ function SampleState:update()
       Init_Module[module.name](module)
 
       if module.systemTime then
-        module.systemTime = math.max(module.systemTime - self.completedModules * 5, 20)
+        module.systemTime = math.max(module.systemTime - self.completedModules * 3, 20)
       end
 
       for k,v in pairs(module.initializedInputs) do
@@ -191,7 +191,19 @@ function SampleState:update()
 
   else
 
-    if #emptySystems == 5 or (self.systemTimer <= 0 and #emptySystems ~= 0) or (foundShip == true and shipIncomplete == false and #emptySystems ~= 0) then
+    local foundShip = false
+    local allFilled = true
+    for k,obj in pairs(Modules) do
+      if obj.moduleName == "Ship System" then
+        foundShip = true
+
+        if not (NODE_LIST[obj.input[1].nodeIdx] and NODE_LIST[obj.input[1].nodeIdx].value == obj.params.resource) then
+          allFilled = false
+        end
+      end
+    end
+
+    if #emptySystems == 5 or (self.systemTimer <= 0 and #emptySystems ~= 0) or (foundShip == true and allFilled == true and #emptySystems ~= 0) then
       self.systemTimer = math.max(self.systemCooldown - self.completedModules, 5)
   
       local module = emptySystems[love.math.random(1, #emptySystems)]
