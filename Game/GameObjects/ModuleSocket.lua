@@ -83,6 +83,8 @@ function ModuleSocket:onUpdate(dt)
         self.isConnected = true
         local w = GameObject("WireCoupling")
 
+        wwise.postEvent("Connect")
+
         self.wireEnd = w.wireEnds[1]
         self.wireEnd.myNode = self
         w.wireEnds[1].position = self.position

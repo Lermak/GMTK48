@@ -73,6 +73,9 @@ end
 function SampleState:init()
   -- Called once, and only once, before entering the state the first time. See Gamestate.switch().
   self.cableState = 0
+  
+  wwise.postEvent("Music")
+  wwise.postEvent("Main_Music")
 end
 
 function SampleState:enter(previous, ...)
