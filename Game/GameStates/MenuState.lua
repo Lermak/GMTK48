@@ -10,6 +10,7 @@ MenuState = {}
 
 function MenuState:init()
   -- Called once, and only once, before entering the state the first time. See Gamestate.switch().
+  wwise.postEvent("Music")
 end
 
 function MenuState:enter(previous, ...)
@@ -33,7 +34,8 @@ function MenuState:enter(previous, ...)
   self.menu = true
   self.exiting = false
 
-  wwise.postEvent("Stop_Music")
+  
+  wwise.postEvent("Intro_Music")
   --local id = wwise.postEvent("Play_MenuMusic")
   --print(wwise.getEventId(id))
   --print(wwise.getSourceTime(id))
