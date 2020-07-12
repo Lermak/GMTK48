@@ -67,6 +67,9 @@ function setLevel()
     GameObject("Module", "Ship System", {x = x4, y = y4}, { resource = "Spider" }),
     GameObject("Module", "Ship System", {x = x5, y = y4}, { resource = "Radiation" }),
     }
+
+
+    
 end
 
 function SampleState:init()

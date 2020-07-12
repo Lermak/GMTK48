@@ -19,6 +19,26 @@ end
 
 Boards = {}
 
+Resources = {
+  "Star",
+  "Electricity",
+  "Leaf",
+  "Crab",
+  "Fish",
+  "Fire",
+  "Gear",
+  "Snowman",
+  "Moon",
+  "Heart",
+  "Clock",
+  "Radiation",
+  "Illuminati",
+  "Money",
+  "Music",
+  "Sun",
+  "Squirrel"
+}
+
 DEBUG_GRAPH = false
 local dbg_print = function(...)
   if DEBUG_GRAPH then print(...) end

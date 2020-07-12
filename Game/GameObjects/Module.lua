@@ -130,6 +130,7 @@ function Module:onInitialize(name, position, params)
   self.pivot.x = 0
   self.pivot.y = 0
   self.zOrder = -10
+  self.cooldown = 100
   self.input = {}
   self.output = {}
   for k,v in pairs(self.initializedInputs) do
@@ -164,6 +165,15 @@ function Module:onUpdate(dt)
       self.system_icon.color = Color(0, 210, 0)
     else
       self.system_icon.color = Color(0, 0, 0)
+    end
+    if self.params.resource == nil then
+      self.cooldown = self.cooldown - dt
+      if self.cooldown < 0 then
+        self.cooldown = 100
+        local r = Resources[love.math.random(1, #Resources)]
+        self.params.resource = r
+        self.system_icon:setImage("Icons/"..r..".png")
+      end
     end
   end
 end
