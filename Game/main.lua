@@ -103,7 +103,7 @@ end
 function love.update(dt)
   if debuggee then debuggee.poll() end
 
-  if not publish and love.keyboard.isTriggered("g") then
+  if not PUBLISH and love.keyboard.isTriggered("g") then
     DEBUG_GRAPH = not DEBUG_GRAPH
   end
 
