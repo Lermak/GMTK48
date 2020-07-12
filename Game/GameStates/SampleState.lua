@@ -29,8 +29,6 @@ function setTutOne()
   }
 end
 
-
-
 function setTutTwo()
   Modules = {
     GameObject("Module", "Producer", {x = x2, y = y1},{ resource = "Star" }),
@@ -61,19 +59,28 @@ function setLevel()
     GameObject("Module", "Doubler", {x = x4, y = y3}),
     GameObject("Module", "Doubler", {x = x5, y = y3}),
 
-    GameObject("Module", "Ship System", {x = x1, y = y4}, { resource = "Crab" }),
-    GameObject("Module", "Ship System", {x = x2, y = y4}, { resource = "Moon" }),
-    GameObject("Module", "Ship System", {x = x3, y = y4}, { resource = "Money" }),
-    GameObject("Module", "Ship System", {x = x4, y = y4}, { resource = "Spider" }),
-    GameObject("Module", "Ship System", {x = x5, y = y4}, { resource = "Radiation" }),
-    }
+    GameObject("Module", "Ship System", {x = x1, y = y4}, { resource = "Electricity" }),
+    GameObject("Module", "Ship System", {x = x2, y = y4}, { resource = "Electricity" }),
+    GameObject("Module", "Ship System", {x = x3, y = y4}, { resource = "Electricity" }),
+    GameObject("Module", "Ship System", {x = x4, y = y4}, { resource = "Electricity" }),
+    GameObject("Module", "Ship System", {x = x5, y = y4}, { resource = "Electricity" }),
+  }
 
-    GameOver = GameObject("GameOver")   
+  for k,obj in pairs(Modules) do
+    if obj.moduleName == "Ship System" then
+      obj:clear()
+    end
+  end
+
+  GameOver = GameObject("GameOver")
 end
 
 function SampleState:init()
   -- Called once, and only once, before entering the state the first time. See Gamestate.switch().
   self.cableState = 0
+
+  self.systemCooldown = 30
+  self.systemTimer = 0
 
   wwise.postEvent("Music")
   wwise.postEvent("Main_Music")
@@ -98,6 +105,44 @@ function SampleState:update()
     self.fadeIn:resume()
     return
   end
+
+  -- Get all current Producer modules
+  local emptySystems = {}
+  for k,obj in pairs(Modules) do
+    if obj.moduleName == nil then
+      table.insert(emptySystems, obj)
+    end
+  end
+
+  if #emptySystems == 5 or (self.systemTimer <= 0 and #emptySystems ~= 0) then
+    self.systemTimer = self.systemCooldown
+
+    local module = emptySystems[love.math.random(1, #emptySystems)]
+    local r = Resources[love.math.random(1, #Resources)]
+    module.params.resource = r
+    module.moduleName = "Ship System"
+    module.moduleIdx = AddModule(module.board, module.params)
+    Init_Module[module.name](module)
+
+    for k,v in pairs(module.initializedInputs) do
+      module.input[#module.input + 1] = v[1]
+      module.input[#module.input].position.x = module.position.x + v[2]
+      module.input[#module.input].position.y = module.position.y + v[3]
+      module.input[#module.input].zOrder = -9
+    end
+  
+    for k,v in pairs(module.initializedOutputs) do
+      module.output[#module.output + 1] = v[1]
+      module.output[#module.output].position.x = module.position.x + v[2]
+      module.output[#module.output].position.y = module.position.y + v[3]
+      module.output[#module.output].zOrder = -9
+      module.output[#module.output]:setupIconScreen()
+      module.output[#module.output]:setupIcon()
+    end
+  else
+    self.systemTimer -= dt
+  end
+
   SolveGraph()
 end
 
