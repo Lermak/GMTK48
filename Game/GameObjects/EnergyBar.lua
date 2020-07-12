@@ -25,7 +25,7 @@ function EnergyBar:onInitialize(m)
 
   self.module = m
 
-  self.need = 1
+  self.need = 10
   self.has = 0
 end
 
