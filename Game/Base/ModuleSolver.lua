@@ -193,7 +193,7 @@ Boards["Converter"] = {
   },
 
   init = function(self, params)
-    self.resource = params.slider
+    self.slider = params.slider
   end,
 
   tick = function(self, input)
