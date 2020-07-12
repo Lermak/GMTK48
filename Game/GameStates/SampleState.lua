@@ -29,7 +29,7 @@ function setTutOne()
   }
 end
 
-GameObject("Slider")
+
 
 function setTutTwo()
   Modules = {
@@ -41,8 +41,6 @@ function setTutTwo()
     GameObject("Module", "Ship System", {x = x3, y = y3},{ resource = "Crab" }),
   }
 end
-
-  
 
 function setLevel()
   Modules = {

@@ -8,7 +8,7 @@
 
 local Slider = ...
 
-function Slider:onInitialize()
+function Slider:onInitialize(x,y)
   -- Called when the game object is constructed
   
   self:setImage("ModuleAssets/SlideRail.png")
@@ -16,10 +16,15 @@ function Slider:onInitialize()
   self.scale.x = 100
   self.scale.y = 38
 
+  self.zOrder = 1
+
   self.pivot.x = 0.5
   self.pivot.y = 0.5
 
-  self.knob = GameObject("SliderKnob")
+  self.position.x = x
+  self.position.y = y
+
+  self.knob = GameObject("SliderKnob", self.position.x, self.position.y)
 
   self.knob.minX = self.position.x - (self.scale.x/2 - self.knob.scale.x/2) - 1
   self.knob.maxX = self.position.x + (self.scale.x/2 - self.knob.scale.x/2) + 1
@@ -28,7 +33,6 @@ function Slider:onInitialize()
 end
 
 function Slider:getCurrentValue()
-  print((self.scale.x/2 - self.knob.scale.x/2))
   return math.floor(((self.knob.position.x - self.position.x) / (self.scale.x/2 - self.knob.scale.x/2)) + 2)
 end
 
