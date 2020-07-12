@@ -341,9 +341,20 @@ function DisconnectNode(idx)
   node.connection = nil
 end
 
+
 function RemoveNode(idx)
   DisconnectNode(idx)
   NODE_LIST[idx] = nil
+end
+
+function ResetModularSolver()
+  for k,v in pairs(MODULE_LIST) do
+    MODULE_LIST[k] = nil
+  end
+
+  for k,v in pairs(NODE_LIST) do
+    NODE_LIST[k] = nil
+  end
 end
 
 function tickModule(module, inputs)

@@ -50,10 +50,14 @@ Init_Module["Converter"] = function(self)
 end
 
 Init_Module["Doubler"] = function(self)
-  self:declareInput(X_CENTER, Y_TOP_ROW)
+  self:declareInput(X_CENTER, Y_TOP_ROW + 20)
 
-  self:declareOutput(X_CENTER_LEFT, Y_BOTTOM_ROW, Vector2D(0, ICON_OFFSET))
-  self:declareOutput(X_CENTER_RIGHT, Y_BOTTOM_ROW, Vector2D(0, ICON_OFFSET))
+  self:declareOutput(X_CENTER_LEFT - 20, Y_BOTTOM_ROW + 20, Vector2D(0, ICON_OFFSET), 0)
+  self:declareOutput(X_CENTER_RIGHT + 20, Y_BOTTOM_ROW + 20, Vector2D(-64 - 20, ICON_OFFSET - 40), 80)
+
+  table.insert(self.detail, GameObject("Image", "ModuleAssets/LineVertical.png", self.position + Vector2D(128, -100), Vector2D(8, 80), self.zOrder - 10))
+  table.insert(self.detail, GameObject("Image", "ModuleAssets/ArrowLeft.png", self.position + Vector2D(84, -126), Vector2D(42, 23), self.zOrder - 10))
+  table.insert(self.detail, GameObject("Image", "ModuleAssets/ArrowRight.png", self.position + Vector2D(172, -126), Vector2D(42, 23), self.zOrder - 10))
 end
 
 
@@ -65,9 +69,12 @@ Init_Module["Ship System"] = function(self)
   iconScreen.zOrder = self.zOrder + 1
 
   local icon = GameObject("ResourceIcon", self.params.resource, Color(0,0,0))
+  local iconScale = 2
   icon.position = self.position + Vector2D(64, -120)
   icon.zOrder = self.zOrder + 2
   icon.visible = true
+  icon.scale.x = icon.scale.x * iconScale
+  icon.scale.y = icon.scale.y * iconScale
 
   self.systemIconScreen = iconScreen
   self.system_icon = icon
@@ -96,6 +103,8 @@ end
 
 function Module:onInitialize(name, position, params)
   params = params or {}
+
+  self.detail = {}
 
   self.params = params
   self.moduleName = name
@@ -224,11 +233,15 @@ function Module:clear()
 
   self.initializedInputs = {}
   self.initializedOutputs = {}
-  self. input = {}
+  self.input = {}
   self.output = {}
 
   if self.system_icon then self.system_icon:destroy() end
   if self.systemIconScreen then self.systemIconScreen:destroy() end
+
+  for k,v in pairs(self.detail) do
+    v:destroy()
+  end
 
   RemoveModule(self.moduleIdx)
   self.moduleName = nil

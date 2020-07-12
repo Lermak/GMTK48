@@ -78,7 +78,7 @@ function love.load(args)
   if(args[2] ~= nil) then
     Gamestate.switch(_G[args[2]])
   else
-    Gamestate.switch(MenuState)
+    Gamestate.switch(SampleState)
   end
 end
 

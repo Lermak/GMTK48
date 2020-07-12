@@ -1,6 +1,7 @@
 Event	ID	Name			Wwise Object Path	Notes
 	63796330	Main_Music			\Default Work Unit\Main_Music	
 	480594535	Disconnect			\Default Work Unit\Disconnect	
+	1539411869	Intro_Music			\Default Work Unit\Intro_Music	
 	3663186417	Connect			\Default Work Unit\Connect	
 	3991942870	Music			\Default Work Unit\Music	
 
