@@ -598,11 +598,9 @@ tove.init = function(path)
 		local fileSep = getSystemPathSeparator()
 
 		if envPath == nil then
-			local projectPrefix = love.filesystem.getSource()
-
-			return projectPrefix .. fileSep .. "tove".. fileSep .. libName[love.system.getOS()]
+			return libName[love.system.getOS()]
 		else
-			return envPath .. fileSep .. libName[love.system.getOS()]
+			return libName[love.system.getOS()]
 		end
 	end
 
