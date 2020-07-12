@@ -124,6 +124,10 @@ function SampleState:update()
       module.moduleIdx = AddModule(module.board, module.params)
       Init_Module[module.name](module)
 
+      if module.systemTime then
+        module.systemTime = math.max(module.systemTime - self.completedModules * 5, 20)
+      end
+
       for k,v in pairs(module.initializedInputs) do
         module.input[#module.input + 1] = v[1]
         module.input[#module.input].position.x = module.position.x + v[2]
@@ -188,7 +192,7 @@ function SampleState:update()
   else
 
     if #emptySystems == 5 or (self.systemTimer <= 0 and #emptySystems ~= 0) or (foundShip == true and shipIncomplete == false and #emptySystems ~= 0) then
-      self.systemTimer = math.max(self.systemCooldown - (self.completedModules * 0.75), 5)
+      self.systemTimer = math.max(self.systemCooldown - self.completedModules, 5)
   
       local module = emptySystems[love.math.random(1, #emptySystems)]
       makeModule(module, #Resources)
