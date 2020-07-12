@@ -14,8 +14,8 @@ function ResourceIcon:onInitialize(file, color)
   self.color = color
   self:setImage("Icons/"..file..".png")
   
-  self.scale.x = 32
-  self.scale.y = 32
+  self.scale.x = 64
+  self.scale.y = 64
   self.pivot.x = 0.5
   self.pivot.y = 0.5
   self.visible = false
