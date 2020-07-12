@@ -17,6 +17,14 @@ function Cable:onInitialize(p0, p1)
   self.dropPointTwo = false
   self:rebuild()
   self.visible = true
+
+  if CABLE_NUM == nil then
+    CABLE_NUM = 0
+  end
+  CABLE_NUM += 1
+  self.cableNum = CABLE_NUM
+
+  self.zOrder = 100 + CABLE_NUM / 1000
 end
 
 function Cable:rebuild()
@@ -92,12 +100,9 @@ end
 
 function Cable:onUpdate(dt)
   if self.placing then
-    --self.dropPoint = "none"
-
-    --self.p1 = Vector2D(MainCamera:mousePosition())
     self:rebuild()
   end
-
+  
   if self.dropPointOne == true then
     local point = "p0"
     local otherPoint = "p1"

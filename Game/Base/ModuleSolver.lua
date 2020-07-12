@@ -19,7 +19,7 @@ end
 
 Boards = {}
 
-local DEBUG_GRAPH = false
+DEBUG_GRAPH = false
 local dbg_print = function(...)
   if DEBUG_GRAPH then print(...) end
 end
@@ -87,6 +87,33 @@ Boards["Producer"] = {
 
   tick = function(self)
     return { self.resource }
+  end
+}
+
+Boards["Converter"] = {
+  inputs = 1,
+  outputs = 1,
+  slider = 0,
+
+  recipes = {
+    {
+      input = { "Crab", 3 },
+      output = "Star"
+    }
+  },
+
+  init = function(self, params)
+    self.resource = params.slider
+  end,
+
+  tick = function(self, input)
+    for k,recipe in pairs(self.recipes) do
+      if recipe.input[1] == input and self.slider == recipe.input[2] then
+        return { recipe.output }
+      end
+    end
+
+    return { "" }
   end
 }
 

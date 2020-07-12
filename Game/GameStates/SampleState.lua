@@ -45,29 +45,29 @@ end
 
 function setLevel()
   Modules = {
-    GameObject("Module", "Producer", {x = x1, y = y1}),
-    GameObject("Module", "Producer", {x = x2, y = y1}),
-    GameObject("Module", "Producer", {x = x3, y = y1}),
-    GameObject("Module", "Producer", {x = x4, y = y1}),
-    GameObject("Module", "Combiner", {x = x5, y = y1}),
+    GameObject("Module", "Producer", {x = x1, y = y1}, { resource = "Star" }),
+    GameObject("Module", "Producer", {x = x2, y = y1}, { resource = "Crab" }),
+    GameObject("Module", "Producer", {x = x3, y = y1}, { resource = "Electricity" }),
+    GameObject("Module", "Producer", {x = x4, y = y1},  { resource = "Fire" }),
+    GameObject("Module", "Producer", {x = x5, y = y1},  { resource = "Star" }),
     
-    GameObject("Module", "Combiner", {x = x1, y = y2}),
+    GameObject("Module", "Empty", {x = x1, y = y2}),
     GameObject("Module", "Combiner", {x = x2, y = y2}),
-    GameObject("Module", "Combiner", {x = x3, y = y2}),
+    GameObject("Module", "Separator", {x = x3, y = y2}),
     GameObject("Module", "Combiner", {x = x4, y = y2}),
-    GameObject("Module", "Combiner", {x = x5, y = y2}),
+    GameObject("Module", "Empty", {x = x5, y = y2}),
     
-    GameObject("Module", "Combiner", {x = x1, y = y3}),
-    GameObject("Module", "Combiner", {x = x2, y = y3}),
-    GameObject("Module", "Combiner", {x = x3, y = y3}),
-    GameObject("Module", "Combiner", {x = x4, y = y3}),
-    GameObject("Module", "Combiner", {x = x5, y = y3}),
-  
-    GameObject("Module", "Ship System", {x = x1, y = y4}),
-    GameObject("Module", "Ship System", {x = x2, y = y4}),
-    GameObject("Module", "Ship System", {x = x3, y = y4}),
-    GameObject("Module", "Ship System", {x = x4, y = y4}),
-    GameObject("Module", "Ship System", {x = x5, y = y4}),
+    GameObject("Module", "Doubler", {x = x1, y = y3}),
+    GameObject("Module", "Converter", {x = x2, y = y3}),
+    GameObject("Module", "Doubler", {x = x3, y = y3}),
+    GameObject("Module", "Empty", {x = x4, y = y3}),
+    GameObject("Module", "Empty", {x = x5, y = y3}),
+
+    GameObject("Module", "Empty", {x = x1, y = y4}),
+    GameObject("Module", "Empty", {x = x2, y = y4}),
+    GameObject("Module", "Empty", {x = x3, y = y4}),
+    GameObject("Module", "Empty", {x = x4, y = y4}),
+    GameObject("Module", "Empty", {x = x5, y = y4}),
     }
 end
 
@@ -78,11 +78,8 @@ end
 
 function SampleState:enter(previous, ...)
   -- Called every time when entering the state. See Gamestate.switch().
-
-  
-
-  --setLevel()
-  setTutOne()
+  setLevel()
+  --setTutOne()
 end
 
 function SampleState:update()  
