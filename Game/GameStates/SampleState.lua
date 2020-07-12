@@ -158,26 +158,28 @@ function SampleState:update()
   elseif self.firstHookedUp == false then
     if self.hookUpCo ~= nil then self.hookUpCo:resume() return end
 
-    local hookedUp = false
-    for k,obj in pairs(Modules) do
-      if obj.moduleName == "Ship System" then
-        if NODE_LIST[obj.input[1].nodeIdx] and NODE_LIST[obj.input[1].nodeIdx].value == obj.params.resource then
-          hookedUp = true
+    if not self.hookedUp then
+      self.hookedUp = false
+      for k,obj in pairs(Modules) do
+        if obj.moduleName == "Ship System" then
+          if NODE_LIST[obj.input[1].nodeIdx] and NODE_LIST[obj.input[1].nodeIdx].value == obj.params.resource then
+            self.hookedUp = true
+          end
         end
       end
     end
 
-    if hookedUp == true then
+    if self.hookedUp == true then
       self.hookUpCo = makeCoroutine(function()
         wwise.postEvent("Main_Music")
         waitSeconds(1)
+    
         
-
         for k,obj in pairs(emptySystems) do
           makeModule(obj, #Resources)
           waitSeconds(0.5)
         end
-
+    
         self.firstHookedUp = true
         self.hookUpCo = false
       end)
@@ -199,6 +201,9 @@ end
 
 function SampleState:moduleFail()
   GameOver.failiures = GameOver.failiures + 1
+  if self.firstHookedUp == false then
+    self.hookedUp = true
+  end
 end
 
 function SampleState:draw()
