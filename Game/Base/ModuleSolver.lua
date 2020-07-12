@@ -92,22 +92,16 @@ Boards["Separator"] = {
   outputs = 2,
 
   recipes = {
-    {
-      input = "Electricity",
-      output = { "Sun", "Spider"}
-    },
-    {
-      input = "Star",
-      output = { "Sun", "Clock"}
-    },
-    {
-      input = "Fish",
-      output = { "Money", "Water"}
-    },
-    {
-      input = "Fire",
-      output = { "Clock", "Trash"}
-    },
+    { input = "Electricity", output = { "Sun", "Spider"} },
+    { input = "Star", output = { "Sun", "Clock"} },
+    { input = "Fish", output = { "Money", "Water"} },
+    { input = "Fire",  output = { "Clock", "Trash"} },
+    { input = "Sun",  output = { "Heart", "Gear"} },
+    { input = "Spider",  output = { "Moon", "Snowman"} },
+    { input = "Clock",  output = { "Crab", "Leaf"} },
+    { input = "Money",  output = { "Gear", "Moon"} },
+    { input = "Water",  output = { "Leaf", "Heart"} },
+    { input = "Trash",  output = { "Snowman", "Crab"} },
   },
 
   tick = function(self, input1)
