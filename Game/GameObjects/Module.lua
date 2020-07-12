@@ -69,7 +69,9 @@ Init_Module["Ship System"] = function(self)
   icon.zOrder = self.zOrder + 2
   icon.visible = true
 
+  self.systemIconScreen = iconScreen
   self.system_icon = icon
+  self.systemTime = math.random(5, 100)
 end
 
 Init_Module["Empty"] = function(self)
@@ -156,6 +158,11 @@ function Module:drawMesh()
 
   love.graphics.draw(self.bgImage, self.bgImageQuad, self.position.x, self.position.y - 180)
   drawText(self.name, self.position + self.namePos, 500, 64, nil, Color(0.1, 0.1, 0.1))
+
+  if self.moduleName == "Ship System" then
+    drawText(string.format("%.0f", self.systemTime), self.position + Vector2D(200, -84), 500, 128, nil, Color(0.1, 0.1, 0.1))
+  end
+
   self:coreDraw()
 end
 
@@ -166,6 +173,7 @@ function Module:onUpdate(dt)
     else
       self.system_icon.color = Color(0, 0, 0)
     end
+<<<<<<< HEAD
     if self.params.resource == nil then
       self.cooldown = self.cooldown - dt
       if self.cooldown < 0 then
@@ -175,7 +183,32 @@ function Module:onUpdate(dt)
         self.system_icon:setImage("Icons/"..r..".png")
       end
     end
+=======
+
+    self.systemTime -= dt
+
+    if self.systemTime < 0 then
+      Gamestate.current():moduleFail(self)
+      self:clear()
+    end
   end
+end
+
+function Module:clear()
+  for k,v in pairs(self.initializedInputs) do
+    v[1]:destroy()
+  end
+
+  for k,v in pairs(self.initializedOutputs) do
+    v[1]:destroy()
+>>>>>>> 234e11747ffa2800477c5963b5d5b19d957b3828
+  end
+
+  if self.system_icon then self.system_icon:destroy() end
+  if self.systemIconScreen then self.systemIconScreen:destroy() end
+
+  RemoveModule(self.moduleIdx)
+  self.moduleName = nil
 end
 
 function Module:onDestroy()

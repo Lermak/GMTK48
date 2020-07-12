@@ -90,6 +90,9 @@ function SampleState:update()
   SolveGraph()
 end
 
+function SampleState:moduleFail()
+end
+
 function SampleState:draw()
   -- Draw on the screen. Called every frame.
 end
