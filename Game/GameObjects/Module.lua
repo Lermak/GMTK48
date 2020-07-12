@@ -173,17 +173,6 @@ function Module:onUpdate(dt)
     else
       self.system_icon.color = Color(0, 0, 0)
     end
-<<<<<<< HEAD
-    if self.params.resource == nil then
-      self.cooldown = self.cooldown - dt
-      if self.cooldown < 0 then
-        self.cooldown = 100
-        local r = Resources[love.math.random(1, #Resources)]
-        self.params.resource = r
-        self.system_icon:setImage("Icons/"..r..".png")
-      end
-    end
-=======
 
     self.systemTime -= dt
 
@@ -201,7 +190,6 @@ function Module:clear()
 
   for k,v in pairs(self.initializedOutputs) do
     v[1]:destroy()
->>>>>>> 234e11747ffa2800477c5963b5d5b19d957b3828
   end
 
   if self.system_icon then self.system_icon:destroy() end

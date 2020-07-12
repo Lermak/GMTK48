@@ -54,6 +54,7 @@ function TitleCard:drawHUD()
 
   -- Draw Title
   love.graphics.draw(self.titleImg, x, y + self.titleHeightOff, 0, w * self.titleImgScale.x, h * self.titleImgScale.y, self.pivot.x / math.abs(self.titleImgScale.x), self.pivot.y / math.abs(self.titleImgScale.y))
+  --drawText("Engineering Chaos", Vector2D(0, 0 + self.titleHeightOff), 1280, 200, nil, Color(0.1, 0.1, 0.1))
 
   
 
