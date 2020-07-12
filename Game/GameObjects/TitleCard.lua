@@ -57,7 +57,7 @@ function TitleCard:drawHUD()
   --love.graphics.draw(self.titleImg, x, y + self.titleHeightOff, 0, w * self.titleImgScale.x, h * self.titleImgScale.y, self.pivot.x / math.abs(self.titleImgScale.x), self.pivot.y / math.abs(self.titleImgScale.y))
   love.graphics.setFont(self.textFontTitle)
   love.graphics.setColor(0,0,0,self.color.a)
-  love.graphics.printf("Engineering\nChaos",
+  love.graphics.printf("Wired Up!",
     0, y - h/3 + self.titleHeightOff, 1280-48, "center")
   
   local text_pos = 720/2 - 4*720/32
