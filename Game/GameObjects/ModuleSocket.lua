@@ -52,6 +52,8 @@ function ModuleSocket:setupIconScreen()
 end
 
 function ModuleSocket:setupIcon()
+  if self.iconScale == 0 then return end
+
   local node = NODE_LIST[self.nodeIdx]
 
   if node.value ~= nil and node.value ~= "" then

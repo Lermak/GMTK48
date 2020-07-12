@@ -118,14 +118,14 @@ Boards["Separator"] = {
 Boards["Producer"] = {
   inputs = 0,
   outputs = 3,
-  resource = { "Star", "Star", "Star" },
+  resource = "Star",
 
   init = function(self, params)
     self.resource = params.resource
   end,
 
   tick = function(self)
-    return { self.resource[1], self.resource[2], self.resource[3] }
+    return { self.resource, self.resource, self.resource }
   end
 }
 
