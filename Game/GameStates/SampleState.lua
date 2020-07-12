@@ -68,9 +68,7 @@ function setLevel()
     GameObject("Module", "Ship System", {x = x5, y = y4}, { resource = "Radiation" }),
     }
 
-    GameOver = GameObject("GameOver")
-
-    
+    GameOver = GameObject("GameOver")   
 end
 
 function SampleState:init()

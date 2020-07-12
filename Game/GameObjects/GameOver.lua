@@ -20,7 +20,8 @@ end
 function GameOver:onUpdate(dt)
   -- Called every frame
   if self.failiures >= 4 then
-  --end the game here
+    --end the game here
+    Gamestate.switch(MenuState)
   end
 end
 
