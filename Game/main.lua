@@ -80,6 +80,9 @@ function love.load(args)
   else
     Gamestate.switch(MenuState)
   end
+
+
+  wwise.postEvent("Music")
 end
 
 local SleepTime = 0

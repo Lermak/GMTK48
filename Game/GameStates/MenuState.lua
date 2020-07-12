@@ -10,7 +10,7 @@ MenuState = {}
 
 function MenuState:init()
   -- Called once, and only once, before entering the state the first time. See Gamestate.switch().
-  wwise.postEvent("Music")
+  
 end
 
 function MenuState:enter(previous, ...)
