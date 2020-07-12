@@ -27,6 +27,9 @@ function WireCoupling:onInitialize()
   self.cable.color = self.color
   self.wireEnds[1].color = self.color
   self.wireEnds[2].color = self.color
+
+  self.wireEnds[1].coupling = self
+  self.wireEnds[2].coupling = self
 end
 
 function WireCoupling:show(b)
@@ -72,7 +75,7 @@ function WireCoupling:onUpdate(dt)
       for z,y in pairs(t) do
         local l = (y.position - Vector2D(mx, my)):len()
         for i,w in pairs(self.wireEnds) do 
-          if l < y.scale.x then
+          if l < y.scale.x and y.id ~= nil then
             --left clicking on an empty node while carrying this node
             
             if y.isConnected == false and Cursor.wireEnd == w then
@@ -94,23 +97,14 @@ function WireCoupling:onUpdate(dt)
               end
 
             elseif Cursor.wireEnd == nil and y.isConnected == true and y.wireEnd == w then
-              DisconnectNode(w.myNode.nodeIdx)
-
-              wwise.postEvent("Disconnect")
-
-              y.isConnected = false
-              Cursor.wireEnd = y.wireEnd
-              self.cable.placing = true
-              self.cable:rebuild()
-              w.dragged = true
-              w.myNode = nil
-              y.wireEnd = nil
+              self:disconnectEnd(y, w, true)
               flag = true
             end
           end
         end
       end
     end
+
     if flag == false then
       if w1 < self.wireEnds[1].scale.x then
         if self.wireEnds[1].dragged then
@@ -139,9 +133,36 @@ function WireCoupling:onUpdate(dt)
   else
     self.born = false
   end
-  
 
   self:attachCable()
+end
+
+function WireCoupling:disconnectEnd(moduleObj, wireEnd, attachCursor)
+  if NODE_LIST[wireEnd.myNode.nodeIdx] ~= nil then
+    DisconnectNode(wireEnd.myNode.nodeIdx)
+  end
+
+  wwise.postEvent("Disconnect")
+
+  moduleObj.isConnected = false
+  
+  if attachCursor then
+    wireEnd.dragged = true
+    Cursor.wireEnd = moduleObj.wireEnd
+    self.cable.placing = true
+    self.cable:rebuild()
+  else
+    wireEnd.dragged = false
+
+    if self.wireEnds[1] == wireEnd then
+      self.cable:drop("p0", true)
+    else
+      self.cable:drop("p1", true)
+    end
+  end
+
+  wireEnd.myNode = nil
+  moduleObj.wireEnd = nil
 end
 
 function WireCoupling:onDestroy()

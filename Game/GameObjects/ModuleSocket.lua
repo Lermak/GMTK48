@@ -113,5 +113,9 @@ function ModuleSocket:onNotHover()
 end
 
 function ModuleSocket:onDestroy()
+  RemoveNode(self.nodeIdx)
+
   -- Called when the object is destroyed
+  if self.iconScreen then self.iconScreen:destroy() end
+  if self.icon then self.iconScreen:destroy() end
 end
