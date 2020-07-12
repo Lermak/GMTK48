@@ -78,7 +78,7 @@ function love.load(args)
   if(args[2] ~= nil) then
     Gamestate.switch(_G[args[2]])
   else
-    Gamestate.switch(SampleState)
+    Gamestate.switch(MenuState)
   end
 end
 
@@ -313,7 +313,7 @@ function love.draw()
   DrawingHUD = false
   
   -- Draw the fade block
-  love.graphics.setColor(0,0,0, 255 - Fade)
+  love.graphics.setColor(0,0,0, 1 - Fade)
   local verts = { 0, 0,
                   0, love.graphics.getHeight(),
                   love.graphics.getWidth(), love.graphics.getHeight(),
