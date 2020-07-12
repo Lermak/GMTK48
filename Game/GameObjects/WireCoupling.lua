@@ -13,6 +13,8 @@ function WireCoupling:onInitialize()
   self.zOrder = 10
   self.visible = false
 
+  self.color = Color(love.math.random(0,255),love.math.random(0,255), love.math.random(0,255),255)
+
   self.wireEnds = {
     GameObject("WireEnd"),
     GameObject("WireEnd")
@@ -20,6 +22,10 @@ function WireCoupling:onInitialize()
   self.birth = true
   self.cable = GameObject("Cable", self.wireEnds[1].position:clone(), self.wireEnds[2].position:clone())
   self:show(true)
+
+  self.cable.color = self.color
+  self.wireEnds[1].color = self.color
+  self.wireEnds[2].color = self.color
 end
 
 function WireCoupling:show(b)
@@ -76,9 +82,22 @@ function WireCoupling:onUpdate(dt)
               w.position = y.position
               Cursor.wireEnd = nil
               flag = true
+
+              self.cable.placing = false
+              self:attachCable()
+              self.cable:rebuild()
+
+              if self.wireEnds[1].myNode and self.wireEnds[2].myNode then
+                ConnectNode(self.wireEnds[1].myNode.nodeIdx, self.wireEnds[2].myNode.nodeIdx)
+              end
+
             elseif Cursor.wireEnd == nil and y.isConnected == true and y.wireEnd == w then
+              DisconnectNode(w.myNode.nodeIdx)
+
               y.isConnected = false
               Cursor.wireEnd = y.wireEnd
+              self.cable.placing = true
+              self.cable:rebuild()
               w.dragged = true
               w.myNode = nil
               y.wireEnd = nil

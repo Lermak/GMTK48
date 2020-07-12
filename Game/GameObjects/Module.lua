@@ -22,27 +22,39 @@ local ICON_OFFSET = 45
 local Init_Module = {}
 
 Init_Module["Producer"] = function(self)
-  self:declareOutput(CENTER, BOTTOM_ROW_Y, {x = 0, y = ICON_OFFSET})
+  self:declareOutput(CENTER, BOTTOM_ROW_Y, Vector2D(0, ICON_OFFSET + 30), 80)
 end
 
 Init_Module["Combiner"] = function(self)
   self:declareInput(LEFT_CENTER, TOP_ROW_Y)
   self:declareInput(RIGHT_CENTER, TOP_ROW_Y)
 
-  self:declareOutput(CENTER, BOTTOM_ROW_Y, {x = 0, y = ICON_OFFSET})
+  self:declareOutput(CENTER, BOTTOM_ROW_Y, Vector2D(0, ICON_OFFSET))
 end
 
+Init_Module["Separator"] = function(self)
+  self:declareInput(CENTER, TOP_ROW_Y)
+
+  self:declareOutput(LEFT_CENTER, BOTTOM_ROW_Y, Vector2D(0, ICON_OFFSET))
+  self:declareOutput(RIGHT_CENTER, BOTTOM_ROW_Y, Vector2D(0, ICON_OFFSET))
+end
+
+Init_Module["Converter"] = function(self)
+  self:declareInput(CENTER, TOP_ROW_Y)
+
+  self:declareOutput(RIGHT_CENTER, BOTTOM_ROW_Y, Vector2D(0, ICON_OFFSET))
+end
 
 Init_Module["Doubler"] = function(self)
   self:declareInput(CENTER, TOP_ROW_Y)
 
-  self:declareOutput(LEFT_CENTER, BOTTOM_ROW_Y, {x = 0, y = ICON_OFFSET})
-  self:declareOutput(RIGHT_CENTER, BOTTOM_ROW_Y, {x = 0, y = ICON_OFFSET})
+  self:declareOutput(LEFT_CENTER, BOTTOM_ROW_Y, Vector2D(0, ICON_OFFSET))
+  self:declareOutput(RIGHT_CENTER, BOTTOM_ROW_Y, Vector2D(0, ICON_OFFSET))
 end
 
 
 Init_Module["Ship System"] = function(self)
-  self:declareInput(CENTER, CENTER)
+  self:declareInput(CENTER, TOP_ROW_Y)
 end
 
 Init_Module["Empty"] = function(self)
@@ -58,12 +70,15 @@ function Module:declareInput(x, y)
   table.insert(self.initializedInputs, inputObj)
 end
 
-function Module:declareOutput(x, y, imgPos)
-  local outObj = { GameObject("ModuleSocket", "output", self.moduleIdx, (#self.initializedOutputs) + 1, {iconPos = imgPos}), x, y }
+function Module:declareOutput(x, y, imgPos, imgScale)
+  imgScale = imgScale or 40
+  local outObj = { GameObject("ModuleSocket", "output", self.moduleIdx, (#self.initializedOutputs) + 1, {iconPos = imgPos, imgScale = imgScale}), x, y }
   table.insert(self.initializedOutputs, outObj)
 end
 
 function Module:onInitialize(name, position, params)
+  params = params or {}
+
   self.board = Boards[name]
   self.moduleIdx = AddModule(self.board, params)
   self.initializedInputs = {}

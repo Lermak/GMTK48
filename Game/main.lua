@@ -100,6 +100,10 @@ end
 function love.update(dt)
   if debuggee then debuggee.poll() end
 
+  if not publish and love.keyboard.isTriggered("g") then
+    DEBUG_GRAPH = not DEBUG_GRAPH
+  end
+
   SleepTime = 0
   
   _G.dt = dt

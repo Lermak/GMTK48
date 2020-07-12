@@ -19,7 +19,7 @@ end
 
 Boards = {}
 
-local DEBUG_GRAPH = false
+DEBUG_GRAPH = false
 local dbg_print = function(...)
   if DEBUG_GRAPH then print(...) end
 end
@@ -85,6 +85,29 @@ Boards["Combiner"] = {
   end
 }
 
+
+Boards["Separator"] = {
+  inputs = 1,
+  outputs = 2,
+
+  recipes = {
+    {
+      input = "Star",
+      output = {"Crab", "Electricity"}
+    },
+  },
+
+  tick = function(self, input1)
+    for k,recipe in pairs(self.recipes) do
+      if recipe.input == input1 then
+        return { recipe.output[1], recipe.output[2] }
+      end
+    end
+
+    return { "", "" }
+  end
+}
+
 Boards["Producer"] = {
   inputs = 0,
   outputs = 1,
@@ -96,6 +119,33 @@ Boards["Producer"] = {
 
   tick = function(self)
     return { self.resource }
+  end
+}
+
+Boards["Converter"] = {
+  inputs = 1,
+  outputs = 1,
+  slider = 0,
+
+  recipes = {
+    {
+      input = { "Crab", 3 },
+      output = "Star"
+    }
+  },
+
+  init = function(self, params)
+    self.resource = params.slider
+  end,
+
+  tick = function(self, input)
+    for k,recipe in pairs(self.recipes) do
+      if recipe.input[1] == input and self.slider == recipe.input[2] then
+        return { recipe.output }
+      end
+    end
+
+    return { "" }
   end
 }
 
@@ -114,6 +164,18 @@ Boards["Doubler"] = {
 
   tick = function(self, input1)
     return { input1, input1 }
+  end
+}
+
+Boards["Ship System"] = {
+  inputs = 1,
+  outputs = 0,
+  
+  init = function(self, params)
+    self.neededResource = params.resource
+  end,
+  tick = function(self, input)
+    if input == self.neededResource then return {} else return nil end
   end
 }
 
@@ -159,7 +221,7 @@ function AddNode(type, module_id, index)
 
     setValue = function(self, value)
       self.value = value
-      if self.connection ~= nil then
+      if self.connection ~= nil and NODE_LIST[self.connection].value == nil then
         dbg_print("  Propegation to Node #" .. self.connection)
         NODE_LIST[self.connection].value = value
       end
@@ -216,7 +278,7 @@ function tickModule(module, inputs)
   local valid, res = pcall(board.tick, board, unpack(inputs))
   if valid then
     if res == nil then
-      dgb_print("NO OUTPUT!")
+      dbg_print("NO OUTPUT!")
       module:setOutputError()
       return
     end
