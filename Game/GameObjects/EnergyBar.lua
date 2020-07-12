@@ -40,7 +40,7 @@ function EnergyBar:onUpdate(dt)
     self.has = self.need
     self.invalid = true
     self.module:animateOut()
-    Gamestate.current().systemCooldown -= 0.5
+    Gamestate.current().completedModules += 1
   end
 end
 
