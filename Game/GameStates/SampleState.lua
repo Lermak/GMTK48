@@ -25,7 +25,6 @@ SampleState = {
 function setTutOne()
   Modules = {
     GameObject("Module", "Producer", {x = x2, y = y2},{ resource = "Star" }),
-
     GameObject("Module", "Ship System", {x = x4, y = y2},{ resource = "Star" }),
   }
 end
@@ -66,7 +65,7 @@ function setLevel()
     GameObject("Module", "Empty", {x = x1, y = y4}),
     GameObject("Module", "Empty", {x = x2, y = y4}),
     GameObject("Module", "Empty", {x = x3, y = y4}),
-    GameObject("Module", "Empty", {x = x4, y = y4}),
+    GameObject("Module", "Ship System", {x = x4, y = y4}, { resource = "Crab" }),
     GameObject("Module", "Empty", {x = x5, y = y4}),
     }
 end

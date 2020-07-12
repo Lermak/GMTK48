@@ -76,7 +76,8 @@ Boards["Combiner"] = {
 
   tick = function(self, input1, input2)
     for k,recipe in pairs(self.recipes) do
-      if recipe.input[1] == input1 and recipe.input[2] == input2 then
+      if recipe.input[1] == input1 and recipe.input[2] == input2 
+      or recipe.input[1] == input2 and recipe.input[2] == input1 then
         return { recipe.output }
       end
     end
