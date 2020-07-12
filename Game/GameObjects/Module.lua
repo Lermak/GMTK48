@@ -216,7 +216,7 @@ function Module:onUpdate(dt)
       Init_Module[self.name](self)
 
       for k,v in pairs(self.initializedInputs) do
-        print(v[1].nodeIdx)
+        --print(v[1].nodeIdx)
         self.input[#self.input + 1] = v[1]
         self.input[#self.input].position.x = self.position.x + v[2]
         self.input[#self.input].position.y = self.position.y + v[3]
