@@ -36,7 +36,7 @@ function GameOver:onDraw()
     t = t.."X"
   end
 
-  love.graphics.setColor(0,0,0,255)
+  love.graphics.setColor(255,0,0,255)
 
   love.graphics.printf(t, 700, 200, 900, "left", 0, 3, 3, 0.5 * 200, 0)
 end
