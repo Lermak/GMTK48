@@ -296,7 +296,7 @@ end
 
 function DisconnectNode(idx)
   local node = NODE_LIST[idx]
-  if node == nil then error("Invalid node index!") end
+  if node == nil then return end
 
   if node.connection then
     NODE_LIST[node.connection].connection = nil

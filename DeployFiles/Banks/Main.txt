@@ -2,6 +2,8 @@ Event	ID	Name			Wwise Object Path	Notes
 	63796330	Main_Music			\Default Work Unit\Main_Music	
 	480594535	Disconnect			\Default Work Unit\Disconnect	
 	1539411869	Intro_Music			\Default Work Unit\Intro_Music	
+	1588590681	GoAway			\Default Work Unit\GoAway	
+	2996152340	ComeBack			\Default Work Unit\ComeBack	
 	3663186417	Connect			\Default Work Unit\Connect	
 	3991942870	Music			\Default Work Unit\Music	
 
@@ -28,7 +30,9 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	362305083	switch18	D:\Mettra_User\Documents\WwiseProjects\LD47\.cache\Windows\SFX\switch18_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Clicks\switch18		77120
 	367850591	switch3	D:\Mettra_User\Documents\WwiseProjects\LD47\.cache\Windows\SFX\switch3_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Clicks\switch3		64832
 	370062635	switch23	D:\Mettra_User\Documents\WwiseProjects\LD47\.cache\Windows\SFX\switch23_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Clicks\switch23		70464
+	372569915	ModuleRise	D:\Mettra_User\Documents\WwiseProjects\LD47\.cache\Windows\SFX\ModuleRise_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\ComeBack\ModuleRise		1075632
 	454769402	switch30	D:\Mettra_User\Documents\WwiseProjects\LD47\.cache\Windows\SFX\switch30_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Clicks\switch30		65856
+	471366368	ModuleDoorOpen	D:\Mettra_User\Documents\WwiseProjects\LD47\.cache\Windows\SFX\ModuleDoorOpen_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\MoveAway\ModuleDoorOpen		688192
 	481190507	switch17	D:\Mettra_User\Documents\WwiseProjects\LD47\.cache\Windows\SFX\switch17_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Clicks\switch17		62272
 	507724173	switch21	D:\Mettra_User\Documents\WwiseProjects\LD47\.cache\Windows\SFX\switch21_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Clicks\switch21		74048
 	550819877	switch20	D:\Mettra_User\Documents\WwiseProjects\LD47\.cache\Windows\SFX\switch20_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Clicks\switch20		64320

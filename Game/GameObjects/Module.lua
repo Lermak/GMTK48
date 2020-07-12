@@ -13,7 +13,6 @@
 local Y_TOP_ROW = -45
 local Y_BOTTOM_ROW = -135
 
-
 local X_CENTER_LEFT = 64
 local X_CENTER = 128
 local X_CENTER_RIGHT = 192
@@ -35,7 +34,7 @@ Init_Module["Combiner"] = function(self)
 
   self:declareOutput(X_CENTER, Y_BOTTOM_ROW, Vector2D(0, ICON_OFFSET + 10), 50)
 
-  table.insert(self.detail, GameObject("Image", "ModuleAssets/WireFrameCombiner.png", self.position, Vector2D(256, 180), 0))
+  table.insert(self.detail, GameObject("Image", "ModuleAssets/WireFrameCombiner.png", self.position, Vector2D(256, 180), -5))
 end
 
 Init_Module["Separator"] = function(self)
@@ -44,7 +43,7 @@ Init_Module["Separator"] = function(self)
   self:declareOutput(X_CENTER_LEFT - 30, Y_BOTTOM_ROW + 14, Vector2D(50, 0))
   self:declareOutput(X_CENTER_RIGHT + 30, Y_BOTTOM_ROW + 14, Vector2D(-50, 0))
 
-  table.insert(self.detail, GameObject("Image", "ModuleAssets/WireFrameSeparator.png", self.position, Vector2D(256, 180), 0))
+  table.insert(self.detail, GameObject("Image", "ModuleAssets/WireFrameSeparator.png", self.position, Vector2D(256, 180), -5))
 end
 
 Init_Module["Converter"] = function(self)
@@ -52,7 +51,7 @@ Init_Module["Converter"] = function(self)
   self.slider = GameObject("Slider", self.position.x + 128, self.position.y - 50, self)
   self:declareOutput(X_CENTER_RIGHT + 28, Y_BOTTOM_ROW + 18, Vector2D(-100, 0), 50)
 
-  table.insert(self.detail, GameObject("Image", "ModuleAssets/WireFrameConverter.png", self.position, Vector2D(256, 180), 0))
+  table.insert(self.detail, GameObject("Image", "ModuleAssets/WireFrameConverter.png", self.position, Vector2D(256, 180), -5))
 end
 
 Init_Module["Doubler"] = function(self)
@@ -61,7 +60,7 @@ Init_Module["Doubler"] = function(self)
   self:declareOutput(X_CENTER_LEFT - 30, Y_BOTTOM_ROW + 24, Vector2D(0, ICON_OFFSET), 0)
   self:declareOutput(X_CENTER_RIGHT + 30, Y_BOTTOM_ROW + 24, Vector2D(-64 - 30, ICON_OFFSET - 40), 80)
 
-  table.insert(self.detail, GameObject("Image", "ModuleAssets/WireFrameDoubler.png", self.position, Vector2D(256, 180), 0))
+  table.insert(self.detail, GameObject("Image", "ModuleAssets/WireFrameDoubler.png", self.position, Vector2D(256, 180), -5))
 end
 
 
@@ -86,7 +85,7 @@ Init_Module["Ship System"] = function(self)
   self.energyBar = energyBar
   self.systemIconScreen = iconScreen
   self.system_icon = icon
-  self.systemTime = 10000--math.random(5, 100)
+  self.systemTime = math.random(1, 10)
 end
 
 Init_Module["Empty"] = function(self)
@@ -174,7 +173,7 @@ function Module:drawMesh()
   -- Set color
   love.graphics.setColor(self.color.r, self.color.g, self.color.b, self.color.a)
 
-  love.graphics.draw(self.bgImage, self.bgImageQuad, self.position.x, self.position.y - 180)
+  love.graphics.draw(self.bgImage, self.bgImageQuad, self.position.x, self.position.y - 180, 0, self.scale.x / 256, self.scale.y / 180)
   love.graphics.setColor(0,0,0,175)
   love.graphics.printf(self.name, self.position.x + self.namePos.x, self.position.y + self.namePos.y, self.image:getWidth(), "center", 0, .5, -.5, 0.5 * 200, 0)
 
@@ -187,7 +186,119 @@ function Module:drawMesh()
   self:coreDraw()
 end
 
+function Module:animateOut()
+  self.exitCo = makeCoroutine(function()
+    wwise.postEvent("GoAway")
+    self:propegatezOrder(200)
+
+    local d = Vector2D(0, 5)
+    local s = 0.01
+    local lastP = 0
+    overTime(0.2, function(p)
+      self:propegatePosition(d * (p - lastP))
+      self:propegateScale(1.0 - s * (p - lastP))
+      lastP = p
+    end)
+
+    local d = Vector2D(0, 256)
+    local lastP = 0
+    overTime(2.2, function(p)
+      p = Easing.InBack(p, 0, 1, 1)
+      self:propegatePosition(d * (p - lastP))
+      lastP = p
+    end)
+
+    waitSeconds(0.5)
+
+    wwise.postEvent("ComeBack")
+
+    self:clear()
+
+    local d = Vector2D(0, 256)
+    local lastP = 0
+    overTime(3.4, function(p)
+      p = Easing.OutBack(p, 0, 1, 1)
+      self:propegatePosition(-d * (p - lastP))
+      lastP = p
+    end)
+
+    local d = Vector2D(0, 5)
+    local s = 0.01
+    local lastP = 0
+    overTime(0.4, function(p)
+      self:propegatePosition(-d * (p - lastP))
+      self:propegateScale(1.0 + s * (p - lastP))
+      lastP = p
+    end)
+
+    self.exitCo = nil
+  end)
+end
+
+function Module:propegatezOrder(dz)
+  self.zOrder -= dz
+
+  for k,v in pairs(self.initializedInputs) do
+    v[1]:propegatezOrder(dz)
+  end
+
+  for k,v in pairs(self.initializedOutputs) do
+    v[1]:propegatezOrder(dz)
+  end
+
+  if self.system_icon then self.system_icon:propegatezOrder(dz) end
+  if self.systemIconScreen then self.systemIconScreen:propegatezOrder(dz) end
+  if self.energyBar then self.energyBar:propegatezOrder(dz) end
+
+  for k,v in pairs(self.detail) do
+    v:propegatezOrder(dz)
+  end
+end
+
+function Module:propegatePosition(dv)
+  self.position -= dv
+
+  for k,v in pairs(self.initializedInputs) do
+    v[1]:propegatePosition(dv)
+  end
+
+  for k,v in pairs(self.initializedOutputs) do
+    v[1]:propegatePosition(dv)
+  end
+
+  if self.system_icon then self.system_icon:propegatePosition(dv) end
+  if self.systemIconScreen then self.systemIconScreen:propegatePosition(dv) end
+  if self.energyBar then self.energyBar:propegatePosition(dv) end
+
+  for k,v in pairs(self.detail) do
+    v:propegatePosition(dv)
+  end
+end
+
+function Module:propegateScale(s)
+  self.scale *= s
+  self.position += Vector2D(256, 180) * (1 - s) / 2
+
+  for k,v in pairs(self.initializedInputs) do
+    v[1]:propegateScale(s)
+  end
+
+  for k,v in pairs(self.initializedOutputs) do
+    v[1]:propegateScale(s)
+  end
+
+  if self.system_icon then self.system_icon:propegateScale(s) end
+  if self.systemIconScreen then self.systemIconScreen:propegateScale(s) end
+  if self.energyBar then self.energyBar:propegateScale(s) end
+
+  for k,v in pairs(self.detail) do
+    v:propegateScale(s)
+  end
+end
+
 function Module:onUpdate(dt)
+  if self.exitCo then self.exitCo:resume() return end
+
   if self.moduleName == "Ship System" then
     if NODE_LIST[self.input[1].nodeIdx].value == self.params.resource then
       self.system_icon.color = Color(0, 210, 0)
@@ -199,7 +310,8 @@ function Module:onUpdate(dt)
 
     if self.systemTime < 0 then
       Gamestate.current():moduleFail(self)
-      self:clear()
+      self:clearConnections()
+      self:animateOut()
     end
   end
 
@@ -233,7 +345,23 @@ function Module:onUpdate(dt)
   end
 end
 
+function Module:clearConnections()
+  self.valid = false
+
+  for k,v in pairs(self.initializedInputs) do
+    v[1]:clearConnections()
+  end
+
+  for k,v in pairs(self.initializedOutputs) do
+    v[1]:clearConnections()
+  end
+
+  RemoveModule(self.moduleIdx)
+  self.moduleName = nil
+end
+
 function Module:clear()
+
   for k,v in pairs(self.initializedInputs) do
     v[1]:destroy()
   end
@@ -241,6 +369,8 @@ function Module:clear()
   for k,v in pairs(self.initializedOutputs) do
     v[1]:destroy()
   end
+
+  self.valid = true
 
   self.initializedInputs = {}
   self.initializedOutputs = {}
@@ -254,9 +384,6 @@ function Module:clear()
   for k,v in pairs(self.detail) do
     v:destroy()
   end
-
-  RemoveModule(self.moduleIdx)
-  self.moduleName = nil
 end
 
 function Module:onDestroy()
