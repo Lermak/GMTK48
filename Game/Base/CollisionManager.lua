@@ -66,3 +66,18 @@ function CollisionManager.boxToCircle(posA, boxA, posB, circleB)
   local distSq = posB:dist2(Vector2D(newX, newY))
   return distSq < circleB.radius * circleB.radius
 end
+
+function CollisionManager.lineToCircle(a, b, c, r)
+  local ab = (b - a)
+  local ac = (c - a)
+  
+  local projLen = ac:dot(ab) / ab:len()
+  local pointOnLine = a + ab:normalized() * projLen
+
+  if projLen < 0 or projLen > ab:len() then
+    return false, nil
+  end
+
+  local pointToCircle =  (pointOnLine - c):len()
+  return pointToCircle <= r, pointOnLine
+end

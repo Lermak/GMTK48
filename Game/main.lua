@@ -167,6 +167,15 @@ function love.update(dt)
   mouse_events = {}
 end
 
+local DEBUG_LINES = {}
+function DrawDebugLine(color, a, b)
+  table.insert(DEBUG_LINES, {
+    color = color,
+    a = a,
+    b = b
+  })
+end
+
 function love.draw()
   -- Draw background
   love.graphics.setColor(0.2,0.2,0.2,255)
@@ -324,6 +333,15 @@ function love.draw()
   if Pause then
     Pause:draw()
   end
+
+  MainCamera:attach()
+  for k,v in pairs(DEBUG_LINES) do
+    love.graphics.setColor(v.color:unpack())
+    love.graphics.line(v.a.x, v.a.y, v.b.x, v.b.y)
+  end
+  MainCamera:detach()
+
+  DEBUG_LINES = {}
 end
 
 function drawHUD()
