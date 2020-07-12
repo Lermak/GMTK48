@@ -33,13 +33,45 @@ Boards["Combiner"] = {
 
   recipes = {
     {
-      input = { "Star", "Star" },
+      input = { "Electricity", "Star" },
+      output = "Leaf"
+    },
+    {
+      input = { "Electricity", "Fish" },
       output = "Crab"
     },
     {
-      input = { "Crab", "Crab" },
-      output = "Electricity" 
+      input = { "Electricity", "Fire" },
+      output = "Gear"
     },
+    {
+      input = { "Star", "Fish" },
+      output = "Snowman"
+    },
+    {
+      input = { "Star", "Fire" },
+      output = "Moon"
+    },
+    {
+      input = { "Fish", "Fire" },
+      output = "Heart"
+    },
+    {
+      input = { "Crab", "Clock" },
+      output = "Radiation"
+    },
+    {
+      input = { "Spider", "Snowman" },
+      output = "Illuminati"
+    },
+    {
+      input = { "Money", "Clock" },
+      output = "Music"
+    },
+    {
+      input = { "Leaf", "Sun" },
+      output = "Squirrel"
+    }
   },
 
   tick = function(self, input1, input2)
