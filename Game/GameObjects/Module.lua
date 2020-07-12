@@ -149,7 +149,7 @@ function Module:drawMesh()
   -- Set color
   love.graphics.setColor(self.color.r / 255, self.color.g / 255, self.color.b / 255, self.color.a / 255)
 
-  --love.graphics.draw(self.bgImage, self.bgImageQuad, self.position.x, self.position.y - 180)
+  love.graphics.draw(self.bgImage, self.bgImageQuad, self.position.x, self.position.y - 180)
   self:coreDraw()
 end
 
