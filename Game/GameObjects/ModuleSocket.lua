@@ -31,7 +31,7 @@ function ModuleSocket:onInitialize(type, moduleId, idx, paramTable)
   self.pivot.y = 0.5
   self.defaultColor = self.color
 
-  self.zOrder = 10
+  self.zOrder = 50
 
   self.icon = nil
 
