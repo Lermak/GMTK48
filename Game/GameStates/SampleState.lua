@@ -68,6 +68,7 @@ function setLevel()
     GameObject("Module", "Ship System", {x = x5, y = y4}, { resource = "Radiation" }),
     }
 
+    GameObject("EnergyBar")
 
     
 end
