@@ -15,8 +15,13 @@ function Cable:onInitialize(p0, p1)
   self.placing = true
   self.dropPointOne = false
   self.dropPointTwo = false
-  self:rebuild()
+  
   self.visible = true
+
+  self.cableWobbleAcc = Vector2D(0, 0)
+  self.cableWobbleVel = Vector2D(0, 0)
+  self.cableWobbleOffset = Vector2D(0, 0)
+  self.prevCursorPos = nil
 
   if CABLE_NUM == nil then
     CABLE_NUM = 0
@@ -25,6 +30,8 @@ function Cable:onInitialize(p0, p1)
   self.cableNum = CABLE_NUM
 
   self.zOrder = 100 + CABLE_NUM / 1000
+
+  self:rebuild()
 end
 
 function Cable:rebuild()
@@ -38,7 +45,9 @@ function Cable:rebuild()
   slump.y = (1.0 - tension) * (-dist);
 
   local controlPoint = slump + ((p0 + p1) / 2);
+  controlPoint += self.cableWobbleOffset
   
+  self.controlPoint = controlPoint:clone()
   local cx = controlPoint.x
   local cy = controlPoint.y
   local cp1 = Vector2D(p0.x + 2.0/3.0*(cx - p0.x), p0.y + 2.0/3.0*(cy - p0.y))
@@ -99,10 +108,6 @@ function Cable:drop(point, isTrue)
 end
 
 function Cable:onUpdate(dt)
-  if self.placing then
-    self:rebuild()
-  end
-  
   if self.dropPointOne == true then
     local point = "p0"
     local otherPoint = "p1"
@@ -120,6 +125,37 @@ function Cable:onUpdate(dt)
   
   else
     self.tension = 0.5
+  end
+
+
+  if not self.dropPointOne and not self.dropPointTwo then
+    local mousePos = Vector2D(MainCamera:mousePosition())
+    if self.prevCursorPos == nil then self.prevCursorPos = mousePos end
+    local mouseDelta = mousePos - self.prevCursorPos
+
+    local rad = 50
+    local force = 1000
+    local mp = (self.controlPoint + (self.p0 + self.p1) / 2) / 2
+    local r, p = CollisionManager.lineToCircle(self.p0, mp, mousePos, rad)
+    if r then
+      local v = p - mousePos
+      self.cableWobbleAcc += v:normalized() * ((rad - v:len()) / rad) * force
+    end
+
+    local r, p = CollisionManager.lineToCircle(self.p1, mp, mousePos, rad)
+    if r then
+      local v = p - mousePos
+      self.cableWobbleAcc += v:normalized() * ((rad - v:len()) / rad) * force
+    end
+
+    self.cableWobbleVel += self.cableWobbleAcc * dt
+    self.cableWobbleOffset += self.cableWobbleVel * dt
+    self.cableWobbleVel *= 0.9
+    self.cableWobbleAcc *= 0.9
+    self.cableWobbleOffset *= 0.9
+    self:rebuild()
+
+    self.prevCursorPos = mousePos
   end
 
 end
