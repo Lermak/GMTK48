@@ -150,7 +150,7 @@ function AddNode(type, module_id, index)
 
     setValue = function(self, value)
       self.value = value
-      if self.connection ~= nil then
+      if self.connection ~= nil and NODE_LIST[self.connection].value == nil then
         dbg_print("  Propegation to Node #" .. self.connection)
         NODE_LIST[self.connection].value = value
       end
