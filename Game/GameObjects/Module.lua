@@ -33,14 +33,14 @@ Init_Module["Combiner"] = function(self)
   self:declareInput(X_CENTER_LEFT, Y_TOP_ROW)
   self:declareInput(X_CENTER_RIGHT, Y_TOP_ROW)
 
-  self:declareOutput(X_CENTER, Y_BOTTOM_ROW, Vector2D(0, ICON_OFFSET))
+  self:declareOutput(X_CENTER, Y_BOTTOM_ROW, Vector2D(0, ICON_OFFSET), 40)
 end
 
 Init_Module["Separator"] = function(self)
   self:declareInput(X_CENTER, Y_TOP_ROW)
 
-  self:declareOutput(X_CENTER_LEFT, Y_BOTTOM_ROW, Vector2D(0, ICON_OFFSET))
-  self:declareOutput(X_CENTER_RIGHT, Y_BOTTOM_ROW, Vector2D(0, ICON_OFFSET))
+  self:declareOutput(X_CENTER_LEFT, Y_BOTTOM_ROW, Vector2D(0, ICON_OFFSET), 40)
+  self:declareOutput(X_CENTER_RIGHT, Y_BOTTOM_ROW, Vector2D(0, ICON_OFFSET), 40)
 end
 
 Init_Module["Converter"] = function(self)
