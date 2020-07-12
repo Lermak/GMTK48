@@ -39,14 +39,15 @@ function WireCoupling:show(b)
 end
 
 function WireCoupling:attachCable()
-  if self.cable.dropPointOne == false then
+  print(self.cable.dropPointTwo)
+  if self.cable.dropPointOne == false or self.cable.dropPointOne == nil then
     self.cable.p0 = self.wireEnds[1].position:clone()
   else
     self.wireEnds[1].position = self.cable.p0:clone()
   end
-
-  if self.cable.dropPointTwo == false then
-    self.cable.p1 = self.wireEnds[2].position:clone()
+  print(self.wireEnds[2])
+  if self.cable.dropPointTwo == false or self.cable.dropPointTwo == nil then
+    self.cable.p1 = self.wireEnds[2].position:clone()   
   else
     self.wireEnds[2].position = self.cable.p1:clone()
   end
@@ -110,10 +111,12 @@ function WireCoupling:onUpdate(dt)
         if self.wireEnds[1].dragged then
           self.wireEnds[1].dragged = false
           Cursor.wireEnd = nil
+          self.cable.placing = false
           self.cable:drop("p0", true)
         elseif Cursor.wireEnd == nil then
           self.wireEnds[1].dragged = true
           Cursor.wireEnd = self.wireEnds[1]
+          self.cable.placing = true
           self.cable:drop("p0", false)
         end
       end
@@ -121,11 +124,13 @@ function WireCoupling:onUpdate(dt)
       if w2 < self.wireEnds[2].scale.x then
         if self.wireEnds[2].dragged then
           self.cable:drop("p1", true)
+          self.cable.placing = false
           self.wireEnds[2].dragged = false
           Cursor.wireEnd = nil
         elseif Cursor.wireEnd == nil then
           self.wireEnds[2].dragged = true
           Cursor.wireEnd = self.wireEnds[2]
+          self.cable.placing = true
           self.cable:drop("p1", false)
         end
       end
