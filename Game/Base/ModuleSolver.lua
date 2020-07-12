@@ -93,8 +93,20 @@ Boards["Separator"] = {
 
   recipes = {
     {
+      input = "Electricity",
+      output = { "Sun", "Spider"}
+    },
+    {
       input = "Star",
-      output = {"Crab", "Electricity"}
+      output = { "Sun", "Clock"}
+    },
+    {
+      input = "Fish",
+      output = { "Money", "Water"}
+    },
+    {
+      input = "Fire",
+      output = { "Clock", "Trash"}
     },
   },
 
@@ -129,10 +141,55 @@ Boards["Converter"] = {
   slider = 0,
 
   recipes = {
-    {
-      input = { "Crab", 3 },
-      output = "Star"
-    }
+    { input = { "Electricity", 0 }, output = "Sun" },
+    { input = { "Electricity", 1 }, output = "Clock" },
+    { input = { "Electricity", 2 }, output = "Spider" },
+    { input = { "Electricity", 3 }, output = "Trash" },
+
+    { input = { "Star", 0 }, output = "Water" },
+    { input = { "Star", 1 }, output = "Sun" },
+    { input = { "Star", 2 }, output = "Money" },
+    { input = { "Star", 3 }, output = "Clock" },
+
+    { input = { "Fish", 0 }, output = "Water" },
+    { input = { "Fish", 1 }, output = "Clock" },
+    { input = { "Fish", 2 }, output = "Money" },
+    { input = { "Fish", 3 }, output = "Trash" },
+
+    { input = { "Fire", 0 }, output = "Clock" },
+    { input = { "Fire", 1 }, output = "Trash" },
+    { input = { "Fire", 2 }, output = "Water" },
+    { input = { "Fire", 3 }, output = "Spider" },
+    
+    { input = { "Sun", 0 }, output = "Fire"},
+    { input = { "Sun", 1 }, output = "Leaf" },
+    { input = { "Sun", 2 }, output = "Electricity" },
+    { input = { "Sun", 3 }, output = "Star" },
+    
+    { input = { "Spider", 0 }, output = "Crab" },
+    { input = { "Spider", 1 }, output = "Heart" },
+    { input = { "Spider", 2 }, output = "Fish" },
+    { input = { "Spider", 3 },  output = "Clock" },
+    
+    { input = { "Clock", 0 }, output = "Snowman" },
+    { input = { "Clock", 1 }, output = "Star" },
+    { input = { "Clock", 2 }, output = "Water" },
+    { input = { "Clock", 3 },  output = "Moon" },
+    
+    { input = { "Money", 0 }, output = "Fish" },
+    { input = { "Money", 1 }, output = "Leaf" },
+    { input = { "Money", 2 }, output = "Crab" },
+    { input = { "Money", 3 },  output = "Water" },
+    
+    { input = { "Water", 0 }, output = "Snowman" },
+    { input = { "Water", 1 }, output = "Gear" },
+    { input = { "Water", 2 }, output = "Trash" },
+    { input = { "Water", 3 },  output = "Money" },
+    
+    { input = { "Trash", 0 }, output = "Heart" },
+    { input = { "Trash", 1 }, output = "Moon" },
+    { input = { "Trash", 2 }, output = "Electricity" },
+    { input = { "Trash", 3 },  output = "Sun" },
   },
 
   init = function(self, params)
