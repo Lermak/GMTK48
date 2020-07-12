@@ -58,14 +58,16 @@ function ModuleSocket:setupIcon()
 
   if node.value ~= nil and node.value ~= "" then
     if self.icon == nil then
-      self.icon = GameObject("ResourceIcon", node.value, Color(0,0,255))
+      self.icon = GameObject("ResourceIcon", node.value, Color(0,0,255)) --make em big!
     else
       self.icon:onInitialize(node.value, Color(0,0,255))
     end
-    
+    local iconScale = 2
     self.icon.zOrder = self.zOrder + 2
     self.icon.visible = true
     self.icon.position = self.position + self.iconPos
+    self.icon.scale.x = self.icon.scale.x * iconScale
+    self.icon.scale.y = self.icon.scale.y * iconScale
   elseif self.icon ~= nil then
     self.icon.visible = false
   end

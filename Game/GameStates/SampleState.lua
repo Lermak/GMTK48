@@ -75,7 +75,7 @@ end
 function SampleState:init()
   -- Called once, and only once, before entering the state the first time. See Gamestate.switch().
   self.cableState = 0
-
+  
   wwise.postEvent("Music")
   wwise.postEvent("Main_Music")
 end
@@ -83,11 +83,22 @@ end
 function SampleState:enter(previous, ...)
   -- Called every time when entering the state. See Gamestate.switch().
   setLevel()
+  self.fadeIn = makeCoroutine(function()
+    overTime(1, function(p)
+      p = Easing.OutQuad(p,0,1,1)
+      Fade = 1 * p
+    end)
+    self.fadeIn = nil
+  end)
   --setTutOne()
 end
 
 function SampleState:update()  
   SolveGraph()
+  if self.fadeIn then
+    self.fadeIn:resume()
+    return
+  end
 end
 
 function SampleState:moduleFail()
