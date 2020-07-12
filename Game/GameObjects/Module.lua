@@ -84,6 +84,7 @@ local Module = ...
 
 function Module:declareInput(x, y)
   local inputObj = { GameObject("ModuleSocket", "input", self.moduleIdx, (#self.initializedInputs) + 1), x, y }
+  
   table.insert(self.initializedInputs, inputObj)
 end
 
@@ -132,7 +133,7 @@ function Module:onInitialize(name, position, params)
   self.pivot.x = 0
   self.pivot.y = 0
   self.zOrder = -10
-  self.cooldown = 100
+  self.cooldown = 10
   self.input = {}
   self.output = {}
   for k,v in pairs(self.initializedInputs) do
@@ -173,23 +174,41 @@ function Module:onUpdate(dt)
     else
       self.system_icon.color = Color(0, 0, 0)
     end
-<<<<<<< HEAD
-    if self.params.resource == nil then
-      self.cooldown = self.cooldown - dt
-      if self.cooldown < 0 then
-        self.cooldown = 100
-        local r = Resources[love.math.random(1, #Resources)]
-        self.params.resource = r
-        self.system_icon:setImage("Icons/"..r..".png")
-      end
-    end
-=======
 
     self.systemTime -= dt
 
     if self.systemTime < 0 then
       Gamestate.current():moduleFail(self)
       self:clear()
+    end
+  end
+
+  if self.moduleName == nil then
+    self.cooldown = self.cooldown - dt
+    if self.cooldown < 0 then
+      self.cooldown = 10
+      local r = Resources[love.math.random(1, #Resources)]
+      self.params.resource = r
+      self.moduleName = "Ship System"
+      self.moduleIdx = AddModule(self.board, self.params)
+      Init_Module[self.name](self)
+
+      for k,v in pairs(self.initializedInputs) do
+        print(v[1].nodeIdx)
+        self.input[#self.input + 1] = v[1]
+        self.input[#self.input].position.x = self.position.x + v[2]
+        self.input[#self.input].position.y = self.position.y + v[3]
+        self.input[#self.input].zOrder = -9
+      end
+    
+      for k,v in pairs(self.initializedOutputs) do
+        self.output[#self.output + 1] = v[1]
+        self.output[#self.output].position.x = self.position.x + v[2]
+        self.output[#self.output].position.y = self.position.y + v[3]
+        self.output[#self.output].zOrder = -9
+        self.output[#self.output]:setupIconScreen()
+        self.output[#self.output]:setupIcon()
+      end
     end
   end
 end
@@ -201,8 +220,12 @@ function Module:clear()
 
   for k,v in pairs(self.initializedOutputs) do
     v[1]:destroy()
->>>>>>> 234e11747ffa2800477c5963b5d5b19d957b3828
   end
+
+  self.initializedInputs = {}
+  self.initializedOutputs = {}
+  self. input = {}
+  self.output = {}
 
   if self.system_icon then self.system_icon:destroy() end
   if self.systemIconScreen then self.systemIconScreen:destroy() end
