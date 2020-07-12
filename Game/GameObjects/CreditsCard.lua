@@ -49,10 +49,13 @@ function CreditsCard:drawHUD()
 
   -- Sound From
   love.graphics.setFont(self.titleFont)
-  love.graphics.printf("Sound From", 0, 340, 1200, "center")
+  love.graphics.printf("Sound Effects", 0, 300, 1200, "center")
 
   love.graphics.setFont(self.nameFont)
-  love.graphics.printf("Kenney - www.kenney.nl", 0, 400, 1200, "center")
+  love.graphics.printf("Kenney - www.kenney.nl", 0, 350, 1200, "center")
+
+  love.graphics.setFont(self.nameFont)
+  love.graphics.printf("ZapSplat.com", 0, 390, 1200, "center")
 
   -- Music
   love.graphics.setFont(self.titleFont)
@@ -60,12 +63,12 @@ function CreditsCard:drawHUD()
 
   love.graphics.setNewFont(16)
 
-  love.graphics.printf("Machinations by Kevin MacLeod", 140, 550, 1200, "left")
-  love.graphics.printf("Link: https://incompetech.filmmusic.io/song/4011-machinations", 140, 574, 1200, "left")
+  love.graphics.printf("Split In Synapse by Kevin MacLeod", 140, 550, 1200, "left")
+  love.graphics.printf("Link: https://incompetech.filmmusic.io/song/4408-split-in-synapse", 140, 574, 1200, "left")
   love.graphics.printf("License: http://creativecommons.org/licenses/by/4.0/", 140, 598, 1200, "left")
 
-  love.graphics.printf("Lobby Time by Kevin MacLeod", 680, 550, 1200, "left")
-  love.graphics.printf("Link: https://incompetech.filmmusic.io/song/3986-lobby-time", 680, 574, 1200, "left")
+  love.graphics.printf("Screen Saver by Kevin MacLeod", 680, 550, 1200, "left")
+  love.graphics.printf("Link: https://incompetech.filmmusic.io/song/5715-screen-saver", 680, 574, 1200, "left")
   love.graphics.printf("License: http://creativecommons.org/licenses/by/4.0/", 680, 598, 1200, "left")
 
   -- Press Any Key to Continue
