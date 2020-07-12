@@ -329,13 +329,13 @@ function Module:onUpdate(dt)
       self.system_icon.color = Color(0, 210, 0)
     else
       self.system_icon.color = Color(0, 0, 0)
-    end
+      
+      self.systemTime -= dt
 
-    self.systemTime -= dt
-
-    if self.systemTime < 0 then
-      Gamestate.current():moduleFail(self)
-      self:animateOut()
+      if self.systemTime < 0 then
+        Gamestate.current():moduleFail(self)
+        self:animateOut()
+      end
     end
   end
 end

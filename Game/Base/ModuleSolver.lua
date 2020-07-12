@@ -22,20 +22,23 @@ Boards = {}
 Resources = {
   "Star",
   "Electricity",
+  "Fire",
+  "Fish",
   "Leaf",
   "Crab",
-  "Fish",
-  "Fire",
   "Gear",
   "Snowman",
   "Moon",
   "Heart",
+  "Sun",
+  "Spider",
   "Clock",
+  "Money",
+  "Water",
+  "Trash",
   "Radiation",
   "Illuminati",
-  "Money",
   "Music",
-  "Sun",
   "Squirrel"
 }
 
@@ -91,7 +94,7 @@ Boards["Separator"] = {
     { input = "Clock", output = { "Crab", "Leaf"} },
     { input = "Money", output = { "Gear", "Moon"} },
     { input = "Water", output = { "Leaf", "Heart"} },
-    { input = "Trash", output = { "Snowman", "Crab"} },
+    { input = "Trash", output = { "Snowman", "Crab"} }
   },
 
   tick = function(self, input1)
@@ -145,22 +148,22 @@ Boards["Converter"] = {
     { input = { "Fire", 2 }, output = "Water" },
     { input = { "Fire", 3 }, output = "Spider" },
     
-    { input = { "Sun", 0 }, output = "Fire"},
+    { input = { "Sun", 0 }, output = "Crab"},
     { input = { "Sun", 1 }, output = "Leaf" },
-    { input = { "Sun", 2 }, output = "Electricity" },
-    { input = { "Sun", 3 }, output = "Star" },
+    { input = { "Sun", 2 }, output = "Snowman" },
+    { input = { "Sun", 3 }, output = "Clock" },
     
     { input = { "Spider", 0 }, output = "Crab" },
     { input = { "Spider", 1 }, output = "Heart" },
-    { input = { "Spider", 2 }, output = "Fish" },
+    { input = { "Spider", 2 }, output = "Leaf" },
     { input = { "Spider", 3 },  output = "Clock" },
     
     { input = { "Clock", 0 }, output = "Snowman" },
-    { input = { "Clock", 1 }, output = "Star" },
+    { input = { "Clock", 1 }, output = "Spider" },
     { input = { "Clock", 2 }, output = "Water" },
     { input = { "Clock", 3 },  output = "Moon" },
     
-    { input = { "Money", 0 }, output = "Fish" },
+    { input = { "Money", 0 }, output = "Clock" },
     { input = { "Money", 1 }, output = "Leaf" },
     { input = { "Money", 2 }, output = "Crab" },
     { input = { "Money", 3 },  output = "Water" },
@@ -172,8 +175,8 @@ Boards["Converter"] = {
     
     { input = { "Trash", 0 }, output = "Heart" },
     { input = { "Trash", 1 }, output = "Moon" },
-    { input = { "Trash", 2 }, output = "Electricity" },
-    { input = { "Trash", 3 },  output = "Sun" },
+    { input = { "Trash", 2 }, output = "Spider" },
+    { input = { "Trash", 3 },  output = "Sun" }
   },
 
   init = function(self, params)
