@@ -86,7 +86,7 @@ Init_Module["Ship System"] = function(self)
   self.energyBar = energyBar
   self.systemIconScreen = iconScreen
   self.system_icon = icon
-  self.systemTime = 10000--math.random(5, 100)
+  self.systemTime = 120--math.random(5, 100)
 end
 
 Init_Module["Empty"] = function(self)
@@ -175,15 +175,20 @@ function Module:drawMesh()
   love.graphics.setColor(self.color.r, self.color.g, self.color.b, self.color.a)
 
   love.graphics.draw(self.bgImage, self.bgImageQuad, self.position.x, self.position.y - 180)
-  love.graphics.setColor(0,0,0,175)
+  love.graphics.setColor(0,0,0,255)
   love.graphics.printf(self.name, self.position.x + self.namePos.x, self.position.y + self.namePos.y, self.image:getWidth(), "center", 0, .5, -.5, 0.5 * 200, 0)
 
   --drawText(self.name, self.position + self.namePos, 500, 64, nil, Color(0.1, 0.1, 0.1))
 
   if self.moduleName == "Ship System" then
-    drawText(string.format("%.0f", self.systemTime), self.position + Vector2D(200, -84), 500, 128, nil, Color(0.1, 0.1, 0.1))
-  end
+    
+    love.graphics.draw(love.graphics.newImage("Data/Images/ModuleAssets/TimerFrame.png"), self.position.x + 200, self.position.y)
+    love.graphics.setColor(255,0,0,175)
+    love.graphics.printf((math.floor(self.systemTime/60))..":"..(math.floor(self.systemTime%60)), self.position.x + 200, self.position.y + -84, self.image:getWidth(), "center", 0, 1, -1, 0.5 * 200, 0)
 
+    --drawText(string.format("%.0f", self.systemTime), self.position + Vector2D(200, -84), 500, 128, nil, Color(0.1, 0.1, 0.1))
+  end
+  love.graphics.setColor(0,0,0,255)
   self:coreDraw()
 end
 
