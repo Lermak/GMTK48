@@ -82,7 +82,9 @@ Init_Module["Ship System"] = function(self)
 
   local energyBar = GameObject("EnergyBar", self)
   energyBar.position = self.position:clone()
-  energyBar.position.y = energyBar.position.y - energyBar.image:getHeight()
+  energyBar.position.x = energyBar.position.x + X_CENTER
+  energyBar.position.y = energyBar.position.y - 160
+  --energyBar.position.y = energyBar.position.y - energyBar.image:getHeight()
   self.energyBar = energyBar
   self.systemIconScreen = iconScreen
   self.system_icon = icon
