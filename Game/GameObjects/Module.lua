@@ -33,7 +33,7 @@ Init_Module["Combiner"] = function(self)
   self:declareInput(X_CENTER_LEFT - 20, Y_TOP_ROW + 12)
   self:declareInput(X_CENTER_RIGHT + 20, Y_TOP_ROW + 12)
 
-  self:declareOutput(X_CENTER, Y_BOTTOM_ROW, Vector2D(0, ICON_OFFSET + 10), 50)
+  self:declareOutput(X_CENTER, Y_BOTTOM_ROW, Vector2D(0, ICON_OFFSET + 10), 60)
 
   table.insert(self.detail, GameObject("Image", "ModuleAssets/WireFrameCombiner.png", self.position, Vector2D(256, 180), 0))
 end
