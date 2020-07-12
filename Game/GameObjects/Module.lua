@@ -55,6 +55,17 @@ end
 
 Init_Module["Ship System"] = function(self)
   self:declareInput(CENTER, TOP_ROW_Y)
+
+  local iconScreen = GameObject("IconScreen", 80)
+  iconScreen.position = self.position + Vector2D(64, -120)
+  iconScreen.zOrder = self.zOrder + 1
+
+  local icon = GameObject("ResourceIcon", self.params.resource, Color(0,0,0))
+  icon.position = self.position + Vector2D(64, -120)
+  icon.zOrder = self.zOrder + 2
+  icon.visible = true
+
+  self.system_icon = icon
 end
 
 Init_Module["Empty"] = function(self)
@@ -79,6 +90,9 @@ end
 function Module:onInitialize(name, position, params)
   params = params or {}
 
+  self.params = params
+  self.moduleName = name
+  self.position = Vector2D(position.x, position.y)
   self.board = Boards[name]
   self.moduleIdx = AddModule(self.board, params)
   self.initializedInputs = {}
@@ -109,7 +123,6 @@ function Module:onInitialize(name, position, params)
   self.scale.y = 180
   self.pivot.x = 0
   self.pivot.y = 0
-  self.position = position
   self.zOrder = -10
   self.input = {}
   self.output = {}
@@ -139,7 +152,15 @@ function Module:drawMesh()
 end
 
 function Module:onUpdate(dt)
-  -- Called every frame  
+  if self.moduleName == "Ship System" then
+    if NODE_LIST[self.input[1].nodeIdx].value == self.params.resource then
+      self.system_icon.color = Color(0, 210, 0)
+    else
+      self.system_icon.color = Color(0, 0, 0)
+    end
+
+
+  end
 end
 
 function Module:onDestroy()
