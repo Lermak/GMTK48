@@ -43,7 +43,7 @@ end
 
 Init_Module["Converter"] = function(self)
   self:declareInput(CENTER, TOP_ROW_Y)
-  GameObject("Slider", self.position.x + 75, self.position.y - 135)
+  self.slider = GameObject("Slider", self.position.x + 75, self.position.y - 135, self)
   self:declareOutput(RIGHT_CENTER, BOTTOM_ROW_Y, Vector2D(0, ICON_OFFSET))
 end
 

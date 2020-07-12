@@ -8,7 +8,7 @@
 
 local Slider = ...
 
-function Slider:onInitialize(x,y)
+function Slider:onInitialize(x,y,m)
   -- Called when the game object is constructed
   
   self:setImage("ModuleAssets/SlideRail.png")
@@ -23,6 +23,8 @@ function Slider:onInitialize(x,y)
 
   self.position.x = x
   self.position.y = y
+
+  self.module = m
 
   self.knob = GameObject("SliderKnob", self.position.x, self.position.y)
 
@@ -39,6 +41,7 @@ end
 function Slider:onUpdate(dt)
   -- Called every frame
   print(self:getCurrentValue())
+  self.module.params.slider = self:getCurrentValue()
 
 end
 
